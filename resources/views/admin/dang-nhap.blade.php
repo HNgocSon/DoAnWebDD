@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{asset('signin.css')}}">
 </head>
 <main class="form-signin w-100 m-auto">
-<form method="POST" action="{{route('xl-dang-nhap')}}">
+<form method="POST" action="{{route('admin.xl-dang-nhap')}}">
     @csrf
     <h1 class="h3 mb-3 fw-normal">Đăng Nhập</h1>
 
@@ -22,10 +22,11 @@
     </div>
     @if(session('thong_bao'))
     <div>
-        <p class=".text-danger">{{session('thong_bao')}}</p>
+        <p class="text-danger">{{session('thong_bao')}}</p>
     </div>
     @endif
 
+    
     <div class="form-check text-start my-3">
       <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
       <label class="form-check-label" for="flexCheckDefault">
