@@ -6,7 +6,6 @@
         
         
         <h3>Danh sách sản phẩm</h3>
-        
           <thead>
             <tr>
                 <th>ID</td>

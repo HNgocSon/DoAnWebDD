@@ -20,6 +20,7 @@ class HoaDonNhapController extends Controller
         $HDN->ngay_nhap    = $request->Ngay_nhap;
         $HDN->tong_tien     = $request->tong_tien;
         $HDN->save();
+
         return redirect()->route('hoa-don-nhap.danh-sach');
      
         

@@ -101,6 +101,42 @@ class SanPhamController extends Controller
         $sanPham->pin= $request->pin;
         
 
+        // $files=$request->img;
+        // foreach($files as $file ){
+        // $ha = new HinhAnh();
+        // $ha->san_pham_id = $sanPham -> id;
+        // $ha->url=$file->store('images');
+        // $ha->save();
+        // }
+
+        return redirect()->route('san-pham.danh-sach')->with('thong_bao','Cập Nhật Sản Phẩm Thành Công');
+     
+    }
+
+    public function Search(Request $request)
+    {
+        $dsSanPham=SanPham::all()->where('gia',$dsSanPham->gia)->first();
+        return view($dsSanPham);
+    }
+
+    public function XemAnh($id)
+    {
+        $dsSanPham = SanPham::find($id);
+        $ha=HinhAnh::all()->where('san_pham_id',$dsSanPham->id);
+        return view('san-pham/xem-anh',compact('ha','dsSanPham'));
+    }   
+
+    public function CapNhatAnh($id)
+    {
+        $dsSanPham = SanPham::find($id);
+        $ha=HinhAnh::all()->where('san_pham_id',$dsSanPham->id);
+        
+        return view('san-pham/sua-anh',compact('ha','dsSanPham'));
+    }    
+
+    public function XuLyCapNhatAnh(Request $request, $id)
+    {
+        $sanPham = SanPham::find($id);
         $files=$request->img;
         foreach($files as $file ){
         $ha = new HinhAnh();
@@ -108,20 +144,15 @@ class SanPhamController extends Controller
         $ha->url=$file->store('images');
         $ha->save();
         }
-
-        return redirect()->route('san-pham.danh-sach')->with('thong_bao','Cập Nhật Sản Phẩm Thành Công');
-     
+        return redirect()->route('san-pham.cap-nhat-anh',['id' => $sanPham->id])->with('thong_bao','Thêm Thành Công');
     }
-    public function Search(Request $request)
+    
+    public function XoaAnh($id)
     {
-        $dsSanPham=SanPham::all();
-        $dsSanPham=SanPham::where('gia',$dsSanPham->gia)->first();
-        return view($dsSanPham);
+        
+        $ha = HinhAnh::find($id);
+        $sanPham = SanPham::all()->where('id',$ha->san_pham_id)->first();
+        $ha->delete();  
+        return redirect()->route('san-pham.cap-nhat-anh',['id' => $sanPham->id])->with('thong_bao','Xóa Thành Công');
     }
-    public function XemAnh($id)
-    {
-        $dsSanPham = SanPham::find($id);
-        $ha=HinhAnh::all()->where('san_pham_id',$dsSanPham->id);
-        return view('san-pham/xem-anh',compact('ha','dsSanPham'));
-    }       
 }

@@ -3,21 +3,19 @@
 <div class="table-responsive">
         <table class="table table-striped table-sm" border="1">
         <h3>Danh sách hình ảnh</h3>
-        
           <thead>
-            <tr>
-                <th>Hình Ảnh</th>
-            </tr>
+             <th>Hình Ảnh</th>
           </thead>
             <tbody>
-            <tr>
+            <td>
                 @foreach($ha as $HinhAnh)
-          
                         <td><img src="{{asset($HinhAnh->url)}}" style="width:100px;height:100px"></td>
-                  
                 @endforeach
-            </tr>
+            </td>
           </tbody>
         </table>
+        <a href="{{ route('san-pham.danh-sach') }}"><button type="button" class="btn btn-success">quay lại</button></a>
+        </div>
+        
         @endsection
-</div>
+
