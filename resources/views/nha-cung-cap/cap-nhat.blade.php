@@ -1,23 +1,50 @@
-@extends('trangchu')
+@extends('master')
 @section('content')
-<form method="POST" action="">
-@csrf
-        <table border=0>
-        <div class="mb-3">
-        <label for="formGroupExampleInput" class="form-label">Tên Nhà Cung Cấp</label>
-        <input type="text" name="ten" value="{{$dsNCC->ten}}" class="form-control" id="formGroupExampleInput" placeholder="Nhập Tên Nhà Cung Cấp">
+<div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Cập Nhật Nhà Cung Cấp') }}</div>
+
+                    <div class="card-body">
+                        <form method="POST" action="">
+                            @csrf
+
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Tên Nhà Cung Cấp') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{$dsNCC->ten}}" name="ten" required autofocus>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Số điện thoại') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{$dsNCC->sdt}}" name="sdt" required autofocus>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Địa Chỉ') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{$dsNCC->dia_chi}}" name="dia_chi" required autofocus>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Lưu') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-        <label for="formGroupExampleInput2" class="form-label">Số Điện Thoại</label>
-        <input type="text" name="sdt" value="{{$dsNCC->sdt}}" class="form-control" id="formGroupExampleInput2" placeholder="Nhập số điện thoại">
-        </div>  
-        <div class="mb-3">
-        <label for="formGroupExampleInput2" class="form-label">Địa Chỉ</label>
-        <input type="text" name="dia_chi" value="{{$dsNCC->dia_chi}}"  class="form-control" id="formGroupExampleInput2" placeholder="Nhập địa chỉ">
-        </div>
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3">Lưu</button>
-        </div>    
-    </table>
-</form>
+    </div>
 @endsection

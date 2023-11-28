@@ -1,78 +1,144 @@
-@extends('trangchu')
+
+@extends('master')
 @section('content')
-<form method='POST' action="" enctype="multipart/form-data">  
-    @csrf
-    <table border=0>
-        <tr>
-            <th>Tên SP</th>
-            <td><input type="text" name="ten"/></td>
-        </tr>
-        <tr>
-            <th>Loại Sản Phẩm</th>
-            <td> <select name="loai_sp" id="" >
-                <option selected>Chọn loại</option>
-                @foreach ($dsLoaiSp as $LoaiSp)
-                <option value="{{ $LoaiSp->id }}">{{ $LoaiSp->ten_loai }}</option>
-                @endforeach
-                </select>  
-            </td>   
-        </tr>
-        <div class="mb-3">
-                <label for="price" class="form-label">Giá sản phẩm:</label>
-                <input type="text" class="form-control" id="price" name="gia" required>
+<div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Thêm Mới Sản Phẩm') }}</div>
+
+                    <div class="card-body">
+                        <form method="POST" action="" enctype="multipart/form-data">
+                            @csrf
+
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Tên Sản Phẩm') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="ten" required autofocus>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Loại Sản Phẩm') }}</label>
+                                <div class="col-md-6">
+                                <select name="loai_sp" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                <option selected>Chọn loại</option>
+                                @foreach ($dsLoaiSp as $LoaiSp)
+                                <option value="{{ $LoaiSp->id }}">{{ $LoaiSp->ten_loai }}</option>
+                                @endforeach
+                                </select>
+                                
+                            
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Giá Sản Phẩm:') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="gia" required autofocus>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Mô tả:') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="mo_ta" required autofocus>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Số Lượng:') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="so_luong" required autofocus>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Màu:') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="mau" required autofocus>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Màn hình:') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="man_hinh" required autofocus>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Camera:') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="camera" required autofocus>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Hệ điều hành:') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="he_dieu_hanh" required autofocus>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Chip:') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="chip" required autofocus>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Ram:') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="ram" required autofocus>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Dung Lượng:') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="dung_luong" required autofocus>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Pin:') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="pin" required autofocus>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Hình:') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="file" class="form-control @error('name') is-invalid @enderror" name="img[]" multiple required autofocus >
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Lưu') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <tr>
-            <th>Mô tả</th>
-            <td><input type="text" name="mo_ta"/></td>
-        </tr>
-        
-            <th>Số lượng</th>
-            <td>
-            <input type="text"  name="so_luong"> 
-            </td>
-        </tr>
-        <tr>
-            <th>Màu</th>
-            <td><input type="text" name="mau"/></td>
-        </tr>
-        <tr>
-            <th>Màn Hình</th>
-            <td><input type="text" name="man_hinh"/></td>
-        </tr>
-
-        <tr>
-            <th>Camera</th>
-            <td><input type="text" name="camera"/></td>
-        </tr>
-        <tr>
-            <th>Hệ điều hành</th>
-            <td><input type="text" name="he_dieu_hanh"/></td>
-        </tr>
-        <tr>
-            <th>Chip</th>
-            <td><input type="text" name="chip"/></td>
-        </tr>
-        <tr>
-            <th>Ram</th>
-            <td><input type="text" name="ram"/></td>
-        </tr>
-        <tr>
-            <th>Dung Lượng</th>
-            <td><input type="text" name="dung_luong"/></td>
-        </tr>
-        <tr>
-            <th>Pin</th>
-            <td><input type="text" name="pin"/></td>
-        </tr>
-        <tr>
-            <th>Hình Ảnh</th>
-            <td><input type="file" name="img[]" multiple/></td>
-        </tr>
-        <tr>
-            <th></th>
-            <td><button type="submit">Lưu</button></td>
-        </tr>
-    </table>
-</form>
+    </div>
 @endsection
-
