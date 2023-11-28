@@ -1,17 +1,34 @@
-@extends('trangchu')
-<form method='POST' action="">
-    @csrf
-    <table border=0>
-        <tr>
-            <th>Loại Sản Phẩm</th>
-            <td><input type="text" name="loai_sp" value="{{$dsLoaiSp->loai_sp}}"/></td>
-        </tr>
-        <tr>
-            <th>Trạng Thái</th>
-            <td><input type="text" name="trang_thai" value="{{$dsLoaiSp->trang_thai}}"/></td>
-        </tr>
-        <tr>
-            <td><button type="submit" class="btn btn-success">Lưu</button></td>
-        </tr>
-    </table>
-</form>
+@extends('master')
+@section('content')
+<div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Cập nhật loại sản phẩm') }}</div>
+
+                    <div class="card-body">
+                        <form method="POST" action="">
+                            @csrf
+
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Tên Loại sản phẩm') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{$dsLoaiSp->ten_loai}}" name="ten_loai" required autofocus>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Lưu') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

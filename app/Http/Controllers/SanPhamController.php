@@ -74,7 +74,7 @@ class SanPhamController extends Controller
     public function CapNhatSp($id){
         $dsSanPham = SanPham::find($id);
         $dsLoaiSp = LoaiSanPham::all();
-        $ha=HinhAnh::where('san_pham_id',$dsSanPham->id)->get();
+        $ha=HinhAnh::all()->where('san_pham_id',$dsSanPham->id);
         return view('san-pham/cap-nhat',compact('dsSanPham','dsLoaiSp','ha'));
     }
 
@@ -100,9 +100,10 @@ class SanPhamController extends Controller
         $sanPham->dung_luong    = $request->dung_luong;
         $sanPham->pin= $request->pin;
         
-        $files=$request->image;
+
+        $files=$request->img;
         foreach($files as $file ){
-        $ha = HinhAnh::find($id);
+        $ha = new HinhAnh();
         $ha->san_pham_id = $sanPham -> id;
         $ha->url=$file->store('images');
         $ha->save();
@@ -117,5 +118,10 @@ class SanPhamController extends Controller
         $dsSanPham=SanPham::where('gia',$dsSanPham->gia)->first();
         return view($dsSanPham);
     }
-    
+    public function XemAnh($id)
+    {
+        $dsSanPham = SanPham::find($id);
+        $ha=HinhAnh::all()->where('san_pham_id',$dsSanPham->id);
+        return view('san-pham/xem-anh',compact('ha','dsSanPham'));
+    }       
 }
