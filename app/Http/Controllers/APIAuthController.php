@@ -11,15 +11,46 @@ class APIAuthController extends Controller
 {
     public function DangKy(Request $request){
 
-        // if(empty($request->email)) {
-        //     return response()->json([
-        //         'message'=>'vui long nhap day du thong tin'
-        //     ]);
-        // }
+        if(!isset($request->password)||empty($request->password)) {
+            return response()->json([
+                'success'=>false,
+                'message'=>'vui lòng nhập password'
+            ]);
+        }
+
+        if(!isset($request->ten)||empty($request->ten)) {
+            return response()->json([
+                'success'=>false,
+                'message'=>'vui lòng nhập tên'
+            ]);
+        }
+
+        if(!isset($request->sdt)||empty($request->sdt)) {
+            return response()->json([
+                'success'=>false,
+                'message'=>'vui lòng nhập tên'
+            ]);
+        }
+
+        if(!isset($request->dia_chi)||empty($request->dia_chi)) {
+            return response()->json([
+                'success'=>false,
+                'message'=>'vui lòng nhập địa chỉ'
+            ]);
+        }
+
+        if(!isset($request->email)||empty($request->email)) {
+            return response()->json([
+                'success'=>false,
+                'message'=>'vui lòng nhập địa chỉ email'
+            ]);
+        }
 
         $khachHang = KhachHang::where('email',$request->email)->first();
+
         if(!empty($khachHang)) {
             return response()->json([
+                'success'=>false,
                 'message'=>"email : {$request->email} da ton tai"
             ]);
         }
@@ -41,8 +72,22 @@ class APIAuthController extends Controller
     }
 
     
-    public function DangNhap()
+    public function DangNhap(Request $request)
     {
+        if(!isset($request->email) || empty($request->email)) {
+            return response()->json([
+                'success'=>false,
+                'message'=>'vui lòng nhập địa chỉ email'
+            ]);
+        }
+
+        if(!isset($request->password) || empty($request->password)) {
+            return response()->json([
+                'success'=>false,
+                'message'=>'vui lòng nhập password '
+            ]);
+        }
+
         $credentials = request(['email', 'password']);
 
         if (! $token = auth('api')->attempt($credentials)) {
@@ -54,7 +99,17 @@ class APIAuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
+    }
+    public function DangXuat()
+    {
+        {
+            auth('api')->logout();
+            return response()->json(['message' => 'Successfully logged out']);
+        }
+    }
 
 
+    public function ResetMatKhau(){
+        
     }
 }

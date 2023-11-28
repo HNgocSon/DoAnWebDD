@@ -65,9 +65,9 @@ Route::post('hoa-don-xuat/them-moi',[HoaDonXuatController::class,'xuLyThemMoiHD'
 Route::get('hoa-don-xuat/danh-sach',[HoaDonXuatController::class,'DanhSach'])->name('hoa-don-xuat.danh-sach');
 //Admin
 Route::get('/', [DangNhapController::class, 'trangchu'])->name('trang-chu')->middleware('auth');
-Route::get('admin/dang-nhap', [DangNhapController::class, 'DangNhap'])->name('dang-nhap')->middleware('guest');
-Route::post('admin/dang-nhap', [DangNhapController::class, 'XuLyDangNhap'])->name('xl-dang-nhap')->middleware('guest');
-Route::get('admin/dang-xuat', [DangNhapController::class, 'DangXuat'])->name('dang-xuat')->middleware('auth');
+Route::get('admin/dang-nhap', [DangNhapController::class, 'DangNhap'])->name('admin.dang-nhap')->middleware('guest');
+Route::post('admin/dang-nhap', [DangNhapController::class, 'XuLyDangNhap'])->name('admin.xl-dang-nhap')->middleware('guest');
+Route::get('admin/dang-xuat', [DangNhapController::class, 'DangXuat'])->name('admin.dang-xuat')->middleware('auth');
 //Nhà Cung Cấp
 Route::middleware('auth')->group(function () {
     Route::prefix('nha-cung-cap')->group(function (){

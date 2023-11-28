@@ -17,6 +17,8 @@ class SanPhamController extends Controller
     }
 
     public function xuLyThemMoiSp(Request $request){
+
+
         $sanPham= new SanPham();
         $sanPham->ten     = $request->ten;
         $sanPham->loai_san_pham_id =$request->loai_sp;
@@ -55,7 +57,7 @@ class SanPhamController extends Controller
         $ha = HinhAnh::all();
         if(empty($sanPham))
         {
-            return"Sản phẩm không tồn tại";
+            return redirect()->route('san-pham.danh-sach')->with('error','sản phẩm không tồn tại');
         }
         foreach($ha as $HA){
             if($HA->san_pham_id == $sanPham->id ){
@@ -81,7 +83,7 @@ class SanPhamController extends Controller
         $sanPham = SanPham::find($id);
         $ha=HinhAnh::all();
         if (empty($sanPham)) {
-            return "Sản phẩm không tồn tại";
+            return redirect()->route('san-pham.danh-sach')->with('error','sản phẩm không tồn tại');
         }
         $sanPham->ten     = $request->ten;
         $sanPham->loai_san_pham_id =$request->loai_sp;

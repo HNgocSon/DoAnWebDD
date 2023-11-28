@@ -12,7 +12,13 @@ class LoaiSanPhamController extends Controller
     }
     public function XuLyThemMoiLoai(Request $request)
     {
-        $LoaiSp= new LoaiSanPham();
+        $loaiSp  = LoaiSanPham::all();
+        foreach ($loaiSp as $LS )
+        if($LS->ten_loai == $request->ten_loai)
+        {
+            return redirect()->route('loai-san-pham.danh-sach')->with('error','loại sản phẩm đã tồn tại');
+        }
+        $LoaiSp = new LoaiSanPham();
         $LoaiSp->ten_loai    = $request->ten_loai;
         $LoaiSp->save();
         return redirect()->route('loai-san-pham.danh-sach')->with('thong_bao','Thêm Thành Công');
@@ -27,7 +33,7 @@ class LoaiSanPhamController extends Controller
         $LoaiSp = LoaiSanPham::find($id);
         if(empty($LoaiSp))
         {
-         return "Loai San Pham Khong ton tai";
+            return redirect()->route('loai-san-pham.danh-sach')->with('error','loại sản phẩm không tồn tại');
         }
         $LoaiSp->delete();
         return redirect()->route('loai-san-pham.danh-sach')->with('thong_bao','Xóa Thành Công');
@@ -45,11 +51,10 @@ class LoaiSanPhamController extends Controller
   
          $LoaiSp = LoaiSanPham::find($id);
          if (empty($LoaiSp)) {
-             return "Loại sản phẩm Không Tồn Tại";
+            return redirect()->route('loai-san-pham.danh-sach')->with('error','loại sản phẩm không tồn tại');
          }
          $LoaiSp->ten_loai    = $request->ten_loai;
          $LoaiSp->save();
- 
          return redirect()->route('loai-san-pham.danh-sach')->with('thong_bao','Cập nhật loại sản phẩm thành công');
      }
 
