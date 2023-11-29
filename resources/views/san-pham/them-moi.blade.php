@@ -1,3 +1,4 @@
+
 @extends('master')
 @section('content')
 <div class="container">
@@ -14,7 +15,7 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Tên Sản Phẩm') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="ten" required autofocus>
+                                    <input id="name" type="text" class="form-control " name="ten">
 
                                 </div>
                             </div>
@@ -22,7 +23,7 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Loại Sản Phẩm') }}</label>
                                 <div class="col-md-6">
                                 <select name="ten_loai" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                <option selected>Chọn loại</option>
+                                    
                                 @foreach ($dsLoaiSp as $LoaiSp)
                                 <option value="{{ $LoaiSp->id }}">{{ $LoaiSp->ten_loai }}</option>
                                 @endforeach

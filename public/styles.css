@@ -92,6 +92,17 @@ body {
   }
   .table-responsive {
     overflow-x: auto;
-    margin-left: 300px;
+    margin-left: 250px;
     -webkit-overflow-scrolling: touch;
   }
+  .tbody, td, tfoot, th, thead, tr {
+    border-color: inherit;
+    
+    border-style: solid;
+    border-width: 4;
+    border: 1px solid #1a1517;
+}
+
+element.style {
+  display: inline-block;
+}

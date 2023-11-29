@@ -5,7 +5,7 @@
         <h1>Danh Sách Bình Luận</h1>
        
           <thead>
-            <tr>
+            <tr class = "table-dark">
                 <th>Tên</th>
                 <th>Tổng Đánh Giá<th>
                 <th>Bình Luận</th>

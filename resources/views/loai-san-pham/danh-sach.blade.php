@@ -2,13 +2,14 @@
 @section('content')
 <div class="table-responsive">
 <a href="{{route('loai-san-pham.them-moi')}}"><button type="submit" class="btn btn-info">Thêm mới</button></a>
-        <table class="table table-striped table-sm" border="1">
+        <table class="table table-striped table-sm " border="1">
         <h3>Danh Sách Loại Sản Phẩm</h3> 
        
           <thead>
-            <tr>
+            <tr class = "table-dark">
                 <th>ID</th>
                 <th>Tên Loại</th>
+                <th>Thao Tác</th>
             </tr>
           </thead>
           <tbody>

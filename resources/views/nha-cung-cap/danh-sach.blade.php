@@ -5,7 +5,7 @@
         <table class="table table-striped table-sm" border="1">
           <thead>
           <h3>Danh Sách Nhà Cung Cấp</h3>
-            <tr>
+            <tr class = "table-dark">
                 <th>ID</th>
                 <th>Tên Nhà Cung Cấp</th>
                 <th>Số Điện Thoại</th>

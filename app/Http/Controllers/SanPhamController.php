@@ -115,8 +115,7 @@ class SanPhamController extends Controller
 
     public function Search(Request $request)
     {
-        $dsSanPham=SanPham::all()->where('gia',$dsSanPham->gia)->first();
-        return view($dsSanPham);
+
     }
 
     public function XemAnh($id)

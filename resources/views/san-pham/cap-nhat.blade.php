@@ -14,7 +14,7 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Tên Sản Phẩm') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{$dsSanPham->ten}}" name="ten" required autofocus>
+                                    <input id="name" type="text" class="form-control" value="{{$dsSanPham->ten}}" name="ten">
 
                                 </div>
                             </div>
