@@ -4,20 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\LoaiSanPham;
+use App\Http\Requests\ThemMoiLoaiSanPhamRequest;
 class LoaiSanPhamController extends Controller
 {
     public function ThemMoiLoaiSp()
     {
         return view('loai-san-pham/them-moi');
     }
-    public function XuLyThemMoiLoai(Request $request)
+    public function XuLyThemMoiLoai(ThemMoiLoaiSanPhamRequest $request)
     {
         $loaiSp  = LoaiSanPham::all();
+
         foreach ($loaiSp as $LS )
         if($LS->ten_loai == $request->ten_loai)
         {
             return redirect()->route('loai-san-pham.danh-sach')->with('error','loại sản phẩm đã tồn tại');
         }
+        
         $LoaiSp = new LoaiSanPham();
         $LoaiSp->ten_loai    = $request->ten_loai;
         $LoaiSp->save();

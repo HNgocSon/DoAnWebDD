@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\NhaCungCap;
+use App\Http\Requests\ThemMoiNhaCungCapRequest;
 class NhaCungCapController extends Controller
 {
     public function ThemMoiNCC()
@@ -11,7 +12,7 @@ class NhaCungCapController extends Controller
         $dsNCC = NhaCungCap::all();
         return view('nha-cung-cap.them-moi',compact('dsNCC'));
     }
-    public function XulyThemMoiNCC(Request $request)
+    public function XulyThemMoiNCC(ThemMoiNhaCungCapRequest $request)
     {
         $ncc = new NhaCungCap();
         $ncc -> ten         =$request -> ten;
@@ -40,7 +41,7 @@ class NhaCungCapController extends Controller
         
     }
 
-    public function XuLyCapNhatNCC(Request $request, $id)
+    public function XuLyCapNhatNCC(ThemMoiNhaCungCapRequest $request, $id)
     {
  
         $ncc = NhaCungCap::find($id);
@@ -52,6 +53,6 @@ class NhaCungCapController extends Controller
         $ncc -> dia_chi     =$request ->dia_chi;
         $ncc->save();
 
-        return redirect()->route('nha-cung-cap.danh-sach')->with('thong_bao','Cập nhật loại sản phẩm thành công');
+        return redirect()->route('nha-cung-cap.danh-sach')->with('thong_bao','Cập nhật nhà cung cấp thành công');
     }
 }

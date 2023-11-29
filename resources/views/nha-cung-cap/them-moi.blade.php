@@ -14,24 +14,30 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Tên Nhà Cung Cấp') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="ten" required autofocus>
-
+                                    <input id="name" type="text" class="form-control  @error('ten') @enderror " name="ten" >
+                                    @error('ten')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Số điện thoại') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="sdt" required autofocus>
-
+                                    <input id="name" type="text" class="form-control  @error('sdt') @enderror  " name="sdt" >
+                                    @error('sdt')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Địa Chỉ') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="dia_chi" required autofocus>
-
+                                    <input id="name" type="text" class="form-control  @error('dia_chi) @enderror " name="dia_chi" >
+                                    @error('dia_chi')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">

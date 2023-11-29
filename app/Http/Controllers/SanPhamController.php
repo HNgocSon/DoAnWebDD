@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\SanPham;
 use App\Models\LoaiSanPham;
 use App\Models\HinhAnh;
-
+use App\Http\Requests\ThemMoiSanPhamRequest;
 
 
 class SanPhamController extends Controller
@@ -16,9 +16,9 @@ class SanPhamController extends Controller
         return view('san-pham.them-moi',compact('dsLoaiSp'));
     }
 
-    public function xuLyThemMoiSp(Request $request){
+    public function xuLyThemMoiSp(ThemMoiSanPhamRequest $request){
 
-
+      
         $sanPham= new SanPham();
         $sanPham->ten     = $request->ten;
         $sanPham->loai_san_pham_id =$request->ten_loai;
@@ -35,12 +35,15 @@ class SanPhamController extends Controller
         $sanPham->pin= $request->pin;
         $sanPham->save();
 
+        if(!empty($request->img)){
+
         $files=$request->img;
         foreach($files as $file ){
         $ha = new HinhAnh();
         $ha->san_pham_id = $sanPham -> id;
         $ha->url=$file->store('images');
         $ha->save();
+        }
         }
         return redirect()->route('san-pham.danh-sach')->with('thong_bao','Thêm Thành Công');
     }
@@ -101,14 +104,6 @@ class SanPhamController extends Controller
         $sanPham->pin= $request->pin;
         
 
-        // $files=$request->img;
-        // foreach($files as $file ){
-        // $ha = new HinhAnh();
-        // $ha->san_pham_id = $sanPham -> id;
-        // $ha->url=$file->store('images');
-        // $ha->save();
-        // }
-
         return redirect()->route('san-pham.danh-sach')->with('thong_bao','Cập Nhật Sản Phẩm Thành Công');
      
     }
@@ -136,13 +131,17 @@ class SanPhamController extends Controller
 
     public function XuLyCapNhatAnh(Request $request, $id)
     {
+        
+
         $sanPham = SanPham::find($id);
+        if(!empty($request->img)){
         $files=$request->img;
         foreach($files as $file ){
         $ha = new HinhAnh();
         $ha->san_pham_id = $sanPham -> id;
         $ha->url=$file->store('images');
         $ha->save();
+        }
         }
         return redirect()->route('san-pham.cap-nhat-anh',['id' => $sanPham->id])->with('thong_bao','Thêm Thành Công');
     }

@@ -14,8 +14,10 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Tên Loại sản phẩm') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="ten_loai" required autofocus>
-
+                                    <input id="name" type="text" class="form-control  @error('ten_loai') @enderror " name="ten_loai" >
+                                    @error('ten_loai')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
