@@ -3,8 +3,6 @@
 <div class="table-responsive">
       <a href="{{route('san-pham.them-moi')}}"><button type="button" class="btn btn-info">Thêm Mới</button></a>
         <table class="table table-striped table-sm" border="1">
-        
-        
         <h3>Danh sách sản phẩm</h3>
           <thead>
             <tr>
