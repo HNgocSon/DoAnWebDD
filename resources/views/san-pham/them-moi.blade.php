@@ -21,7 +21,7 @@
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Loại Sản Phẩm') }}</label>
                                 <div class="col-md-6">
-                                <select name="loai_sp" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                <select name="ten_loai" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                                 <option selected>Chọn loại</option>
                                 @foreach ($dsLoaiSp as $LoaiSp)
                                 <option value="{{ $LoaiSp->id }}">{{ $LoaiSp->ten_loai }}</option>

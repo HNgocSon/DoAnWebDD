@@ -20,7 +20,7 @@
                 <th>Ram</th>
                 <th>Dung Lượng</th>
                 <th>Pin</th>
-                <th>Hình Ảnh</th>
+                <th>Hình Ảnh</th>   
             </tr>
           </thead>
             <tbody>
@@ -28,7 +28,7 @@
             <tr>
                 <td>{{ $sanPham->id }}</td>
                 <td>{{ $sanPham->ten }}</td>
-                <td>{{ $sanPham->loai_san_pham->ten_loai }}</td>
+                <td>{{ $sanPham->loai_san_pham->ten_loai}}</td>
                 <td>{{ $sanPham->gia}}</td>
                 <td>{{ $sanPham->mo_ta}}</td>
                 <td>{{ $sanPham->so_luong }}</td>

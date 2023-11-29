@@ -21,7 +21,7 @@
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Loại Sản Phẩm') }}</label>
                                 <div class="col-md-6">
-                                <select name="loai_sp" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                <select name="ten_loai" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                                 <option selected>{{$dsSanPham->loai_san_pham->ten_loai}}</option>
                                 @foreach ($dsLoaiSp as $LoaiSp)
                                 <option value="{{ $LoaiSp->id }}">{{ $LoaiSp->ten_loai }}</option>
@@ -119,17 +119,14 @@
                             </div>
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Hình:') }}</label>
-
                                 <div class="col-md-6">
-                                @foreach($ha as $hinhanh)
+                                <!-- @foreach($ha as $hinhanh)
                                 <tr>
-                                 
                                     <td><img src="{{asset($hinhanh->url)}}" style="width:80px"/></td>
-                                    
                                 </tr>
-                                @endforeach
-                                    <input id="name" type="file" class="form-control @error('name') is-invalid @enderror" name="img[]" multiple required autofocus >
-
+                                @endforeach -->
+                                    <a href="{{ route('san-pham.cap-nhat-anh', ['id' => $dsSanPham->id]) }}"><button type="button" class="btn btn-success">Xem ảnh</button></a>
+                                    <!-- <input id="name" type="file" class="form-control @error('name') is-invalid @enderror" name="img[]" multiple required autofocus > -->
                                 </div>
                             </div>
                             <div class="form-group row">
