@@ -23,7 +23,7 @@
                 </tr>
                 @endforeach -->
                 <tr>Chon Thêm Ảnh</tr>
-                <input id="#" type="file" class="form-control @error('name') is-invalid @enderror" name="img[]" multiple required autofocus >
+                <input id="#" type="file" class="form-control" name="img[]" multiple >
             </div>
            
           </tr>
@@ -40,7 +40,12 @@
         <button type="submit" class="btn btn-primary">
                 Lưu
         </button>
+<<<<<<< HEAD
 
+=======
+        <a href="{{ route('san-pham.cap-nhat',['id'=>$dsSanPham->id]) }}"><button type="button" class="btn btn-success">quay lại</button></a>
+        </form>
+>>>>>>> 2882480a5458ac1b7564664f7f0c1f2db64d541e
         </div>
         </form>
         @endsection

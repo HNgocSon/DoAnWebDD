@@ -41,8 +41,13 @@
                 <td>{{ $sanPham->ram }}</td>
                 <td>{{ $sanPham->dung_luong}}</td>  
                 <td>{{ $sanPham->pin}}</td>
+<<<<<<< HEAD
                 <td><a href="{{ route('san-pham.xem-anh', ['id' => $sanPham->id]) }}"><button type="button" class="btn btn-success">Xem</button></a></td>
                 <td><a href="{{ route('san-pham.cap-nhat', ['id' => $sanPham->id]) }}"><button type="button" class="btn btn-success ">Sửa</button></a><a href="{{ route('san-pham.xoa', ['id' => $sanPham->id]) }}"><button type="button" class="btn btn-danger btn-sm px-3"><i class="glyphicon glyphicon-remove"></i></button></a></td>
+=======
+                <td><a href="{{ route('san-pham.xem-anh', ['id' => $sanPham->id]) }}"><button type="button" class="btn btn-success">Xem ảnh</button></a></td>
+                <td><a href="{{ route('san-pham.cap-nhat', ['id' => $sanPham->id]) }}"><button type="button" class="btn btn-success">Sửa</button></a> | <a href="{{ route('san-pham.xoa', ['id' => $sanPham->id]) }}"><button type="button" class="btn btn-success">Xóa</button></a></td>
+>>>>>>> 2882480a5458ac1b7564664f7f0c1f2db64d541e
             </tr>
             @endforeach
             
