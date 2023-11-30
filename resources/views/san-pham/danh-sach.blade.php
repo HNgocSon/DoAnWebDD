@@ -5,12 +5,12 @@
         <table class="table table-striped table-sm" border="1">
         <h3>Danh sách sản phẩm</h3>
           <thead>
-            <tr>
+            <tr class = "table-dark">
                 <th>ID</td>
                 <th>Tên SP</th>
                 <th>Loại Sản Phẩm</th>
                 <th>Giá</th>
-                <th>Mô tả</th>
+                <th style="width:135px;text-align:center;padding-bottom:20px;">Mô tả</th>
                 <th>Số Lượng</th>
                 <th>Màu</th>
                 <th>Màn Hình</th>
@@ -20,7 +20,8 @@
                 <th>Ram</th>
                 <th>Dung Lượng</th>
                 <th>Pin</th>
-                <th>Hình Ảnh</th>   
+                <th>Hình Ảnh</th> 
+                <th style="width:135px;text-align:center;padding-bottom:20px;">Thao Tác</th>  
             </tr>
           </thead>
             <tbody>
@@ -40,8 +41,8 @@
                 <td>{{ $sanPham->ram }}</td>
                 <td>{{ $sanPham->dung_luong}}</td>  
                 <td>{{ $sanPham->pin}}</td>
-                <td><a href="{{ route('san-pham.xem-anh', ['id' => $sanPham->id]) }}"><button type="button" class="btn btn-success">Xem ảnh</button></a></td>
-                <td><a href="{{ route('san-pham.cap-nhat', ['id' => $sanPham->id]) }}"><button type="button" class="btn btn-success">Sửa</button></a> | <a href="{{ route('san-pham.xoa', ['id' => $sanPham->id]) }}"><button type="button" class="btn btn-success">Xóa</button></a></td>
+                <td><a href="{{ route('san-pham.xem-anh', ['id' => $sanPham->id]) }}"><button type="button" class="btn btn-success">Xem</button></a></td>
+                <td><a href="{{ route('san-pham.cap-nhat', ['id' => $sanPham->id]) }}"><button type="button" class="btn btn-success ">Sửa</button></a> | <a href="{{ route('san-pham.xoa', ['id' => $sanPham->id]) }}"><button type="button" style="height: 33px; width: 50px;" class="btn btn-danger btn-sm px-3"><i class="glyphicon glyphicon-remove"></i></button></a></td>
             </tr>
             @endforeach
             

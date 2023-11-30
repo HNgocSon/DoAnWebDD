@@ -34,7 +34,7 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Địa Chỉ') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control  @error('dia_chi) @enderror " name="dia_chi" >
+                                    <input id="name" type="text" class="form-control" name="dia_chi" >
                                     @error('dia_chi')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror

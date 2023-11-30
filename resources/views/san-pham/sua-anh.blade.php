@@ -1,9 +1,11 @@
 @extends('trangchu')
 @section('content')
-<div class="table-responsive">
 <form method="POST" action="" enctype="multipart/form-data">
- @CSRF
+ @csrf
+<div class="table-responsive">
+
         <table class="table table-striped table-sm" border="1">
+
         <h3>Danh sách hình ảnh</h3>
         
           <thead>
@@ -28,16 +30,19 @@
           </button>
             
           </tr>
-            <tr>
+          <tr style=" display:grid">
                 @foreach($ha as $HinhAnh)
                         <td><img src="{{asset($HinhAnh->url)}}" style="width:100px;height:100px"></td>
-                        <td><a href="{{ route('san-pham.xoa-anh', ['id' => $HinhAnh->id]) }}"><button type="button" class="btn btn-success">Xóa</button></a></td>
-                @endforeach
-            </tr>
+                        <td name="btn-xoa"><a href="{{ route('san-pham.xoa-anh', ['id' => $HinhAnh->id]) }}"><button type="button" class="btn btn-success">Xóa</button></a></td>
+                 @endforeach
+          </tr>
+           
           </tbody>
+          </div>
         </table>
        
         <a href="{{ route('san-pham.cap-nhat',['id'=>$dsSanPham->id]) }}"><button type="button" class="btn btn-success">quay lại</button></a>
         </form>
         </div>
+        </form>
         @endsection

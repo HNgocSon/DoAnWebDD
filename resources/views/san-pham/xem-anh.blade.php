@@ -7,11 +7,11 @@
              <th>Hình Ảnh</th>
           </thead>
             <tbody>
-            <td>
+            <tr style="display: block;">
                 @foreach($ha as $HinhAnh)
                         <td><img src="{{asset($HinhAnh->url)}}" style="width:100px;height:100px"></td>
                 @endforeach
-            </td>
+            </tr>
           </tbody>
         </table>
         <a href="{{ route('san-pham.danh-sach') }}"><button type="button" class="btn btn-success">quay lại</button></a>
