@@ -45,14 +45,14 @@
 
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <!-- <div class="form-group row">
                                 <label for="name"  class="col-md-4 col-form-label text-md-right">{{ __('Số Lượng:') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" value="{{$dsSanPham->so_luong}}" type="text" class="form-control @error('name') is-invalid @enderror" name="so_luong" required autofocus>
 
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group row">
                                 <label for="name"  class="col-md-4 col-form-label text-md-right">{{ __('Màu:') }}</label>
 

@@ -11,7 +11,7 @@ use App\Http\Controllers\HoaDonXuatController;
 use App\Http\Controllers\NhaCungCapController;
 use App\Http\Controllers\BinhLuanController;
 use App\Http\Controllers\HoaDonNhapController;
-
+use App\Http\Controllers\ChiTietHoaDonNhapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +93,9 @@ Route::get('quan-ly-binh-luan/danh-sach',[BinhLuanController::class,'DSBinhLuan'
 Route::get('quan-ly-binh-luan/them-moi',[BinhLuanController::class,'themMoi'])->name('quan-ly-binh-luan.them-moi');
 
 //Hóa Đơn Nhập
-Route::get('hoa-don-nhap/them-moi',[HoaDonNhapController::class,'HoaDonNhap'])->name('hoa-don-nhap.them-moi');
-Route::post('hoa-don-nhap/them-moi',[HoaDonNhapController::class,'xuLyThemMoiHDNhap'])->name('xuly-hd-nhap.them-moi');
-Route::get('hoa-don-nhap/danh-sach',[HoaDonNhapController::class,'DanhSachHDN'])->name('hoa-don-nhap.danh-sach');
+Route::get('hoa-don-nhap/them-moi',[HoaDonNhapController::class,'ThemHoaDonNhap'])->name('hoa-don-nhap.them-moi');
+Route::post('hoa-don-nhap/them-moi',[HoaDonNhapController::class,'XuLyHoaDonNhap'])->name('xl-hoa-don-nhap.them-moi');
+Route::get('hoa-don-nhap/danh-sach',[HoaDonNhapController::class,'DanhSachHoaDonNhap'])->name('hoa-don-nhap.danh-sach');
+Route::get('hoa-don-nhap/xoa/{id}',[HoaDonNhapController::class,'XoaHoaDonNhap'])->name('hoa-don-nhap.xoa');
+
+Route::get('hoa-don-nhap/chi-tiet-hoa-don-nhap/{id}',[ChiTietHoaDonNhapController::class,'XemChiTietHoaDonNhap'])->name('hoa-don-nhap.chi-tiet-hoa-don-nhap');

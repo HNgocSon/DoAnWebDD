@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\NhaCungCap;
+use App\Models\SanPham;
 
 class HoaDonNhap extends Model
 {
@@ -13,4 +14,5 @@ class HoaDonNhap extends Model
     public function nha_cung_cap(){
         return $this->belongsto(NhaCungCap::class);
     }
+    
 }

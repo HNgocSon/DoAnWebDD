@@ -23,8 +23,10 @@
                 <tr>Chon Thêm Ảnh</tr>
                 <input id="#" type="file" class="form-control" name="img[]" multiple >
             </div>
-            <div>
-            </div>
+            <button type="submit" class="btn btn-primary">
+                Lưu
+          </button>
+            
           </tr>
             <tr>
                 @foreach($ha as $HinhAnh)
@@ -34,9 +36,7 @@
             </tr>
           </tbody>
         </table>
-        <button type="submit" class="btn btn-primary">
-                Lưu
-        </button>
+       
         <a href="{{ route('san-pham.cap-nhat',['id'=>$dsSanPham->id]) }}"><button type="button" class="btn btn-success">quay lại</button></a>
         </form>
         </div>

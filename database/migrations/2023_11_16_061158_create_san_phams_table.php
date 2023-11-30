@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('loai_san_pham_id');
             $table->float('gia');
             $table->string('mo_ta');
-            $table->integer('so_luong');
+            $table->integer('so_luong')->default(0);
             $table->string('mau');
             $table->string('man_hinh');
             $table->string('camera');

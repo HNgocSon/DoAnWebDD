@@ -1,52 +1,49 @@
- 
-<style>
-    #tb-ds-san-pham th {
-        padding: 10px; /* Thêm khoảng trống 10px vào mỗi bên trong thẻ <th> */
-        text-align: center; /* Căn giữa nội dung bên trong thẻ <th> */
-    }
-
-    #tb-ds-san-pham td {
-        padding: 10px; /* Thêm khoảng trống 10px vào mỗi bên trong thẻ <td> */
-    }
-</style>
 @extends('trangchu')
+
 @section('content')
-
-
 <div class="table-responsive">
-        <table class="table table-striped table-sm" border="1">
-        <form method="POST" action="{{route('xuly-hd-nhap.them-moi')}}" >
-            @csrf
-            <h1>THÊM HOÁ ĐƠN NHẬP </h1>
-            <select name="ten_ncc" id="nha_cung_cap_id">
-            <option selected>Chọn Nhà Cung Cấp</option>
-                    @foreach($dsNCC as $ncc)
-                    <option value="{{$ncc->id}}"> {{$ncc->ten}}</option>
-                    @endforeach
+
+            <h1>THÊM HOÁ ĐƠN </h1>
+            <label>Chọn nha cung cap</label>
+            <select name="ncc" id="nha_cung_cap">
+                @foreach($dsNhaCungCap as $ncc)
+                <option value="{{$ncc->id}}" > {{$ncc->ten}}</option>
+                @endforeach
             </select>
-            <div class="col-md-6">
-                <label for="ten" class="form-label">Ngày nhập:</label>
-                    <input type="date" name="Ngay_nhap" id="Ngay_nhap" class="form-control">
-                    </div>
-                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            
-            
-            <label>Tổng Tiền</label>
-            <input type="number" id="tong_tien" name="tong_tien" />
-           
-       
-            <button type="button" class="btn btn-success" id="btn-them">Thêm Vào Danh Sách</button> 
+            <br>
+          
+            <h3>DANH SÁCH SẢN PHẨM</h3>
+
+            <label>Chọn Sản Phẩm</label>
+            <select name="san_pham" id="san_pham">
+                @foreach($dsSanPham as $SP)
+                <option value="{{$SP->id}}"> {{$SP->ten}}</option>
+                @endforeach
+            </select>
+
+            <label>Số Lượng</label>
+            <input type="number" id="so_luong" value="0"/>
+            <label>Giá Bán</label>
+            <input type="number" id="gia_ban" value="0"/>
+            <label>Giá nhap</label>
+            <input type="number" id="gia_nhap" value="0"/>
+
+            <button type="button" id="btn-them">Thêm san pham</button> 
 
             <br> </br>
-
-        <table id="tb-ds" border="1">
+    <form method="POST" action="{{route('xl-hoa-don-nhap.them-moi')}}">
+        @csrf
+        <table id="tb-ds-san-pham" border="1">
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Nhà Cung Cấp</th>
-                        <th>Ngày nhập</th>
-                        <th>tổng tiền</th>
+                        <th>Sản Phẩm</th>
+                        <th>Số Lượng</th>
+                        <th>Giá Bán</th>
+                        <th>Gia Nhap</th>
+                        <th>Thành Tiền</th>
                         <th>Thao Tác</th>
+
                     </tr>
                 </thead> 
                 <tbody>
@@ -54,90 +51,104 @@
                 </tbody>   
         </table>
             
-
+        <input type="hidden" id="nha_cung_cap_id" name="nha_cung_cap_id" value="1"/>
+        
             <br/><br/>
-            <button type ="submit" class="btn btn-success">Lưu</button>
-
-        </table>
-</div>
+            <button type ="submit">Lưu</button>
 </form>
-@endsection   
 
+@endsection
 
 @section('page')
 <script type="text/javascript">
     $(document).ready(function(){
         $("#btn-them").click(function(){
+          
             var stt=$('#tb-ds-san-pham tbody tr').length+1;
-            var tenNCC=$("#nha_cung_cap_id").find(":selected").text();
-            var idNCC=$("#nha_cung_cap_id").find(":selected").val();
-            var NgayNhap=$("#Ngay_nhap").val();
-            var TongTien=$("#tong_tien").val();
-           
-            //tạo 1 dòng    
+            var tenSP=$("#san_pham").find(":selected").text();
+            var idSP= $("#san_pham").find(":selected").val();
+            var soLuong=$("#so_luong").val();
+            var giaBan=$("#gia_ban").val();
+            var giaNhap=$("#gia_nhap").val();
+            var thanhTien = soLuong * giaNhap;
+         
             var row=`<tr>
             <td>${stt}</td>
-            <td>${tenNCC}<input type="hidden" name ="idNCC[]" value="${tenNCC}"/></td>
-            <td>${NgayNhap}<input type="hidden" name ="NgayNhap[]" value="${NgayNhap}"/></td>
-            <td>${TongTien}<input type="hidden" name ="TongTien[]" value="${TongTien}"/></td>
+            <td>${tenSP}<input type="hidden" name ="idSP[]" value="${idSP}"/></td>
+            <td>${soLuong}<input type="hidden" name ="soLuong[]" value="${soLuong}"/></td>
+            <td>${giaBan}<input type="hidden" name ="giaBan[]" value="${giaBan}"/></td>
+            <td>${giaNhap}<input type="hidden" name ="giaNhap[]" value="${giaNhap}"/></td>
+            <td>${thanhTien}<input type="hidden" name ="thanhTien[]" value="${thanhTien}"/></td>
             
             <td> <a href="#" class="edit-link">Sửa</a> | <a href="#" class="delete-link">Xoá</a></td>
-          
 
             </tr>`;
-            // theem cuoi tab
 
-            $("#tb-ds").find('tbody').append(row);
 
+            $("#tb-ds-san-pham").find('tbody').append(row);
             //xoa
-            $("#tb-ds").on("click", ".delete-link", function(e) {
+            $("#tb-ds-san-pham").on("click", ".delete-link", function(e) {
             e.preventDefault();
             $(this).closest("tr").remove();
             // Cập nhật lại STT sau khi xóa
-            $('#tb-ds tbody tr').each(function(index) {
+            $('#tb-ds-san-pham tbody tr').each(function(index) {
                 $(this).find("td:first").text(index + 1);
             });
-        
-        });
-      
-        // Chỉnh sửa dòng
-    $("#tb-ds").on("click", ".edit-link", function(e) {
-        e.preventDefault();
-        var tr = $(this).closest("tr");
-
-        // Lưu trữ giá trị hiện tại
-        var currentData = {    
-            TongTien: tr.find("td:eq(3)").text()
-        };
-
-        // Thay đổi dòng sang chế độ chỉnh sửa
-        tr.find("td:eq(3)").html(`<input type="number" value="${currentData.TongTien}" class="tong-tien-input-edit" />`);
-        tr.find("td:last").html(`<a href="#" class="save-link">Lưu</a> | <a href="#" class="cancel-link">Hủy</a>`);
-    });
-
-    // Lưu chỉnh sửa
-    $("#tb-ds").on("click", ".save-link", function(e) {
-        e.preventDefault();
-        var tr = $(this).closest("tr");
-        var newTongTien = tr.find(".tong-tien-input-edit").val();
-        
-
-        tr.find("td:eq(3)").text(newTongTien);
-        tr.find("td:last").html(`<a href="#" class="edit-link">Sửa</a> | <a href="#" class="delete-link">Xoá</a>`);
-    });
-
-    // Hủy chỉnh sửa
-    $("#tb-ds").on("click", ".cancel-link", function(e) {
-        e.preventDefault();
-        var tr = $(this).closest("tr");
-
-
-        tr.find("td:eq(3)").text(tr.find(".tong-tien-input-edit").val());
-        tr.find("td:last").html(`<a href="#" class="edit-link">Sửa</a> | <a href="#" class="delete-link">Xoá</a>`);
-    });
-    });
-});
+           
+        });  
     
+            // Chỉnh sửa dòng
+        $("#tb-ds-san-pham").on("click", ".edit-link", function(e) {
+            e.preventDefault();
+            var tr = $(this).closest("tr");
+
+            // Lưu trữ giá trị hiện tại
+            var currentData = {
+                soLuong: tr.find("td:eq(2)").text(),
+                giaBan: tr.find("td:eq(3)").text(),
+                giaNhap: tr.find("td:eq(4)").text(),
+            };
+
+            // Thay đổi dòng sang chế độ chỉnh sửa
+            tr.find("td:eq(2)").html(`<input type="number" value="${currentData.soLuong}" class="so-luong-input-edit" />`);
+            tr.find("td:eq(3)").html(`<input type="number" value="${currentData.giaBan}" class="gia-ban-input-edit" />`);
+            tr.find("td:eq(4)").html(`<input type="number" value="${currentData.giaNhap}" class="gia-nhap-input-edit" />`);
+            tr.find("td:last").html(`<a href="#" class="save-link">Lưu</a> | <a href="#" class="cancel-link">Hủy</a>`);
+        });
+
+        // Lưu chỉnh sửa
+        $("#tb-ds-san-pham").on("click", ".save-link", function(e) {
+            e.preventDefault();
+            var tr = $(this).closest("tr");
+            var newSoLuong = tr.find(".so-luong-input-edit").val();
+            var newGiaBan = tr.find(".gia-ban-input-edit").val();
+            var newGiaNhap = tr.find(".gia-nhap-input-edit").val();
+            var newThanhTien = newSoLuong * newGiaNhap;
+
+            tr.find("td:eq(2)").text(newSoLuong);
+            tr.find("td:eq(3)").text(newGiaBan);
+            tr.find("td:eq(4)").text(newGiaNhap);
+            tr.find("td:eq(5)").text(newThanhTien);
+            tr.find("td:last").html(`<a href="#" class="edit-link">Sửa</a> | <a href="#" class="delete-link">Xoá</a>`);
+        });
+
+        // Hủy chỉnh sửa
+        $("#tb-ds-san-pham").on("click", ".cancel-link", function(e) {
+            e.preventDefault();
+            var tr = $(this).closest("tr");
+
+            tr.find("td:eq(2)").text(tr.find(".so-luong-input-edit").val());
+            tr.find("td:eq(3)").text(tr.find(".gia-ban-input-edit").val());
+            tr.find("td:eq(4)").text(tr.find(".gia-nhap-input-edit").val());
+            tr.find("td:last").html(`<a href="#" class="edit-link">Sửa</a> | <a href="#" class="delete-link">Xoá</a>`);
+        });
+    });
+        $('#nha_cung_cap').change(function(){
+            // var nhacungcap=$(this).val();
+            $('#nha_cung_cap_id').val(this.value);
+        })
+    
+});
 
 </script>
 @endsection

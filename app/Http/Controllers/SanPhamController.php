@@ -18,13 +18,13 @@ class SanPhamController extends Controller
 
     public function xuLyThemMoiSp(ThemMoiSanPhamRequest $request){
 
-      
+        
         $sanPham= new SanPham();
         $sanPham->ten     = $request->ten;
         $sanPham->loai_san_pham_id =$request->ten_loai;
         $sanPham->gia    = $request->gia;
         $sanPham->mo_ta     = $request->mo_ta;
-        $sanPham->so_luong    = $request->so_luong;
+        // $sanPham->so_luong    = $request->so_luong;
         $sanPham->mau= $request->mau;
         $sanPham->man_hinh    = $request->man_hinh;
         $sanPham->camera= $request->camera;
@@ -36,7 +36,6 @@ class SanPhamController extends Controller
         $sanPham->save();
 
         if(!empty($request->img)){
-
         $files=$request->img;
         foreach($files as $file ){
         $ha = new HinhAnh();
@@ -93,7 +92,7 @@ class SanPhamController extends Controller
         $sanPham->loai_san_pham_id =$request->loai_sp;
         $sanPham->gia    = $request->gia;
         $sanPham->mo_ta     = $request->mo_ta;
-        $sanPham->so_luong    = $request->so_luong;
+        // $sanPham->so_luong    = $request->so_luong;
         $sanPham->mau= $request->mau;
         $sanPham->man_hinh    = $request->man_hinh;
         $sanPham->camera= $request->camera;
@@ -102,6 +101,7 @@ class SanPhamController extends Controller
         $sanPham->ram= $request->ram;
         $sanPham->dung_luong    = $request->dung_luong;
         $sanPham->pin= $request->pin;
+        $sanPham->save();
         
 
         return redirect()->route('san-pham.danh-sach')->with('thong_bao','Cập Nhật Sản Phẩm Thành Công');
