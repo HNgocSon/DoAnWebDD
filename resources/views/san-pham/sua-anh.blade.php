@@ -40,12 +40,8 @@
         <button type="submit" class="btn btn-primary">
                 Lưu
         </button>
-<<<<<<< HEAD
-
-=======
         <a href="{{ route('san-pham.cap-nhat',['id'=>$dsSanPham->id]) }}"><button type="button" class="btn btn-success">quay lại</button></a>
         </form>
->>>>>>> 2882480a5458ac1b7564664f7f0c1f2db64d541e
         </div>
         </form>
         @endsection
