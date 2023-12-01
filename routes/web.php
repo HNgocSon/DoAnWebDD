@@ -30,7 +30,7 @@ Route::get('/', function () {
 
 
 //loại sản phẩm
-// Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::prefix('loai-san-pham')->group(function (){
         Route::name('loai-san-pham.')->group(function (){
         Route::get('them-moi',[LoaiSanPhamController::class,'ThemMoiLoaiSp'])->name('them-moi');
@@ -41,10 +41,10 @@ Route::get('/', function () {
         Route::post('cap-nhat/{id}', [LoaiSanPhamController::class, 'XuLyCapNhatLoaiSp'])->name('xl-cap-nhat');
         });
     });
-// });
+});
 //sản phẩm
 
-// Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::prefix('san-pham')->group(function (){
         Route::name('san-pham.')->group(function (){
         Route::get('danh-sach',[SanPhamController::class,'DanhSachSp'])->name('danh-sach');
@@ -62,7 +62,7 @@ Route::get('/', function () {
         Route::get('xoa-anh/{id}',[SanPhamController::class,'XoaAnh'])->name('xoa-anh');
         });
     });
-// });
+});
 
 
 //Hóa đơn xuất
@@ -75,7 +75,7 @@ Route::get('admin/dang-nhap', [DangNhapController::class, 'DangNhap'])->name('ad
 Route::post('admin/dang-nhap', [DangNhapController::class, 'XuLyDangNhap'])->name('admin.xl-dang-nhap')->middleware('guest');
 Route::get('admin/dang-xuat', [DangNhapController::class, 'DangXuat'])->name('admin.dang-xuat')->middleware('auth');
 //Nhà Cung Cấp
-// Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::prefix('nha-cung-cap')->group(function (){
         Route::name('nha-cung-cap.')->group(function (){
             Route::get('them-moi',[NhaCungCapController::class,'ThemMoiNCC'])->name('them-moi');
@@ -86,7 +86,7 @@ Route::get('admin/dang-xuat', [DangNhapController::class, 'DangXuat'])->name('ad
             Route::post('cap-nhat/{id}', [NhaCungCapController::class, 'XuLyCapNhatNCC'])->name('xl-cap-nhat');
         });
     });
-// });
+});
 
 //Bình Luận
 Route::get('quan-ly-binh-luan/danh-sach',[BinhLuanController::class,'DSBinhLuan'])->name('quan-ly-binh-luan.danh-sach');

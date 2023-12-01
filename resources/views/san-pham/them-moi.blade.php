@@ -12,15 +12,12 @@
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Tên Sản Phẩm') }}</label>
                                 <div class="col-md-6">
-<<<<<<< HEAD
-                                    <input id="name" type="text" class="form-control " name="ten">
-
-=======
+                                    
                                     <input id="name" type="text" class="form-control @error('ten') @enderror  " name="ten" >
                                     @error('ten')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
->>>>>>> 2882480a5458ac1b7564664f7f0c1f2db64d541e
+
                                 </div>
                               
                             </div>
