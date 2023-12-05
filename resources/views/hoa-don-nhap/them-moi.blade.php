@@ -5,7 +5,9 @@
 
             <h1>THÊM HOÁ ĐƠN </h1>
             <label>Chọn nha cung cap</label>
+
             <select name="ncc" id="nha_cung_cap">
+                <option>Chon Nha Cung Cap</option>
                 @foreach($dsNhaCungCap as $ncc)
                 <option value="{{$ncc->id}}" > {{$ncc->ten}}</option>
                 @endforeach
@@ -16,6 +18,7 @@
 
             <label>Chọn Sản Phẩm</label>
             <select name="san_pham" id="san_pham">
+                <option>Chon San Pham</option>
                 @foreach($dsSanPham as $SP)
                 <option value="{{$SP->id}}"> {{$SP->ten}}</option>
                 @endforeach
@@ -51,7 +54,7 @@
                 </tbody>   
         </table>
             
-        <input type="hidden" id="nha_cung_cap_id" name="nha_cung_cap_id" value="1"/>
+        <input type="hidden" id="nha_cung_cap_id" name="nha_cung_cap_id" value=""/>
         
             <br/><br/>
             <button type ="submit">Lưu</button>

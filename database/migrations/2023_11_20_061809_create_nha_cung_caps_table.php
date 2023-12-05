@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('sdt');
             $table->string('dia_chi');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

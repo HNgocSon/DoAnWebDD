@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('comments');
             $table->dateTime('thoi_gian');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

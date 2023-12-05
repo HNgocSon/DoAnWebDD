@@ -16,9 +16,10 @@ return new class extends Migration
             $table->date('ngay_tao');
             $table->integer('san_pham_id');
             $table->integer('khach_hang_id');
-            $table->float('tong_tien');
-            $table->float('status');
+            $table->float('tong_tien',100);
+            $table->float('status')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

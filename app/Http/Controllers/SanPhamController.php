@@ -21,7 +21,7 @@ class SanPhamController extends Controller
         
         $sanPham= new SanPham();
         $sanPham->ten     = $request->ten;
-        $sanPham->loai_san_pham_id =$request->ten_loai;
+        $sanPham->loai_san_pham_id = $request->ten_loai;
         $sanPham->gia    = $request->gia;
         $sanPham->mo_ta     = $request->mo_ta;
         // $sanPham->so_luong    = $request->so_luong;
@@ -53,6 +53,7 @@ class SanPhamController extends Controller
        
         return view('san-pham/danh-sach',compact('dsSanPham','ha'));
     }
+
 
     public function XoaSp($id)
     {
@@ -89,7 +90,7 @@ class SanPhamController extends Controller
             return redirect()->route('san-pham.danh-sach')->with('error','sản phẩm không tồn tại');
         }
         $sanPham->ten     = $request->ten;
-        $sanPham->loai_san_pham_id =$request->ten_loai;
+        $sanPham->loai_san_pham_id = $request->ten_loai;
         $sanPham->gia    = $request->gia;
         $sanPham->mo_ta     = $request->mo_ta;
         // $sanPham->so_luong    = $request->so_luong;

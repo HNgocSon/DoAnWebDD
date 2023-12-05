@@ -20,6 +20,7 @@ return new class extends Migration
             $table->float('gia_ban');
             $table->float('thanh_tien');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

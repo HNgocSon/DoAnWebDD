@@ -21,10 +21,13 @@
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Loại Sản Phẩm') }}</label>
                                 <div class="col-md-6">
+                                
                                 <select name="ten_loai" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                <option selected>{{$dsSanPham->loai_san_pham->ten_loai}}</option>
+                                <option selected value="{{$dsSanPham->loai_san_pham_id}}" >{{$dsSanPham->loai_san_pham->ten_loai}}</option>
                                 @foreach ($dsLoaiSp as $LoaiSp)
-                                <option value="{{ $LoaiSp->id }}">{{ $LoaiSp->ten_loai }}</option>
+                                    @if($dsSanPham->loai_san_pham_id != $LoaiSp->id)
+                                        <option value="{{ $LoaiSp->id }}">{{ $LoaiSp->ten_loai}}</option>
+                                    @endif
                                 @endforeach
                                 </select>
                                 </div>

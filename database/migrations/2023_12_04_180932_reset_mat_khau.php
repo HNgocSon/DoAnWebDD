@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hinh_anh', function (Blueprint $table) {
+      
+        Schema::create('reset_mat_khau', function (Blueprint $table) {
             $table->id();
-            $table->string('url',100);
-            $table->integer('san_pham_id');
-            $table->timestamps();
+            $table->string('email')->index();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
         });
     }
 
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hinh_anh');
+        Schema::dropIfExists('reset_mat_khau');
     }
 };

@@ -10,7 +10,7 @@
                 <th>Tên SP</th>
                 <th>Loại Sản Phẩm</th>
                 <th>Giá</th>
-                <th style="width:135px;text-align:center;padding-bottom:20px;">Mô tả</th>
+                <th >Mô tả</th>
                 <th>Số Lượng</th>
                 <th>Màu</th>
                 <th>Màn Hình</th>
@@ -21,7 +21,7 @@
                 <th>Dung Lượng</th>
                 <th>Pin</th>
                 <th>Hình Ảnh</th> 
-                <th style="width:135px;text-align:center;padding-bottom:20px;">Thao Tác</th>  
+                <th>Thao Tác</th>  
             </tr>
           </thead>
             <tbody>
