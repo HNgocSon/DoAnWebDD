@@ -101,10 +101,10 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'khach_hang' => [
+            'provider' => 'khach_hang',
             'table' => 'password_reset_tokens',
-            'expire' => 60,
+            'expire' => 180,
             'throttle' => 60,
         ],
     ],

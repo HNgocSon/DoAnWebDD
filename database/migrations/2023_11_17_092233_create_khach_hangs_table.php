@@ -17,9 +17,10 @@ return new class extends Migration
             $table->string('sdt');
             $table->string('email');
             $table->string('password');
-            $table->string('dia_chi');
-            $table->integer('status');
+            $table->string('dia_chi',50);
+            $table->integer('status')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -12,6 +12,7 @@ use App\Http\Controllers\NhaCungCapController;
 use App\Http\Controllers\BinhLuanController;
 use App\Http\Controllers\HoaDonNhapController;
 use App\Http\Controllers\ChiTietHoaDonNhapController;
+use App\Http\Controllers\APIAuthController;;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,10 @@ use App\Http\Controllers\ChiTietHoaDonNhapController;
 Route::get('/', function () {
     return view('trangchu');
 });
+
+
+Route::get('reset-password/{token}',[APIAuthController::class,'ResetMatKhau'])->name('reset-password');
+Route::post('reset-password-post',[APIAuthController::class,'ResetMatKhauPost'])->name('reset-password-post');
 
 
 //loại sản phẩm

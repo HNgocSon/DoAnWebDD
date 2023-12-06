@@ -17,6 +17,7 @@ return new class extends Migration
             $table->datetime('ngay_nhap')->nullable()->default(DB::raw('now()'));
             $table->float('tong_tien');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

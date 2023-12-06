@@ -136,6 +136,11 @@
         @yield('content')
         
 </main>
+    <!-- resources/views/layouts/app.blade.php -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="{{ asset('jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('bootstrap-5.2.3/js/bootstrap.bundle.min.js')}}"></script>

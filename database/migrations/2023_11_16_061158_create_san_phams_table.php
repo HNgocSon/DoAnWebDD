@@ -13,20 +13,21 @@ return new class extends Migration
     {
         Schema::create('san_pham', function (Blueprint $table) {
             $table->id();
-            $table->string('ten');
+            $table->string('ten',60);
             $table->integer('loai_san_pham_id');
-            $table->float('gia');
-            $table->string('mo_ta');
+            $table->float('gia',30);
+            $table->string('mo_ta',100);
             $table->integer('so_luong')->default(0);
-            $table->string('mau');
-            $table->string('man_hinh');
+            $table->string('mau',20);
+            $table->string('man_hinh',20);
             $table->string('camera');
-            $table->string('he_dieu_hanh');
-            $table->string('chip');
-            $table->string('ram');
-            $table->string('dung_luong');
-            $table->string('pin');
+            $table->string('he_dieu_hanh',20);
+            $table->string('chip',20);
+            $table->string('ram',20);
+            $table->string('dung_luong',20);
+            $table->string('pin',20);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
