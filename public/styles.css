@@ -92,7 +92,7 @@ body {
   }
   .table-responsive {
     overflow-x: auto;
-    margin-left: 3000px;
+    margin-left: 300px;
     -webkit-overflow-scrolling: touch;
   }
   .tbody, td, tfoot, th, thead, tr {

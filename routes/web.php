@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
 });
 //sản phẩm
 
-Route::middleware('auth')->group(function () {
+// Route::middleware('auth')->group(function () {
     Route::prefix('san-pham')->group(function (){
         Route::name('san-pham.')->group(function (){
         Route::get('danh-sach',[SanPhamController::class,'DanhSachSp'])->name('danh-sach');
@@ -62,7 +62,7 @@ Route::middleware('auth')->group(function () {
         Route::get('xoa-anh/{id}',[SanPhamController::class,'XoaAnh'])->name('xoa-anh');
         });
     });
-});
+// });
 
 
 //Hóa đơn xuất

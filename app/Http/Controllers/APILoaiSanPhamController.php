@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\LoaiSanPham;
+use App\Models\HinhAnh;
+use App\Models\SanPham;
 class APILoaiSanPhamController extends Controller
 {
     public function LayDanhSachLoaiSanPham()
