@@ -9,6 +9,6 @@
 <body>
     <h1>Xác Nhận tài khoản</h1>
 
-    <a href="{{route('accept')}}">xác nhận tài khoản</a>
+    <a href="{{ route('khach-hang.accept', ['khachhang' => $khachHang->id, 'token' => $khachHang->token]) }}">Xác nhận tài khoản</a>
 </body>
 </html>

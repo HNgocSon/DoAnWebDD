@@ -63,11 +63,6 @@ class APIAuthController extends Controller
         }
         
         $token = Str::random(64);
-        
-        Mail::send('email.accept-account', ['token' => $token], function ($message) use ($request){
-            $message->to($request->email);
-            $message->subject("signup account");
-        });
 
         $khachHang = new KhachHang();
         $khachHang->ten = $request->ten;
@@ -75,20 +70,74 @@ class APIAuthController extends Controller
         $khachHang->email = $request->email;
         $khachHang->password = Hash::make($request->password);
         $khachHang->dia_chi = $request->dia_chi;
+        $khachHang->token = $token;
         $khachHang-> save();
+
+
+
+        Mail::send('email.accept-account',compact('khachHang'), function ($message) use ($khachHang){
+            $message->to($khachHang->email);
+            $message->subject("signup account");
+        });
 
         return response()->json([
             'success'=>true,
-            'message'=>'dang ky thanh cong'
+            'message'=>'dang ky thanh cong vui long xac nhan email'
         ]);
     }
 
+    public function KiemTraTokenDangKy($khachhang, $token)
+    {
+        $tokenInfo = DB::table('khach_hang')
+            ->where('id', $khachhang)
+            ->where('token', $token)
+            ->first();
 
-    public function Accept($id){
-       $user = KhachHang::find($id);
-            $user->status = 1;
-            $user -> save();
+        if (!$tokenInfo) {
+            return false;
+        }
+        $creationTime = Carbon::parse($tokenInfo->created_at);
+        $expirationTime = $creationTime->addMinutes(1);
+    
+        return now()->lessThanOrEqualTo($expirationTime);
     }
+
+    public function Accept($khachhang,$token){
+
+        // Kiểm tra token còn hạn
+        // $updatePassword = DB::table('khach_hang')->where([
+        //     'id' => $khachhang,
+        //     'token' => $token
+        // ])->first();
+      
+        if (!$this->KiemTraTokenDangKy($khachhang, $token)) {
+            return "Token đã hết hạn hoặc không hợp lệ";
+        }
+    
+        $user = KhachHang::find($khachhang);
+        if ($user->token === $token) {
+            $user->update(['status' => 1, 'token' => null]);
+            return "Xác nhận thành công";
+        } else {
+            return "Không thành công";
+        }
+        ///////////////////////////////////////
+        if (!$this->KiemTraTokenDangKy($khachhang, $token)) {
+            return "Token đã hết hạn hoặc không hợp lệ";
+        }
+    
+        $user = KhachHang::find($khachhang);
+        
+        if ($user->status === 1) {
+            return "Người dùng đã được xác nhận trước đó";
+        }
+    
+        // Cập nhật trạng thái và xóa token
+        $user->update(['status' => 1, 'token' => null]);
+    
+        return "Xác nhận thành công";
+    }
+    
 
     
     public function DangNhap(Request $request)
@@ -131,8 +180,6 @@ class APIAuthController extends Controller
 
     public function QuenMatKhau(Request $request)
     {
-
-    
         $user = KhachHang::where('email', $request->email)->first();
 
         if (!$user) {
@@ -162,7 +209,7 @@ class APIAuthController extends Controller
         return view('email/reset-password', compact('token'));
     }
 
-    public function isTokenValid($email, $token)
+    public function KiemTraTokenResetMatKhau($email, $token)
     {
         $tokenInfo = DB::table('reset_mat_khau')
             ->where('email', $email)
@@ -179,17 +226,17 @@ class APIAuthController extends Controller
 
     public function ResetMatKhauPost(ResetMatKhauRequest $request)
     {
-        $updatePassword = DB::table('reset_mat_khau')->where([
-            'email' => $request->email,
-            'token' => $request->token
-        ])->first();
+    //     $updatePassword = DB::table('reset_mat_khau')->where([
+    //         'email' => $request->email,
+    //         'token' => $request->token
+    //     ])->first();
 
-        if (!$this->isTokenValid($request->email, $request->token)) {
+        if (!$this->KiemTraTokenResetMatKhau($request->email, $request->token)) {
             return "Token đã hết hạn hoặc không hợp lệ";
         }
 
         KhachHang::where("email", $request->email)->update(["password" => Hash::make($request->password)]);
-
+       
         return "Cập nhật mật khẩu thành công";
     }
 }

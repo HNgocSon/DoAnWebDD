@@ -33,6 +33,7 @@ Route::get('/', function () {
 Route::get('reset-password/{token}',[APIAuthController::class,'ResetMatKhau'])->name('reset-password');
 Route::post('reset-password-post',[APIAuthController::class,'ResetMatKhauPost'])->name('reset-password-post');
 
+Route::get('/accept/{khachhang}/{token}',[APIAuthController::class,'Accept'])->name('khach-hang.accept');
 
 //loại sản phẩm
 Route::middleware('auth')->group(function () {

@@ -104,7 +104,7 @@ return [
         'khach_hang' => [
             'provider' => 'khach_hang',
             'table' => 'password_reset_tokens',
-            'expire' => 180,
+            'expire' => 30,
             'throttle' => 60,
         ],
     ],

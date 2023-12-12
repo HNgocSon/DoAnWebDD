@@ -10,7 +10,14 @@ class KhachHang extends Authenticatable implements JWTSubject
 {
     use HasFactory;
     protected $table="khach_hang";
-
+    
+    public $timestamps = false;
+    
+    protected $fillable = [
+        'status',
+        'token',
+        'created_at'
+    ];
     public function getJWTIdentifier()
     {
         return $this->getKey();

@@ -10,12 +10,12 @@ class ResetMatKhau extends Model
     use HasFactory;
     protected $table = 'reset_mat_khau';
 
-    // public $timestamps = false;
+    public $timestamps = false;
 
-    // protected $fillable = [
-    //     'email',
-    //     'token',
-    //     'created_at'
-    // ];
+    protected $fillable = [
+        'email',
+        'token',
+        'created_at'
+    ];
 
 }

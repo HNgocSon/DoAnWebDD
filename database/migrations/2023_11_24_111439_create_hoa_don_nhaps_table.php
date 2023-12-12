@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('nha_cung_cap_id');
             $table->datetime('ngay_nhap')->nullable()->default(DB::raw('now()'));
             $table->float('tong_tien');
+            $table->integer('status')->default(0);;
             $table->timestamps();
             $table->softDeletes();
         });

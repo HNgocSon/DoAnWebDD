@@ -26,7 +26,7 @@ Route::middleware('guest:api')->group(function () {
     Route::post('dang-nhap',[APIAuthController::class,'DangNhap']);
     Route::post('dang-ky',[APIAuthController::class,'DangKy']);
     Route::post('forget-password',[APIAuthController::class,'QuenMatKhau']);
-    Route::post('accept',[APIAuthController::class,'Accept'])->name('accept');
+    
 
 });
 
