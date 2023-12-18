@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('san_pham', function (Blueprint $table) {
             $table->id();
-            $table->string('ten',60);
-            $table->integer('loai_san_pham_id');
+            $table->string('ten');
+            $table->unsignedBigInteger('loai_san_pham_id');
             $table->float('gia',30);
             $table->string('mo_ta',100);
             $table->integer('so_luong')->default(0);
@@ -28,6 +28,9 @@ return new class extends Migration
             $table->string('pin',20);
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('loai_san_pham_id')->references('id')->on('loai_san_pham')->onDelete('cascade');
+
         });
     }
 

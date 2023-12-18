@@ -34,7 +34,7 @@
             <button type="button" id="btn-them">Thêm san pham</button> 
 
             <br> </br>
-    <form method="POST" action="{{route('xl-hoa-don-nhap.them-moi')}}">
+    <form method="POST" action="{{route('hoa-don-nhap.xl-them-moi')}}">
         @csrf
         <table id="tb-ds-san-pham" border="1">
                 <thead>

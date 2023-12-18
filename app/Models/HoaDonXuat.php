@@ -10,9 +10,7 @@ class HoaDonXuat extends Model
 {
     use HasFactory;
     protected $table="hoa_don_xuat";
-    public function san_pham(){
-        return $this->belongsto(SanPham::class);
-    }
+
     public function khach_hang(){
         return $this->belongsto(KhachHang::class);
     }

@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-      
-        Schema::create('reset_mat_khau', function (Blueprint $table) {
+        Schema::create('quyen', function (Blueprint $table) {
             $table->id();
-            $table->string('email')->index();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
+            $table->string('ten');
+            $table->timestamps();
         });
     }
 
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reset_mat_khau');
+        Schema::dropIfExists('quyen');
     }
 };

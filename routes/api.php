@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIAuthController;
 use App\Http\Controllers\APISanPhamController;
 use App\Http\Controllers\APILoaiSanPhamController;
+use App\Http\Controllers\APIHoaDonXuatController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -53,3 +54,7 @@ Route::middleware('guest:api')->group(function () {
         Route::post("/tim-kiem",[APILoaiSanPhamController::class,"TimKiemLoaiSanPham"]);
     });
 });
+
+//Hóa Đơn Xuất
+Route::post("hoa-don",[APIHoaDonXuatController::class,"XuLyHoaDonXuat"]);
+

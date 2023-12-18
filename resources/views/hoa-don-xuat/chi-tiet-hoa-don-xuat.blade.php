@@ -3,14 +3,12 @@
 
 <div class="table-responsive">
     <table class="table table-striped table-sm" border="1">
-    <h3>Chi Tiết Hóa Đơn Nhập</h3>
+    <h3>Chi Tiết Hóa Đơn Xuât</h3>
         <thead>
             <tr>
-                <th>Tên San Phẩm</td>
+                <th>Tên Sản Phẩm</td>
                 <th>Số Lượng</th>
-                <th>Giá Nhập</th>
-                <th>Giá Bán</th>
-                <th>Thành Tiền</th>
+                <th>Đơn Giá</th>
             </tr>
         </thead>
         <tbody>
@@ -20,14 +18,12 @@
                 <tr>
                     <td>{{ $ctHoaDon->san_pham->ten }}</td>
                     <td>{{ $ctHoaDon->so_luong }}</td>
-                    <td>{{ $ctHoaDon->gia_nhap }}</td>
-                    <td>{{ $ctHoaDon->gia_ban }}</td>
-                    <td>{{ $ctHoaDon->thanh_tien }}</td>
+                    <td>{{ $ctHoaDon->don_gia }}</td>
                 </tr>
                 @endif
             @endforeach
         </tbody>
     </table>
-    <a href="{{route('hoa-don-nhap.danh-sach')}}"><button type="submit" class="btn btn-info">quay lai</button></a>
+    <a href="{{route('hoa-don-xuat.danh-sach')}}"><button type="submit" class="btn btn-info">quay lai</button></a>
 </div>
 @endsection

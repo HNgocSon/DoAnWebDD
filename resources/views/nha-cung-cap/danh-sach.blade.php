@@ -3,6 +3,10 @@
  <div class="table-responsive">
  <a href="{{route('nha-cung-cap.them-moi')}}"><button type="submit" class="btn btn-info">Thêm mới</button></a>
         <table class="table table-striped table-sm" border="1">
+        <form action="{{route('nha-cung-cap.search')}}" method="GET">
+          <input type="text" name="query" placeholder="Search for products">
+          <button type="submit">Search</button>
+          </form>
           <thead>
           <h3>Danh Sách Nhà Cung Cấp</h3>
             <tr class = "table-dark">

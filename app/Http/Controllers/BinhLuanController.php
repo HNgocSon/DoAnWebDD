@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\KhachHang;
 use Illuminate\Http\Request;
 use App\Models\BinhLuan;
-
+use Illuminate\Support\Facades\Gate;
 class BinhLuanController extends Controller
 {
     public function DSBinhLuan()

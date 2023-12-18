@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('hoa_don_nhap', function (Blueprint $table) {
             $table->id();
-            $table->integer('nha_cung_cap_id');
+            $table->unsignedBigInteger('nha_cung_cap_id');
             $table->datetime('ngay_nhap')->nullable()->default(DB::raw('now()'));
             $table->float('tong_tien');
             $table->integer('status')->default(0);;
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('nha_cung_cap_id')->references('id')->on('nha_cung_cap')->onDelete('cascade');
         });
     }
 

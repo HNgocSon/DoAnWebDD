@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('hinh_anh', function (Blueprint $table) {
             $table->id();
             $table->string('url',100);
-            $table->integer('san_pham_id');
+            $table->unsignedBigInteger('san_pham_id');
             $table->timestamps();
+            
+            $table->foreign('san_pham_id')->references('id')->on('san_pham')->onDelete('cascade');
         });
     }
 

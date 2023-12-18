@@ -4,6 +4,10 @@
       <div class="table-responsive">
       <a href="{{route('hoa-don-nhap.them-moi')}}"><button type="submit" class="btn btn-info">Thêm mới</button></a>
         <table class="table table-striped table-sm" border="1">
+          <form action="{{route('hoa-don-nhap.search')}}" method="GET">
+          <input type="text" name="query" placeholder="Search for products">
+          <button type="submit">Search</button>
+          </form>
         <h3>Hóa Đơn Nhập</h3>
           <thead>
             <tr>

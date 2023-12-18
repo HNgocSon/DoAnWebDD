@@ -9,4 +9,16 @@ class Admin extends Authenticatable
 {
     use HasFactory;
     protected $table="admin";
+
+    protected $fillable = [
+        'ten',
+        'ten_dang_nhap',
+        'password',
+        'quyen_id'
+    ];
+
+    public function quyen()
+    {
+        return $this->belongsTo(Quyen::class);
+    }
 }

@@ -12,6 +12,9 @@ class SanPham extends Model
 
     protected $table="san_pham";
 
+    protected $fillable = [
+        'so_luong',
+    ];
     public function loai_san_pham(){
         return $this->belongsto(LoaiSanPham::class);
     }

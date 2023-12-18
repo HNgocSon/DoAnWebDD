@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('ten');
             $table->string('sdt');
-            $table->string('email');
+            $table->string('email')->index();
             $table->string('password');
             $table->string('dia_chi',50);
             $table->integer('status')->default(0);
-            $table->timestamps();
+            $table->timestamps()->nullable();
             $table->softDeletes();
         });
     }

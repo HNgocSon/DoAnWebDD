@@ -6,30 +6,47 @@ use Illuminate\Http\Request;
 use App\Models\SanPham;
 use App\Models\HoaDonXuat;
 use App\Models\KhachHang;
+use App\Models\ChiTietHoaDonXuat;
+use Illuminate\Support\Facades\Gate;
 class HoaDonXuatController extends Controller
 {
-    public function HoaDon()
-    {
-        $dsSanPham=SanPham::all();
-        $dsKhachHang=KhachHang::all();
-        return view("hoa-don-xuat/them-moi", compact("dsSanPham","dsKhachHang"));
-    }
-    
 
-    public function xuLyThemMoiHD(Request $request){
-        $hoaDon= new HoaDonXuat();
-        $hoaDon->san_pham_id    = $request->ten_sp ;
-        $hoaDon->ngay_tao    = $request->Ngay_tao;
-        $hoaDon->khach_hang_id    = $request->khach_hang;
-        $hoaDon->tong_tien     = $request->tong_tien;
-        $hoaDon->save();
-        return redirect()->route('hoa-don-xuat.danh-sach');
-     
-        
-    }
+
     public function DanhSach()
     {
-        $dsHD=HoaDonXuat::all();
-        return view('hoa-don-xuat/danh-sach', compact('dsHD'));
+        $dsHoaDonXuat = HoaDonXuat::all();
+        return view('hoa-don-xuat/danh-sach', compact('dsHoaDonXuat'));
+    }
+
+    public function XemChiTietHoaDonNhap($id)
+    {
+        if (Gate::denies('quan-ly-hoa-don-xuat')) {
+            return redirect()->route('trang-chu')->with('error','bạn không có quyền truy cập vào chức năng này');
+        }
+        $hoaDon = HoaDonXuat::find($id);
+        $dsSanPham = SanPham::all();
+        $chiTietHoaDon = ChiTietHoaDonXuat::all();
+        return view('hoa-don-xuat/chi-tiet-hoa-don-xuat',compact('hoaDon','dsSanPham','chiTietHoaDon'));
+    }
+
+    public function XoaHoaDonXuat($id){
+        if (Gate::denies('quan-ly-hoa-don-xuat')) {
+            return redirect()->route('trang-chu')->with('error','bạn không có quyền truy cập vào chức năng này');
+        }
+        $hoaDon = HoaDonXuat::find($id);
+
+        $ctHoaDonXuat = ChiTietHoaDonXuat::all();
+        if(empty($hoaDon))
+        {
+            return redirect()->route('hoa-don-xuat.danh-sach')->with('error','Hóa Đơn Không Tồn Tại');
+        }
+        foreach($ctHoaDonXuat as $ctHoaDon){
+            if($ctHoaDon->hoa_don_xuat_id == $hoaDon->id ){
+                $ctHoaDon->delete();
+            }
+        }
+        $hoaDon->delete();
+        
+        return redirect()->route('hoa-don-xuat.danh-sach')->with('thong_bao','Xóa Thành Công');
     }
 }

@@ -3,6 +3,10 @@
 <div class="table-responsive">
       <a href="{{route('san-pham.them-moi')}}"><button type="button" class="btn btn-info">Thêm Mới</button></a>
         <table class="table table-striped table-sm" border="1">
+          <form action="{{route('san-pham.search')}}" method="GET">
+          <input type="text" name="query" placeholder="Search for products">
+          <button type="submit">Search</button>
+          </form>
         <h3>Danh sách sản phẩm</h3>
           <thead>
             <tr class = "table-dark">
@@ -45,7 +49,7 @@
                 <td><a href="{{ route('san-pham.cap-nhat', ['id' => $sanPham->id]) }}"><button type="button" class="btn btn-success ">Sửa</button></a> | <a href="{{ route('san-pham.xoa', ['id' => $sanPham->id]) }}"><button type="button" style="height: 33px; width: 50px;" class="btn btn-danger btn-sm px-3"><i class="glyphicon glyphicon-remove"></i></button></a></td>
             </tr>
             @endforeach
-            
+          
           </tbody>
         </table>
 </div>

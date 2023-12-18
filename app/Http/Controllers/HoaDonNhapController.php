@@ -7,6 +7,7 @@ use App\Models\NhaCungCap;
 use App\Models\HoaDonNhap;
 use App\Models\SanPham;
 use App\Models\ChiTietHoaDonNhap;
+use Illuminate\Support\Facades\Gate;
 
 class HoaDonNhapController extends Controller
 {
@@ -17,6 +18,9 @@ class HoaDonNhapController extends Controller
     }
 
     public function ThemHoaDonNhap(){
+        if (Gate::denies('quan-ly-hoa-don-nhap')) {
+            return redirect()->route('trang-chu')->with('error','bạn không có quyền truy cập vào chức năng này');
+        }
         $dsSanPham = SanPham::all();
         $dsNhaCungCap = NhaCungCap::all();
         return view('hoa-don-nhap/them-moi',compact('dsSanPham','dsNhaCungCap'));
@@ -56,7 +60,9 @@ class HoaDonNhapController extends Controller
     }
 
     public function XoaHoaDonNhap($id){
-
+        if (Gate::denies('quan-ly-hoa-don-nhap')) {
+            return redirect()->route('trang-chu')->with('error','bạn không có quyền truy cập vào chức năng này');
+        }
         $hoaDon = HoaDonNhap::find($id);
 
         $ctHoaDonNhap = ChiTietHoaDonNhap::all();
@@ -72,5 +78,33 @@ class HoaDonNhapController extends Controller
         $hoaDon->delete();
         
         return redirect()->route('hoa-don-nhap.danh-sach')->with('thong_bao','Xóa Thành Công');
+    }
+
+    public function XemChiTietHoaDonNhap($id)
+    {
+        if (Gate::denies('quan-ly-hoa-don-nhap')) {
+            return redirect()->route('trang-chu')->with('error','bạn không có quyền truy cập vào chức năng này');
+        }
+        $hoaDon = HoaDonNhap::find($id);
+        $dsSanPham = SanPham::all();
+        $chiTietHoaDon = ChiTietHoaDonNhap::all();
+        return view('hoa-don-nhap/chi-tiet-hoa-don-nhap',compact('hoaDon','dsSanPham','chiTietHoaDon'));
+    }
+
+    public function Search(Request $request)
+    {
+        if (Gate::denies('quan-ly-hoa-don-nhap')) {
+            return redirect()->route('trang-chu')->with('error','bạn không có quyền truy cập vào chức năng này');
+        }
+        $query = $request->input('query');
+
+        $dsHoaDonNhap = HoaDonNhap::where('ngay_nhap', 'LIKE', "%$query%")
+        ->orWhere('tong_tien', 'LIKE', "%$query%")
+        ->orWhere('nha_cung_cap_id', 'LIKE', "%$query%")
+        ->join('nha_cung_cap', 'hoa_don_nhap.nha_cung_cap_id', '=', 'nha_cung_cap.id')
+        ->orwhere('nha_cung_cap.ten', 'LIKE', "%$query%")
+        ->get();
+            
+        return view('hoa-don-nhap/danh-sach',compact('dsHoaDonNhap'));
     }
 }

@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('binh_luan', function (Blueprint $table) {
             $table->id();
-            $table->integer('khach_hang_id');
+            $table->unsignedBigInteger('khach_hang_id');
             $table->string('comments');
             $table->dateTime('thoi_gian');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('khach_hang_id')->references('id')->on('khach_hang')->onDelete('cascade');
         });
     }
 

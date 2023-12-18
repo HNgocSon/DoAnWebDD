@@ -3,6 +3,10 @@
 <div class="table-responsive">
 <a href="{{route('loai-san-pham.them-moi')}}"><button type="submit" class="btn btn-info">Thêm mới</button></a>
         <table class="table table-striped table-sm " border="1">
+        <form action="{{route('loai-san-pham.search')}}" method="GET">
+          <input type="text" name="query" placeholder="Search for products">
+          <button type="submit">Search</button>
+          </form>
         <h3>Danh Sách Loại Sản Phẩm</h3> 
        
           <thead>

@@ -16,7 +16,11 @@ return new class extends Migration
             $table->string('ten');
             $table->string('ten_dang_nhap');
             $table->string('password');
+            $table->unsignedBigInteger('quyen_id');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('quyen_id')->references('id')->on('quyen')->onDelete('cascade');
         });
     }
 

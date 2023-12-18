@@ -14,6 +14,7 @@ class KhachHang extends Authenticatable implements JWTSubject
     public $timestamps = false;
     
     protected $fillable = [
+        'password',
         'status',
         'token',
         'created_at'
@@ -27,4 +28,6 @@ class KhachHang extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+
 }
