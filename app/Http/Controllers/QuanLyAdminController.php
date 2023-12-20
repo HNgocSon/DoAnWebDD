@@ -7,6 +7,8 @@ use App\Models\Admin;
 use App\Models\Quyen;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\AdminRequest;
+
 class QuanLyAdminController extends Controller
 {
     public function ThemMoiAdmin(){
@@ -17,7 +19,7 @@ class QuanLyAdminController extends Controller
         return view('admin/them-moi', compact('dsQuyen'));
     }
 
-    public function XuLyThemMoiAdmin(Request $request){
+    public function XuLyThemMoiAdmin(AdminRequest $request){
       
         $admin= new Admin();
         $admin->ten           = $request->ten;
@@ -29,9 +31,10 @@ class QuanLyAdminController extends Controller
         return redirect()->route('admin.danh-sach')->with('thong_bao','thêm tài khoản quản lý thành công');
     }
 
-    public function DanhSachAdmin(){
-        $dsAdmin = Admin::all();
-        return view('admin/danh-sach',compact('dsAdmin'));
+    public function DanhSachAdmin(Request $request){
+        $Page = $request->input('Page', 5 );
+        $dsAdmin = Admin::paginate($Page);
+        return view('admin/danh-sach',compact('dsAdmin','Page'));
     }
 
     public function XoaAdmin($id)
@@ -58,7 +61,7 @@ class QuanLyAdminController extends Controller
         return view('admin/cap-nhat',compact('admin','quyen'));
     }
 
-    public function XuLyCapNhatAdmin(Request $request, $id)
+    public function XuLyCapNhatAdmin(AdminRequest $request, $id)
     {
         $admin = Admin::find($id);
         if (empty($admin)) {

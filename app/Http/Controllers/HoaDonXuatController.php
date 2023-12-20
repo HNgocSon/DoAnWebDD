@@ -12,10 +12,11 @@ class HoaDonXuatController extends Controller
 {
 
 
-    public function DanhSach()
+    public function DanhSach(Request $request)
     {
-        $dsHoaDonXuat = HoaDonXuat::all();
-        return view('hoa-don-xuat/danh-sach', compact('dsHoaDonXuat'));
+        $Page = $request->input('Page', 5 );
+        $dsHoaDonXuat = HoaDonXuat::paginate($Page);
+        return view('hoa-don-xuat/danh-sach', compact('dsHoaDonXuat','Page'));
     }
 
     public function XemChiTietHoaDonNhap($id)

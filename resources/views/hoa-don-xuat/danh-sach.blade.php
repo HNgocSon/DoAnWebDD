@@ -3,6 +3,17 @@
       <div class="table-responsive">
         <table class="table table-striped table-sm" border="1">
         <h3>Hóa Đơn</h3>
+        <form method="get" action="{{ route('hoa-don-xuat.danh-sach') }}">
+            <label for="Page">Số lượng dòng trên mỗi trang:</label>
+            <select name="Page" id="Page" onchange="this.form.submit()">
+                <option value="5" {{ $Page == 5 ? 'selected' : '' }}>5</option>
+                <option value="10" {{ $Page == 10 ? 'selected' : '' }}>10</option>
+                <option value="20" {{ $Page == 20 ? 'selected' : '' }}>20</option>
+                <option value="50" {{ $Page == 50 ? 'selected' : '' }}>50</option>
+                <option value="100" {{ $Page == 100 ? 'selected' : '' }}>100</option>
+           
+            </select>
+        </form>
           <thead>
             <tr>
                 <th>Khách Hàng</th>
@@ -35,7 +46,41 @@
             
           </tbody>
         </table>
-    
+        <div class="container mt-3">
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            @if ($dsHoaDonXuat->currentPage() > 1)
+                <li class="page-item">
+                    <a class="page-link" href="{{ $dsHoaDonXuat->previousPageUrl() }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo; Previous</span>
+                    </a>
+                </li>
+            @else
+                <li class="page-item disabled">
+                    <span class="page-link" aria-hidden="true">&laquo; Previous</span>
+                </li>
+            @endif
+
+            @for ($i = max(1, $dsHoaDonXuat->currentPage() - 1); $i <= min($dsHoaDonXuat->currentPage() + 1, $dsHoaDonXuat->lastPage()); $i++)
+                <li class="page-item {{ $i == $dsHoaDonXuat->currentPage() ? 'active' : '' }}">
+                    <a class="page-link" href="{{ $dsHoaDonXuat->url($i) }}">{{ $i }}</a>
+                </li>
+            @endfor
+
+            @if ($dsHoaDonXuat->hasMorePages())
+                <li class="page-item">
+                    <a class="page-link" href="{{ $dsHoaDonXuat->nextPageUrl() }}" aria-label="Next">
+                        <span aria-hidden="true">Next &raquo;</span>
+                    </a>
+                </li>
+            @else
+                <li class="page-item disabled">
+                    <span class="page-link" aria-hidden="true">Next &raquo;</span>
+                </li>
+            @endif
+        </ul>
+    </nav>
+</div>
 </div>
 
 @endsection

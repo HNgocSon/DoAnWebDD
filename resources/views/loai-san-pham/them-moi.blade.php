@@ -27,6 +27,11 @@
                                     </button>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <div class="col-md-6 offset-md-4">
+                                    <a href="{{route('loai-san-pham.danh-sach')}}" class="btn btn-primary">Quay lại</a>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

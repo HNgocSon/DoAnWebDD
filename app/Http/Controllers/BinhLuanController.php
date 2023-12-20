@@ -8,23 +8,19 @@ use App\Models\BinhLuan;
 use Illuminate\Support\Facades\Gate;
 class BinhLuanController extends Controller
 {
-    public function DSBinhLuan()
+    public function DanhSachBinhLuan(Request $request)
     {
-        $dsCMT=BinhLuan::all();
+        $Page = $request->input('Page', 5 );
+        $dsCMT=BinhLuan::paginate($Page);
         $dsKhachhang=KhachHang::all();
-        return view('quan-ly-binh-luan.danh-sach',compact('dsCMT','dsKhachhang'));
+        return view('quan-ly-binh-luan/danh-sach',compact('dsCMT','dsKhachhang','Page'));
     }
-    public function themMoi()
+
+    public function XoaBinhLuan($id)
     {
-        return view('quan-ly-binh-luan.them-moi');
+        $binhLuan=BinhLuan::find($id);
+        $binhLuan->delete();
+        return redirect()->route('binh-luan.danh-sach')->with('thong_bao','xóa bình luận thành công');
     }
-    public function XulyBinhLuan(Request $request)
-    {
-        $cmt=BinhLuan::all();
-        $cmt->khach_hang_id;
-        $cmt->tong_danh_gia;
-        $cmt->comments;
-        $cmt->thoi_gian;
-        $cmt->save();
-    }
+
 }

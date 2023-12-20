@@ -7,9 +7,10 @@ use App\Models\KhachHang;
 use Illuminate\Support\Facades\Gate;
 class QuanLyKhachHangController extends Controller
 {
-    public function DanhSachKhachHang(){
-        $dsKhachHang = KhachHang::all();
-        return view('quan-ly-tai-khoan-khach-hang/danh-sach',compact('dsKhachHang'));
+    public function DanhSachKhachHang(Request $request){
+        $Page = $request->input('Page', 5 );
+        $dsKhachHang = KhachHang::paginate($Page);
+        return view('quan-ly-tai-khoan-khach-hang/danh-sach',compact('dsKhachHang','Page'));
     }
 
     public function XoaTaiKhoan($id){

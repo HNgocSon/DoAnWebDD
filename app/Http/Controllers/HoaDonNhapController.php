@@ -13,8 +13,9 @@ class HoaDonNhapController extends Controller
 {
 
     function DanhSachHoaDonNhap(request $request){
-        $dsHoaDonNhap= HoaDonNhap::all();
-        return view('hoa-don-nhap/danh-sach',compact('dsHoaDonNhap'));
+        $Page = $request->input('Page', 5 );
+        $dsHoaDonNhap= HoaDonNhap::paginate($Page);
+        return view('hoa-don-nhap/danh-sach',compact('dsHoaDonNhap','Page'));
     }
 
     public function ThemHoaDonNhap(){

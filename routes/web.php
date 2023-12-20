@@ -122,8 +122,8 @@ Route::middleware('auth')->group(function () {
 });
 
 //Bình Luận
-Route::get('quan-ly-binh-luan/danh-sach',[BinhLuanController::class,'DSBinhLuan'])->name('quan-ly-binh-luan.danh-sach');
-Route::get('quan-ly-binh-luan/them-moi',[BinhLuanController::class,'themMoi'])->name('quan-ly-binh-luan.them-moi');
+Route::get('binh-luan/danh-sach',[BinhLuanController::class,'DanhSachBinhLuan'])->name('binh-luan.danh-sach');
+
 
 //Hóa Đơn Nhập
 Route::middleware('auth')->group(function () {

@@ -7,7 +7,7 @@ use App\Models\SanPham;
 use App\Models\LoaiSanPham;
 use App\Models\HinhAnh;
 use App\Models\Admin;
-use App\Http\Requests\ThemMoiSanPhamRequest;
+use App\Http\Requests\SanPhamRequest;
 use Illuminate\Support\Facades\Gate;
 
 class SanPhamController extends Controller
@@ -20,7 +20,7 @@ class SanPhamController extends Controller
         return redirect()->route('trang-chu')->with('error','bạn không có quyền truy cập vào chức năng này');
     }
 
-    public function xuLyThemMoiSp(ThemMoiSanPhamRequest $request,Admin $admin)
+    public function xuLyThemMoiSp(SanPhamRequest $request)
     {
         $sanPham= new SanPham();
         $sanPham->ten     = $request->ten;
@@ -50,12 +50,12 @@ class SanPhamController extends Controller
         
     }
 
-    public function DanhSachSp(){
-
-        $dsSanPham = SanPham::all();
+    public function DanhSachSp(Request $request){
+        $Page = $request->input('Page', 5 );
+        $dsSanPham = SanPham::paginate($Page);
         $ha=HinhAnh::all();
        
-        return view('san-pham/danh-sach',compact('dsSanPham','ha'));
+        return view('san-pham/danh-sach',compact('dsSanPham','ha','Page'));
     }
 
 
@@ -91,7 +91,7 @@ class SanPhamController extends Controller
         return view('san-pham/cap-nhat',compact('dsSanPham','dsLoaiSp','ha'));
     }
 
-    public function xuLyCapNhatSp(Request $request, $id)
+    public function xuLyCapNhatSp(SanPhamRequest $request, $id)
     {
         if (Gate::denies('quan-ly-san-pham')) {
             return redirect()->route('trang-chu')->with('error','Bạn Không Có Quyền truy cập vào chức năng này');

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\LoaiSanPham;
-use App\Http\Requests\ThemMoiLoaiSanPhamRequest;
+use App\Http\Requests\LoaiSanPhamRequest;
 use Illuminate\Support\Facades\Gate;
 class LoaiSanPhamController extends Controller
 {
@@ -15,7 +15,7 @@ class LoaiSanPhamController extends Controller
         }
         return view('loai-san-pham/them-moi');
     }
-    public function XuLyThemMoiLoai(ThemMoiLoaiSanPhamRequest $request)
+    public function XuLyThemMoiLoai(LoaiSanPhamRequest $request)
     {
         $loaiSp  = LoaiSanPham::all();
 
@@ -32,10 +32,11 @@ class LoaiSanPhamController extends Controller
 
     }
 
-    public function DanhSachLoaiSp()
+    public function DanhSachLoaiSp(Request $request)
     {
-        $dsLoaiSp=LoaiSanPham::all();
-        return view('loai-san-pham/danh-sach',compact('dsLoaiSp'));
+        $Page = $request->input('Page', 5 );
+        $dsLoaiSp=LoaiSanPham::paginate($Page);
+        return view('loai-san-pham/danh-sach',compact('dsLoaiSp','Page'));
     }
     public function XoaLoaiSp($id)
     {
@@ -64,7 +65,7 @@ class LoaiSanPhamController extends Controller
          
      }
  
-     public function XuLyCapNhatLoaiSp(Request $request, $id)
+     public function XuLyCapNhatLoaiSp(LoaiSanPhamRequest $request, $id)
      {
   
          $LoaiSp = LoaiSanPham::find($id);

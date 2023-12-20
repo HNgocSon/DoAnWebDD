@@ -12,15 +12,24 @@
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">Tên Quan Lý</label>
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control  @error('ten_loai') @enderror " name="ten" >    
+                                    <input id="name" type="text" class="form-control  @error('ten') @enderror " name="ten" >    
+                                    @error('ten')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <label for="name" class="col-md-4 col-form-label text-md-right">Tên Đăng Nhập </label>
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control  @error('ten_loai') @enderror " name="ten_dang_nhap" >                                 
+                                    <input id="name" type="text" class="form-control  @error('ten_dang_nhap') @enderror " name="ten_dang_nhap" >     
+                                     @error('ten_dang_nhap')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror                            
                                 </div>
                                 <label for="name" class="col-md-4 col-form-label text-md-right">Mật Khẩu</label>
                                 <div class="col-md-6">
-                                    <input id="name" type="password" class="form-control  @error('ten_loai') @enderror " name="password" >
+                                    <input id="name" type="password" class="form-control  @error('password') @enderror " name="password" >
+                                    @error('password')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror      
                                 </div>
                                 <label for="name" class="col-md-4 col-form-label text-md-right">chọn quyền</label>
                                 <div class="col-md-6">
@@ -38,6 +47,11 @@
                                     <button type="submit" class="btn btn-primary">
                                         Lưu
                                     </button>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6 offset-md-4">
+                                    <a href="{{route('admin.danh-sach')}}" class="btn btn-primary">Quay lại</a>
                                 </div>
                             </div>
                         </form>

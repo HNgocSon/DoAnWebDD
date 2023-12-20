@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ThemMoiSanPhamRequest extends FormRequest
+class SanPhamRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,6 @@ class ThemMoiSanPhamRequest extends FormRequest
     {
         return [
                 'ten' => 'required',
-                'ten_loai' => 'required',
                 'gia' => 'required|numeric',
                 'mo_ta' => 'required',
                 'mau' => 'required',
@@ -40,7 +39,6 @@ class ThemMoiSanPhamRequest extends FormRequest
     {
         return [
             'ten.required' => 'Vui Lòng nhập tên sản phẩm',
-            'ten_loai.required' => 'chọn loại',
             'gia.required' => 'vui lòng nhập giá tiền',
             'gia.numeric' => 'giá tiền phải là số',
             'mo_ta.required' => 'vui lòng nhập mô tả',

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ThemMoiNhaCungCapRequest extends FormRequest
+class LoaiSanPhamRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,20 +22,19 @@ class ThemMoiNhaCungCapRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ten' => 'required',
-            'sdt' => 'required|numeric',
-            'dia_chi' => 'required',
-       
+            
+            'ten_loai' => 'required|between:2,20',
+            
         ];
     }
     public function messages()
     {
         return [
-            'ten.required' => 'vui lòng nhập tên nhà cung cấp',
-            'dia_chi.required' => 'vui lòng chọn địa chỉ',
-            'sdt.required' => 'vui lòng nhập số điện thoại',
-            'sdt.numeric' => 'số điện thoại phải là số',
+           
+            'ten_loai.required' => 'vui lòng nhập tên loại sản phẩm',
+            'ten_loai.between' => 'tên loại phải từ :min ký tự dến :max',
        
+        
         ];
     }
 }

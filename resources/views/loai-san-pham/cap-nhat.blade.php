@@ -15,7 +15,9 @@
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{$dsLoaiSp->ten_loai}}" name="ten_loai" required autofocus>
-
+                                    @error('ten_loai')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">

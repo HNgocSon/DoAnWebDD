@@ -15,21 +15,30 @@
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control" value="{{$admin->ten}}" name="ten">
+                                    @error('ten')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror 
                                 </div>
+                              
                             </div>
                             
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">Tên Đăng Nhập</label>
-
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{$admin->ten_dang_nhap}}"  name="ten_dang_nhap" required autofocus>
-
+                                    <input id="name" type="text" class="form-control @error('ten_dang_nhap') is-invalid @enderror" value="{{$admin->ten_dang_nhap}}"  name="ten_dang_nhap" required autofocus>
+                                    @error('ten_dang_nhap')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror 
                                 </div>
+                               
                             </div>
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">Password</label>
                                 <div class="col-md-6">
-                                    <input id="name" value="{{$admin->password}}" type="password" class="form-control @error('name') is-invalid @enderror" name="password" required autofocus>
+                                    <input id="name" value="{{$admin->password}}" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autofocus>
+                                    @error('password')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror                                 
                                 </div>
                             </div> 
                             <div class="form-group row">

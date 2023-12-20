@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\NhaCungCap;
-use App\Http\Requests\ThemMoiNhaCungCapRequest;
+use App\Http\Requests\NhaCungCapRequest;
 use Illuminate\Support\Facades\Gate;
 class NhaCungCapController extends Controller
 {
@@ -16,7 +16,7 @@ class NhaCungCapController extends Controller
         $dsNCC = NhaCungCap::all();
         return view('nha-cung-cap.them-moi',compact('dsNCC'));
     }
-    public function XulyThemMoiNCC(ThemMoiNhaCungCapRequest $request)
+    public function XulyThemMoiNCC(NhaCungCapRequest $request)
     {
         $ncc = new NhaCungCap();
         $ncc -> ten         =$request -> ten;
@@ -25,10 +25,11 @@ class NhaCungCapController extends Controller
         $ncc->save();
         return redirect()->route('nha-cung-cap.danh-sach')->with('thong_bao','Thêm Mới NCC thành công');
     }
-    public function DanhSachNCC()
+    public function DanhSachNCC(Request $request)
     {
-        $dsNCC = NhaCungCap::all();
-        return view('nha-cung-cap/danh-sach',compact('dsNCC'));
+        $Page = $request->input('Page', 5 );
+        $dsNCC = NhaCungCap::paginate($Page);
+        return view('nha-cung-cap/danh-sach',compact('dsNCC','Page'));
     } 
     public function XoaLoaiNCC($id)
     {
@@ -54,7 +55,7 @@ class NhaCungCapController extends Controller
         
     }
 
-    public function XuLyCapNhatNCC(ThemMoiNhaCungCapRequest $request, $id)
+    public function XuLyCapNhatNCC(NhaCungCapRequest $request, $id)
     {
         $ncc = NhaCungCap::find($id);
         if (empty($ncc)) {

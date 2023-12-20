@@ -9,6 +9,17 @@
           </form>
           <thead>
           <h3>Danh Sách Nhà Cung Cấp</h3>
+          <form method="get" action="{{ route('nha-cung-cap.danh-sach') }}">
+            <label for="Page">Số lượng dòng trên mỗi trang:</label>
+            <select name="Page" id="Page" onchange="this.form.submit()">
+                <option value="5" {{ $Page == 5 ? 'selected' : '' }}>5</option>
+                <option value="10" {{ $Page == 10 ? 'selected' : '' }}>10</option>
+                <option value="20" {{ $Page == 20 ? 'selected' : '' }}>20</option>
+                <option value="50" {{ $Page == 50 ? 'selected' : '' }}>50</option>
+                <option value="100" {{ $Page == 100 ? 'selected' : '' }}>100</option>
+           
+            </select>
+        </form>
             <tr class = "table-dark">
                 <th>ID</th>
                 <th>Tên Nhà Cung Cấp</th>
@@ -30,7 +41,41 @@
             @endforeach
           </tbody>
         </table>
-        
+        <div class="container mt-3">
+          <nav aria-label="Page navigation">
+              <ul class="pagination justify-content-center">
+                  @if ($dsNCC->currentPage() > 1)
+                      <li class="page-item">
+                          <a class="page-link" href="{{ $dsNCC->previousPageUrl() }}" aria-label="Previous">
+                              <span aria-hidden="true">&laquo; Previous</span>
+                          </a>
+                      </li>
+                  @else
+                      <li class="page-item disabled">
+                          <span class="page-link" aria-hidden="true">&laquo; Previous</span>
+                      </li>
+                  @endif
+
+                  @for ($i = max(1, $dsNCC->currentPage() - 1); $i <= min($dsNCC->currentPage() + 1, $dsNCC->lastPage()); $i++)
+                      <li class="page-item {{ $i == $dsNCC->currentPage() ? 'active' : '' }}">
+                          <a class="page-link" href="{{ $dsNCC->url($i) }}">{{ $i }}</a>
+                      </li>
+                  @endfor
+
+                  @if ($dsNCC->hasMorePages())
+                      <li class="page-item">
+                          <a class="page-link" href="{{ $dsNCC->nextPageUrl() }}" aria-label="Next">
+                              <span aria-hidden="true">Next &raquo;</span>
+                          </a>
+                      </li>
+                  @else
+                      <li class="page-item disabled">
+                          <span class="page-link" aria-hidden="true">Next &raquo;</span>
+                      </li>
+                  @endif
+              </ul>
+          </nav>
+      </div>
     </div>
 @endsection
 

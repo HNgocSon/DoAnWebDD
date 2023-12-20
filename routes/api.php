@@ -58,3 +58,4 @@ Route::middleware('guest:api')->group(function () {
 //Hóa Đơn Xuất
 Route::post("hoa-don",[APIHoaDonXuatController::class,"XuLyHoaDonXuat"]);
 
+//Bình Luận

@@ -8,6 +8,17 @@
           <button type="submit">Search</button>
           </form>
         <h3>Tài Khoản Admin</h3>
+        <form method="get" action="{{ route('admin.danh-sach') }}">
+            <label for="Page">Số lượng dòng trên mỗi trang:</label>
+            <select name="Page" id="Page" onchange="this.form.submit()">
+                <option value="5" {{ $Page == 5 ? 'selected' : '' }}>5</option>
+                <option value="10" {{ $Page == 10 ? 'selected' : '' }}>10</option>
+                <option value="20" {{ $Page == 20 ? 'selected' : '' }}>20</option>
+                <option value="50" {{ $Page == 50 ? 'selected' : '' }}>50</option>
+                <option value="100" {{ $Page == 100 ? 'selected' : '' }}>100</option>
+           
+            </select>
+        </form>
           <thead>
             <tr>
                 <th>Tên</td>
@@ -35,6 +46,40 @@
             @endforeach
           </tbody>
         </table>
-    
+        <div class="container mt-3">
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            @if ($dsAdmin->currentPage() > 1)
+                <li class="page-item">
+                    <a class="page-link" href="{{ $dsAdmin->previousPageUrl() }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo; Previous</span>
+                    </a>
+                </li>
+            @else
+                <li class="page-item disabled">
+                    <span class="page-link" aria-hidden="true">&laquo; Previous</span>
+                </li>
+            @endif
+
+            @for ($i = max(1, $dsAdmin->currentPage() - 1); $i <= min($dsAdmin->currentPage() + 1, $dsAdmin->lastPage()); $i++)
+                <li class="page-item {{ $i == $dsAdmin->currentPage() ? 'active' : '' }}">
+                    <a class="page-link" href="{{ $dsAdmin->url($i) }}">{{ $i }}</a>
+                </li>
+            @endfor
+
+            @if ($dsAdmin->hasMorePages())
+                <li class="page-item">
+                    <a class="page-link" href="{{ $dsAdmin->nextPageUrl() }}" aria-label="Next">
+                        <span aria-hidden="true">Next &raquo;</span>
+                    </a>
+                </li>
+            @else
+                <li class="page-item disabled">
+                    <span class="page-link" aria-hidden="true">Next &raquo;</span>
+                </li>
+            @endif
+        </ul>
+    </nav>
+</div>
 </div>
 @endsection
