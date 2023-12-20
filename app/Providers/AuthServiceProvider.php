@@ -27,40 +27,40 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('quan-ly-san-pham', function (Admin $admin) {
-            if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Sản Phẩm' ||  $admin->quyen_id == 0 ) {
+            if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Sản Phẩm' ||  $admin->quyen->ten_quyen === 'Quản Lý' ) {
                 return true;
             }
             return false;
         });
     
         Gate::define('quan-ly-nha-cung-cap', function (Admin $admin) {
-            if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Nhà Cung Cấp' ||  $admin->quyen_id == 0 ) {
+            if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Nhà Cung Cấp' || $admin->quyen->ten_quyen === 'Quản Lý') {
                 return true;
             }
             return false;
         });
         Gate::define('quan-ly-hoa-don-nhap', function (Admin $admin) {
-            if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Hóa Đơn Nhập' ||  $admin->quyen_id == 0 ) {
+            if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Hóa Đơn Nhập' || $admin->quyen->ten_quyen === 'Quản Lý') {
                 return true;
             }
             return false;
         });
     
         Gate::define('quan-ly-hoa-don-xuat', function (Admin $admin) {
-            if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Hóa Đơn Xuất' ||  $admin->quyen_id == 0 ) {
+            if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Hóa Đơn Xuất' ||  $admin->quyen->ten_quyen === 'Quản Lý') {
                 return true;
             }
             return false;
         });
         Gate::define('quan-ly-binh-luan', function (Admin $admin) {
-            if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Bình Luận' ||  $admin->quyen_id == 0 ) {
+            if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Bình Luận' || $admin->quyen->ten_quyen === 'Quản Lý') {
                 return true;
             }
             return false;
         });
     
         Gate::define('quan-ly-thong-ke', function (Admin $admin) {
-            if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Thống Kê' ||  $admin->quyen_id == 0 ) {
+            if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Thống Kê' ||  $admin->quyen->ten_quyen === 'Quản Lý') {
                 return true;
             }
             return false;
@@ -68,11 +68,11 @@ class AuthServiceProvider extends ServiceProvider
 
 
         Gate::define('quan-ly-tai-khoan-admin', function (Admin $admin) {
-            return $admin->quyen_id == 0;
+            return $admin->quyen->ten_quyen === 'Quản Lý';
         });
     
         Gate::define('quan-ly-tai-khoan-nguoi-dung', function (Admin $admin) {
-            if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Tài Khoản Người Dùng' ||  $admin->quyen_id == 0 ) {
+            if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Tài Khoản Người Dùng' || $admin->quyen->ten_quyen === 'Quản Lý') {
                 return true;
             }
             return false;

@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('dia_chi',50);
             $table->integer('status')->default(0);
-            $table->timestamps()->nullable();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
             $table->softDeletes();
         });
     }

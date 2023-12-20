@@ -36,7 +36,9 @@
 
                                 <select name="quyen" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                                     @foreach ($dsQuyen as $quyen)
-                                    <option value="{{ $quyen->id }}">{{ $quyen->ten_quyen }}</option>
+                                        @if($quyen->id != 1)
+                                        <option value="{{ $quyen->id }}">{{ $quyen->ten_quyen }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                                 </div>

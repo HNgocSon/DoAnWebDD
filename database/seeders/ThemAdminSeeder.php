@@ -17,6 +17,7 @@ class ThemAdminSeeder extends Seeder
         $admin->ten           = "Admin";
         $admin->ten_dang_nhap = "admin";
         $admin->password      = Hash::make('123456');
+        $admin->quyen_id      = 1;
         $admin->save();
     }
 }

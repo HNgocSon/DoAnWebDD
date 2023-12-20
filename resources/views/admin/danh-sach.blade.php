@@ -37,7 +37,7 @@
                 @else
                     <td>Admin</td> 
                 @endif
-                @if ($admin->quyen_id == 0)
+                @if ($admin->quyen_id == 1)
                     <td>Tài Khoản Gốc</td>
                 @else
                 <td><a href="{{route('admin.cap-nhat',['id'=>$admin->id])}}"><button type="button" class="btn btn-success">Sữa</button></a>|<a href="{{route('admin.xoa',['id'=>$admin->id])}}"><button type="button" class="btn btn-success">Xóa</button></a></td>
