@@ -37,7 +37,7 @@ class APIAuthController extends Controller
         if(!isset($request->sdt)||empty($request->sdt)) {
             return response()->json([
                 'success'=>false,
-                'message'=>'vui lòng nhập So dien thoai'
+                'message'=>'vui lòng nhập số điện thoại'
             ]);
         }
 
@@ -60,7 +60,7 @@ class APIAuthController extends Controller
         if(!empty($khachHang)) {
             return response()->json([
                 'success'=>false,
-                'message'=>"email : {$request->email} da ton tai"
+                'message'=>"email : {$request->email} đã tồn tại"
             ]);
         }
         
@@ -84,7 +84,7 @@ class APIAuthController extends Controller
 
         return response()->json([
             'success'=>true,
-            'message'=>'dang ky thanh cong vui long xac nhan email'
+            'message'=>'Đăng ký thành công vui lòng xác nhận mail'
         ]);
     }
 

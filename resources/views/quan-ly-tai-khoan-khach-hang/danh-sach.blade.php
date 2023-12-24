@@ -2,22 +2,29 @@
 @section('content')
       <div class="table-responsive">
         <table class="table table-striped table-sm" border="1">
-          <form action="{{route('khach-hang.search')}}" method="GET">
-          <input type="text" name="query" placeholder="Search for products">
-          <button type="submit">Search</button>
-          </form>
-        <h3>Tài Khoản Khách Hàng</h3>
-        <form method="get" action="{{ route('khach-hang.danh-sach') }}">
-            <label for="Page">Số lượng dòng trên mỗi trang:</label>
-            <select name="Page" id="Page" onchange="this.form.submit()">
-                <option value="5" {{ $Page == 5 ? 'selected' : '' }}>5</option>
-                <option value="10" {{ $Page == 10 ? 'selected' : '' }}>10</option>
-                <option value="20" {{ $Page == 20 ? 'selected' : '' }}>20</option>
-                <option value="50" {{ $Page == 50 ? 'selected' : '' }}>50</option>
-                <option value="100" {{ $Page == 100 ? 'selected' : '' }}>100</option>
-           
-            </select>
+        <form class="form-inline" action="{{ route('khach-hang.search') }}" method="GET">
+            <div class="input-group">
+                <input type="text" class="form-control" style="max-width: 400px;" name="query" placeholder="Search for customers">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
         </form>
+
+        <h3>Tài Khoản Khách Hàng</h3>
+        <form class="form-inline" method="get" action="{{ route('khach-hang.danh-sach') }}">
+            <div class="form-group" style="max-width: 200px;">
+                <label for="Page" style="color :red;font-size: 13px;">Số lượng dòng trên mỗi trang:</label>
+                <select class="form-control" name="Page" id="Page" onchange="this.form.submit()">
+                    <option value="5" {{ $Page == 5 ? 'selected' : '' }}>5</option>
+                    <option value="10" {{ $Page == 10 ? 'selected' : '' }}>10</option>
+                    <option value="20" {{ $Page == 20 ? 'selected' : '' }}>20</option>
+                    <option value="50" {{ $Page == 50 ? 'selected' : '' }}>50</option>
+                    <option value="100" {{ $Page == 100 ? 'selected' : '' }}>100</option>
+                </select>
+            </div>
+        </form>
+
 
           <thead>
             <tr>

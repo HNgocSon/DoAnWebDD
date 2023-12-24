@@ -106,3 +106,9 @@ body {
 element.style {
   display: inline-block;
 }
+
+    .alert-danger {
+        padding: 5px 10px; /* Điều chỉnh giảm kích thước padding */
+        font-size: 12px; /* Điều chỉnh kích thước font chữ */
+        margin-bottom: 5px; /* Điều chỉnh khoảng cách dưới của thông báo */
+    }

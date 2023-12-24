@@ -1,16 +1,22 @@
 @extends('trangchu')
 @section('content')
  <div class="table-responsive">
- <a href="{{route('nha-cung-cap.them-moi')}}"><button type="submit" class="btn btn-info">Thêm mới</button></a>
+
         <table class="table table-striped table-sm" border="1">
-        <form action="{{route('nha-cung-cap.search')}}" method="GET">
-          <input type="text" name="query" placeholder="Search for products">
-          <button type="submit">Search</button>
-          </form>
+        <form class="form-inline" action="{{ route('nha-cung-cap.search') }}" method="GET">
+            <div class="input-group">
+                <input type="text" class="form-control" style="max-width: 400px;" name="query" placeholder="Search for products">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                    <a href="{{route('nha-cung-cap.them-moi')}}"><button type="submit" class="btn btn-info">Thêm mới</button></a>
+                </div>
+            </div>
+        </form>
+
           <thead>
           <h3>Danh Sách Nhà Cung Cấp</h3>
           <form method="get" action="{{ route('nha-cung-cap.danh-sach') }}">
-            <label for="Page">Số lượng dòng trên mỗi trang:</label>
+            <label for="Page" style="color :red;font-size: 13px;">Số lượng dòng trên mỗi trang:</label>
             <select name="Page" id="Page" onchange="this.form.submit()">
                 <option value="5" {{ $Page == 5 ? 'selected' : '' }}>5</option>
                 <option value="10" {{ $Page == 10 ? 'selected' : '' }}>10</option>
