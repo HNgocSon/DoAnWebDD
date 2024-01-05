@@ -28,9 +28,9 @@ class DangNhapController extends Controller
         }
 
         if(Auth::attempt(['ten_dang_nhap'=> $request->ten_dang_nhap,'password'=>$request->password])){
-            return redirect()->route('trang-chu')->with('thong_bao','đăng nhập Thành Công');
+            return redirect()->route('trang-chu')->with('thong_bao','Đăng Nhập Thành Công');
         }
-       return  redirect()->route('admin.dang-nhap')->with('thong_bao','tên đăng nhập hoặc mật khẩu không đúng');
+       return  redirect()->route('admin.dang-nhap')->with('thong_bao','Tên đăng nhập hoặc mật khẩu không đúng');
     }
     public function DangXuat()
     {

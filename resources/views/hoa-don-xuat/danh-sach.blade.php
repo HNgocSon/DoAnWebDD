@@ -3,17 +3,19 @@
       <div class="table-responsive">
         <table class="table table-striped table-sm" border="1">
         <h3>Hóa Đơn</h3>
-        <form method="get" action="{{ route('hoa-don-xuat.danh-sach') }}">
-            <label for="Page">Số lượng dòng trên mỗi trang:</label>
-            <select name="Page" id="Page" onchange="this.form.submit()">
+    <form class="form-inline" method="get" action="{{ route('hoa-don-xuat.danh-sach') }}">
+        <div class="form-group" style="max-width: 200px;">
+            <label for="Page" style="color :red;font-size: 13px;">Số lượng dòng trên mỗi trang:</label>
+            <select class="form-control" name="Page" id="Page" onchange="this.form.submit()">
                 <option value="5" {{ $Page == 5 ? 'selected' : '' }}>5</option>
                 <option value="10" {{ $Page == 10 ? 'selected' : '' }}>10</option>
                 <option value="20" {{ $Page == 20 ? 'selected' : '' }}>20</option>
                 <option value="50" {{ $Page == 50 ? 'selected' : '' }}>50</option>
                 <option value="100" {{ $Page == 100 ? 'selected' : '' }}>100</option>
-           
             </select>
-        </form>
+        </div>
+    </form>
+
           <thead>
             <tr>
                 <th>Khách Hàng</th>
