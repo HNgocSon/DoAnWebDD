@@ -117,8 +117,10 @@ class APIAuthController extends Controller
         }
     
         $user->update(['status' => 1, 'token' => null]);
-    
-        return "Xác nhận thành công";
+        
+        $redirectPath = 'http://localhost:3000/dang-nhap';
+
+        return "xác nhận thanh công";
     }
     
 
@@ -173,14 +175,6 @@ class APIAuthController extends Controller
             return response()->json(['message' => 'User not found'], 404);
         }
 
-        // $minutes = 10;
-
-        // try {
-        //     Cache::put('reset_email', $request->email, $minutes);
-        // } catch (\Exception $e) {
-        //     dd($e->getMessage());
-        // }
-
         $token = Str::random(64);
 
         DB::table('khach_hang')->update([
@@ -189,7 +183,7 @@ class APIAuthController extends Controller
         ]);
        
 
-        Mail::send('email.forget-password', ['token' => $token], function ($message) use ($request){
+        Mail::send('email.forgot-password', ['token' => $token], function ($message) use ($request){
             $message->to($request->email);
             $message->subject("reset password");
         });
@@ -221,11 +215,6 @@ class APIAuthController extends Controller
 
     public function ResetMatKhauPost(ResetMatKhauRequest $request)
     {
-        // $resetEmail = Cache::get('reset_email');
-        // dd($resetEmail, $request->email);
-        // if ($resetEmail !== $request->email) {
-        //     return "Email không hợp lệ";
-        // }
 
         if (!$this->KiemTraTokenResetMatKhau($request->email, $request->token)) {
             return "Token đã hết hạn hoặc không hợp lệ";
@@ -235,5 +224,6 @@ class APIAuthController extends Controller
        
         return "Cập nhật mật khẩu thành công";
     }
+
 }
 

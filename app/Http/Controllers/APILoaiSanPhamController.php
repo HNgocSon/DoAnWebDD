@@ -17,13 +17,13 @@ class APILoaiSanPhamController extends Controller
         ]);
     }
 
-    public function LayChiTietLoaiSanPham($id){
-
-        $loaiSanPham = LoaiSanPham::with('ds_san_pham')->where('id',$id)->get();
-
+    public function LayChiTietLoaiSanPham($id)
+    {
+        $loaiSanPham = LoaiSanPham::with('ds_san_pham', 'ds_san_pham.hinh_anh')->find($id);
+    
         return response()->json([
-            'success'=>true,
-            'data'=>$loaiSanPham
+            'success' => true,
+            'data' => $loaiSanPham
         ]);
     }
 

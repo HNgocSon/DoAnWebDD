@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('loai_san_pham', function (Blueprint $table) {
             $table->id();
             $table->string('ten_loai');
+            $table->string('img')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

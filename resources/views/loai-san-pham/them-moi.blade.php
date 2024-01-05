@@ -7,7 +7,7 @@
                     <div class="card-header">{{ __('Thêm mới loại sản phẩm') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="">
+                        <form method="post" action="" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
@@ -19,6 +19,15 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Hình:') }}</label>
+                                <div class="col-md-6">
+                                    <input id="name" type="file" class="form-control @error('hinh') @enderror" name="img"   >
+                                    @error('hinh')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-6 offset-md-4">

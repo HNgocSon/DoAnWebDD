@@ -27,6 +27,8 @@ class LoaiSanPhamController extends Controller
         
         $LoaiSp = new LoaiSanPham();
         $LoaiSp->ten_loai    = $request->ten_loai;
+         $file = $request->img;
+         $LoaiSp->img = $file->store('images');
         $LoaiSp->save();
         return redirect()->route('loai-san-pham.danh-sach')->with('thong_bao','Thêm Thành Công');
 
