@@ -15,7 +15,11 @@ use App\Http\Controllers\ChiTietHoaDonNhapController;
 use App\Http\Controllers\APIAuthController;
 use App\Http\Controllers\QuanLyKhachHangController;
 use App\Http\Controllers\QuanLyAdminController;
+<<<<<<< HEAD
+use App\Http\Controllers\RevenueController;
+=======
 use App\Http\Controllers\DangNhapGoogleController;
+>>>>>>> e35d1c19f60c8f32407834df34ce47e912dbb65b
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -94,7 +98,7 @@ Route::middleware('auth')->group(function () {
         Route::name('hoa-don-xuat.')->group(function (){
             Route::get('danh-sach',[HoaDonXuatController::class,'DanhSach'])->name('danh-sach');
             Route::get('chi-tiet/{id}',[HoaDonXuatController::class,'ChiTietHoaDonXuat'])->name('chi-tiet');
-            Route::get('xoa/{id}',[HoaDonXuatController::class,'XoaHoaDonXuat'])->name('chi-tiet');
+            Route::get('xoa/{id}',[HoaDonXuatController::class,'XoaHoaDonXuat'])->name('xoa');
         });
     });
 });
@@ -167,3 +171,4 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+Route::get('thong-ke/danh-sach', [RevenueController::class, 'index'])->name('thong-ke.danh-sach');

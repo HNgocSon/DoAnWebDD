@@ -27,142 +27,133 @@
                         </div>
                         <h3>Biến Thể Sản Phẩm</h3>
                             <div class="form-group row">
-                                <label for="name" class="col-md-12 col-form-label text-md-right">{{ __('Giá Sản Phẩm:') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Giá Sản Phẩm:') }}</label>
 
-                                <div class="col-md-8">
-                                    <input id="gia" type="text" class="form-control @error('gia') @enderror" name="gia" placeholder="Nhập Giá" >
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('gia') @enderror" name="gia" >
+                                    @error('gia')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                 
                             </div>
                             <div class="form-group row">
                                 <label for="mo_ta" class="col-md-12 col-form-label text-md-right">{{ __('Mô tả:') }}</label>
 
-                                <div class="col-md-8">
-                                    <input id="mo_ta" type="text" class="form-control @error('mo_ta') @enderror" name="mo_ta" placeholder="Nhập Mô Tả">                     
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('mo_ta') @enderror" name="mo_ta" >
+                                    @error('mo_ta')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="name" class="col-md-12 col-form-label text-md-right">{{ __('Màu:') }}</label>
 
-                                <div class="col-md-8">
-                                    <input id="mau" type="text" class="form-control @error('mau') @enderror" name="mau" placeholder="Nhập Màu">
-                                
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('mau') @enderror" name="mau" >
+                                    @error('mau')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="name" class="col-md-12 col-form-label text-md-right">{{ __('Màn hình:') }}</label>
 
-                                <div class="col-md-8">
-                                    <input id="man_hinh" type="text" class="form-control @error('man_hinh') @enderror" name="man_hinh" placeholder="Nhập Màn Hình">
-                                  
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('man_hinh') @enderror" name="man_hinh" >
+                                    @error('man_hinh')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="name" class="col-md-12 col-form-label text-md-right">{{ __('Camera:') }}</label>
 
-                                <div class="col-md-8">
-                                    <input id="camera" type="text" class="form-control @error('camera') @enderror" name="camera" placeholder="Nhập Camera">
-                                    
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('camera') @enderror" name="camera" >
+                                    @error('camera')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="name" class="col-md-12 col-form-label text-md-right">{{ __('Hệ điều hành:') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Hệ điều hành:') }}</label>
 
-                                <div class="col-md-8">
-                                    <input id="he_dieu_hanh" type="text" class="form-control @error('he_dieu_hanh') @enderror" name="he_dieu_hanh" placeholder="Nhập Hệ Điêu Hành">
-                                   
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('he_dieu_hanh') @enderror" name="he_dieu_hanh" >
+                                    @error('he_dieu_hanh')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="name" class="col-md-12 col-form-label text-md-right">{{ __('Chip:') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Chip:') }}</label>
 
-                                <div class="col-md-8">
-                                    <input id="chip" type="text" class="form-control @error('chip') @enderror" name="chip" placeholder="Nhập Chip">
-                                   
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('chip') @enderror" name="chip" >
+                                    @error('chip')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="name" class="col-md-12 col-form-label text-md-right">{{ __('Ram:') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Ram:') }}</label>
 
-                                <div class="col-md-8">
-                                    <input id="ram" type="text" class="form-control @error('ram') @enderror" name="ram" placeholder="Nhập Ram">
-                                   
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('ram') @enderror" name="ram" >
+                                    @error('ram')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="name" class="col-md-12 col-form-label text-md-right">{{ __('Dung Lượng:') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Dung Lượng:') }}</label>
 
-                                <div class="col-md-8">
-                                    <input id="dung_luong" type="text" class="form-control @error('dung_luong') @enderror" name="dung_luong" placeholder="Nhập Dung Lượng">
-                                   
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('dung_luong') @enderror" name="dung_luong" >
+                                    @error('dung_luong')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
-                            <div class="form-group row ">
-                                <label for="name" class="col-md-12 col-form-label text-md-right">{{ __('Pin:') }}</label>
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Pin:') }}</label>
 
-                                <div class="col-md-8">
-                                    <input id="pin" type="text" class="form-control @error('pin') @enderror   " name="pin" placeholder="Nhập Pin">
-                                 
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('pin') @enderror   " name="pin" >
+                                    @error('pin')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
-                        
-                       
-                                <div class="col-md-8 offset-md-12">
-                                    <button type="button" id="btn-them">Thêm san Bien Thể</button> 
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Hình:') }}</label>
+                                <div class="col-md-6">
+                                    <input id="name" type="file" class="form-control @error('hinh') @enderror   " name="img[]" multiple  >
+                                    @error('hinh')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
-                       
-
-                            <br> <br>
-                        <div class="form-group row">
-                            <div class="container mt-12">
-                                <form method="POST" action="{{route('san-pham.xl-them-moi')}}" enctype="multipart/form-data">
-                                    @csrf
-                                    <table id="tb-ds-san-pham" border="1"  class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>STT</th>
-                                                    <th>Giá</th>
-                                                    <th>Mô Tả</th>
-                                                    <th>Màu</th>
-                                                    <th>Màn Hình</th>
-                                                    <th>Camera</th>
-                                                    <th>Hệ điều hành</th>
-                                                    <th>Chip</th>
-                                                    <th>Ram</th>
-                                                    <th>Dung Lượng</th>
-                                                    <th>Pin</th>
-                                                </tr>
-                                            </thead> 
-                                            <tbody>
-
-                                            </tbody>   
-                                    </table>
-                                    <input type="hidden" id="ten_san_pham" name="ten_san_pham" value=""/>
-                                    <input type="hidden" id="loai_san_pham_id" name="loai_san_pham_id" value=""/>
-
-                                    <div class="form-group row">
-                                    <label for="name" class="col-md-12 col-form-label text-md-right">{{ __('Hình:') }}</label>
-                                        <div class="col-md-8">
-                                            <input id="img" type="file" class="form-control @error('img') @enderror" name="img[]" multiple >
-                                        </div>
-                                    </div>
-
-                                        <br/><br/>
-                                        <button type ="submit">Lưu</button>
-                                        <div class="form-group row">
-                                            <div class="col-md-8 offset-md-12">
-                                                <a href="{{route('hoa-don-nhap.danh-sach')}}" class="btn btn-primary">Quay lại</a>
-                                            </div>
-                                        </div>
-                                </form>
                             </div>
-                        </div>
+                            <div class="form-group row">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Lưu') }}
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6 offset-md-4">
+                                    <a href="{{route('san-pham.danh-sach')}}" class="btn btn-primary">Quay lại</a>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-
-</div>
+    </div>
 @endsection
 @section('page')
 <script type="text/javascript">

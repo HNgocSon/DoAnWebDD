@@ -18,7 +18,7 @@
             <div class="form-group" style="max-width: 200px;">
                 <label for="Page" style="color :red;font-size: 13px;">Số lượng dòng trên mỗi trang:</label>
                 <select class="form-control" name="Page" id="Page" onchange="this.form.submit()">
-                    <option value="5" {{ $Page == 5 ? 'selected' : '' }}>5</option>
+                    <option value="5"  {{ $Page == 5 ? 'selected' : '' }}>5</option>
                     <option value="10" {{ $Page == 10 ? 'selected' : '' }}>10</option>
                     <option value="20" {{ $Page == 20 ? 'selected' : '' }}>20</option>
                     <option value="50" {{ $Page == 50 ? 'selected' : '' }}>50</option>
