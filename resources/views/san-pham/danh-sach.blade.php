@@ -2,23 +2,21 @@
 @section('content')
 <div class="table-responsive">
         <table class="table table-striped table-sm" border="1">
+        <a href="{{ route('san-pham.them-moi') }}">
+            <button type="button" class="btn btn-info">Thêm Mới</button>
+        </a>
         <form class="form-inline" action="{{ route('san-pham.search') }}" method="GET">
             <div class="input-group">
                 <input type="text" class="form-control" style="width: 400px;" name="query" placeholder="Search for products">
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-primary">Search</button>
-                   
                 </div>
             </div>
         </form>
-        <a href="{{ route('san-pham.them-moi') }}">
-            <button type="button" class="btn btn-info">Thêm Mới</button>
-        </a>
         <h3>Danh sách sản phẩm</h3>
-        
         <form class="form-inline" method="get" action="{{ route('san-pham.danh-sach') }}">
             <div class="form-group" style="max-width: 200px;">
-                <label for="Page" style="color :red;font-size: 13px;">Số lượng dòng trên mỗi trang:</label>
+                <label for="Page" style="font-size: 13px;">Số lượng dòng trên mỗi trang:</label>
                 <select class="form-control" name="Page" id="Page" onchange="this.form.submit()">
                     <option value="5" {{ $Page == 5 ? 'selected' : '' }}>5</option>
                     <option value="10" {{ $Page == 10 ? 'selected' : '' }}>10</option>

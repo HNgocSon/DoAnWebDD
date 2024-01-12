@@ -3,12 +3,14 @@
       <div class="table-responsive">
       
         <table class="table table-striped table-sm" border="1">
+        <div> 
+            <a href="{{route('admin.them-moi')}}"><button type="button" class="btn btn-info">Thêm Mới</button></a>
+        </div>
         <form class="form-inline" action="{{ route('admin.search') }}" method="GET">
             <div class="input-group">
                 <input type="text" class="form-control" style="max-width: 400px;" name="query" placeholder="Search for products">
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-primary">Search</button>
-                    <a href="{{route('admin.them-moi')}}"><button type="button" class="btn btn-info">Thêm Mới</button></a>
                 </div>
             </div>
         </form>

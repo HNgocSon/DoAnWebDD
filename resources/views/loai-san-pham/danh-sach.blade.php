@@ -2,17 +2,18 @@
 @section('content')
 <div class="table-responsive">
         <table class="table table-striped table-sm " border="1">
+        
+        <div>
+            <a href="{{route('loai-san-pham.them-moi')}}"><buttontype="button" class="btn btn-info">Thêm mới</button></a>
+        </div>
         <form class="form-inline" action="{{ route('loai-san-pham.search') }}" method="GET">
             <div class="input-group">
                 <input type="text" class="form-control" style="width: 400px;" name="query" placeholder="Search for products">
+                <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                </div>
             </div>
-            <div class="input-group-append">
-            <button type="submit" class="btn btn-primary">Search</button>
-        </div>
         </form>
-        
-        <a href="{{route('loai-san-pham.them-moi')}}"><buttontype="button" class="btn btn-info">Thêm mới</button></a>
-        
         <h3>Danh Sách Loại Sản Phẩm</h3> 
         <form class="form-inline" method="get" action="{{ route('loai-san-pham.danh-sach') }}">
             <div class="form-group" style="max-width: 200px;">

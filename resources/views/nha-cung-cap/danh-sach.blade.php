@@ -1,8 +1,10 @@
 @extends('trangchu')
 @section('content')
  <div class="table-responsive">
-
         <table class="table table-striped table-sm" border="1">
+       <div>
+            <a href="{{route('nha-cung-cap.them-moi')}}"><button type="submit" class="btn btn-info">Thêm mới</button></a>
+        </div>
         <form class="form-inline" action="{{ route('nha-cung-cap.search') }}" method="GET">
             <div class="input-group">
                 <input type="text" class="form-control" style="max-width: 400px;" name="query" placeholder="Search for products">
@@ -12,8 +14,6 @@
                 </div>
             </div>
         </form>
-        <a href="{{route('nha-cung-cap.them-moi')}}"><button type="submit" class="btn btn-info">Thêm mới</button></a>
-
           <thead>
           <h3>Danh Sách Nhà Cung Cấp</h3>
           <form method="get" action="{{ route('nha-cung-cap.danh-sach') }}">
