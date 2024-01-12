@@ -38,7 +38,7 @@ class AdminRequest extends FormRequest
             'ten_dang_nhap.required' => 'vui lòng nhập tên đăng nhập',
             'ten_dang_nhap.regex' => 'tên đăng nhập không được chứa ký tự đặc biệt',
             'password.required' => 'vui lòng nhập mật khẩu',
-            'password.min' => 'mật khẩu từ :min ký tự trở lên',
+            'password.min' => 'mật khẩu từ :min ký tự trở lên', 
             
        
         

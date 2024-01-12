@@ -15,7 +15,11 @@ use App\Http\Controllers\ChiTietHoaDonNhapController;
 use App\Http\Controllers\APIAuthController;
 use App\Http\Controllers\QuanLyKhachHangController;
 use App\Http\Controllers\QuanLyAdminController;
+<<<<<<< HEAD
 use App\Http\Controllers\RevenueController;
+=======
+use App\Http\Controllers\DangNhapGoogleController;
+>>>>>>> e35d1c19f60c8f32407834df34ce47e912dbb65b
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +34,11 @@ use App\Http\Controllers\RevenueController;
 Route::get('/', function () {
     return view('trangchu');
 })->name('trang-chu');
+
+
+
+Route::get('/auth/google', [DangNhapGoogleController::class, 'redirectToGoogle']);
+Route::get('/auth/google/callback', [DangNhapGoogleController::class, 'handleGoogleCallback']);
 
 
 Route::get('reset-password/{token}',[APIAuthController::class,'ResetMatKhau'])->name('reset-password');
