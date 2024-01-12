@@ -4,10 +4,10 @@
 <div class="table-responsive">
 
             <h1>THÊM HOÁ ĐƠN </h1>
-            <label>Chọn nha cung cap</label>
+            <label>Chọn nhà cung cấp</label>
 
             <select name="ncc" id="nha_cung_cap">
-                <option>Chon Nha Cung Cap</option>
+                <option>Chon nhà cung cấp</option>
                 @foreach($dsNhaCungCap as $ncc)
                 <option value="{{$ncc->id}}" > {{$ncc->ten}}</option>
                 @endforeach
@@ -18,7 +18,7 @@
 
             <label>Chọn Sản Phẩm</label>
             <select name="san_pham" id="san_pham">
-                <option>Chon San Pham</option>
+                <option>Chon Sản Phẩm</option>
                 @foreach($dsSanPham as $SP)
                 <option value="{{$SP->id}}"> {{$SP->ten}}</option>
                 @endforeach
@@ -28,10 +28,10 @@
             <input type="number" id="so_luong" value="0"/>
             <label>Giá Bán</label>
             <input type="number" id="gia_ban" value="0"/>
-            <label>Giá nhap</label>
+            <label>Giá nhập</label>
             <input type="number" id="gia_nhap" value="0"/>
 
-            <button type="button" id="btn-them">Thêm san pham</button> 
+            <button type="button" id="btn-them">Thêm sản phẩm</button> 
 
             <br> </br>
     <form method="POST" action="{{route('hoa-don-nhap.xl-them-moi')}}">

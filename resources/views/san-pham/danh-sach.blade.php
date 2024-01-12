@@ -1,9 +1,6 @@
 @extends('trangchu')
 @section('content')
 <div class="table-responsive">
-
-    
-
         <table class="table table-striped table-sm" border="1">
         <form class="form-inline" action="{{ route('san-pham.search') }}" method="GET">
             <div class="input-group">

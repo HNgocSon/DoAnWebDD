@@ -6,11 +6,13 @@
         <table class="table table-striped table-sm" border="1">
         <form class="form-inline" action="{{ route('hoa-don-nhap.search') }}" method="GET">
             <div class="input-group" >
-                <input type="text" class="form-control" style="max-width: 400px;" name="query" placeholder="Search for products">
+                
                 <div class="input-group-append">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                    <a href="{{route('hoa-don-nhap.them-moi')}}"><button type="submit" class="btn btn-info">Thêm mới</button></a>
+                   
+                    <a href="{{route('hoa-don-nhap.them-moi')}}"><button type="button" class="btn btn-info">Thêm mới</button></a>
                 </div>
+                <input type="text" class="form-control" style="max-width: 400px;" name="query" placeholder="Search for products">
+                <button type="submit" class="btn btn-primary">Search</button>
             </div>
         </form>
 

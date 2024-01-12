@@ -5,11 +5,14 @@
         <table class="table table-striped table-sm " border="1">
         <form class="form-inline" action="{{ route('loai-san-pham.search') }}" method="GET">
             <div class="input-group">
-                <input type="text" class="form-control" style="width: 400px;" name="query" placeholder="Search for products">
+               
                 <div class="input-group-append">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                    <a href="{{route('loai-san-pham.them-moi')}}"><button type="submit" class="btn btn-info">Thêm mới</button></a>
+                    
+                    <a href="{{route('loai-san-pham.them-moi')}}">
+                        <button type="button" class="btn btn-info">Thêm mới</button></a>
                 </div>
+                <input type="text" class="form-control" style="width: 400px;" name="query" placeholder="Search for products">
+                <button type="submit" class="btn btn-primary">Search</button>
             </div>
         </form>
 
@@ -18,7 +21,7 @@
             <div class="form-group" style="max-width: 200px;">
                 <label for="Page" style="color :red;font-size: 13px;">Số lượng dòng trên mỗi trang:</label>
                 <select class="form-control" name="Page" id="Page" onchange="this.form.submit()">
-                    <option value="5" {{ $Page == 5 ? 'selected' : '' }}>5</option>
+                    <option value="5"  {{ $Page == 5 ? 'selected' : '' }}>5</option>
                     <option value="10" {{ $Page == 10 ? 'selected' : '' }}>10</option>
                     <option value="20" {{ $Page == 20 ? 'selected' : '' }}>20</option>
                     <option value="50" {{ $Page == 50 ? 'selected' : '' }}>50</option>
