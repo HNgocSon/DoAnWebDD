@@ -15,6 +15,9 @@ class SanPham extends Model
     protected $fillable = [
         'so_luong',
     ];
+    public function san_pham_bien_the(){
+        return $this->hasMany(SanPhamBienThe::class);
+    }
     public function loai_san_pham(){
         return $this->belongsto(LoaiSanPham::class);
     }

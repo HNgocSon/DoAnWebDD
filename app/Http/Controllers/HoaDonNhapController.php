@@ -7,6 +7,7 @@ use App\Models\NhaCungCap;
 use App\Models\HoaDonNhap;
 use App\Models\SanPham;
 use App\Models\ChiTietHoaDonNhap;
+use App\Models\SanPhamBienThe;
 use Illuminate\Support\Facades\Gate;
 
 class HoaDonNhapController extends Controller
@@ -23,8 +24,9 @@ class HoaDonNhapController extends Controller
             return redirect()->route('trang-chu')->with('error','bạn không có quyền truy cập vào chức năng này');
         }
         $dsSanPham = SanPham::all();
+        $dsBienThe = SanPhamBienThe::all();
         $dsNhaCungCap = NhaCungCap::all();
-        return view('hoa-don-nhap/them-moi',compact('dsSanPham','dsNhaCungCap'));
+        return view('hoa-don-nhap/them-moi',compact('dsSanPham','dsNhaCungCap','dsBienThe'));
     }
 
     public function XuLyHoaDonNhap(Request $request){
@@ -34,13 +36,12 @@ class HoaDonNhapController extends Controller
         $hd->tong_tien =  0;
         $hd->save();
         $TongTien=0;
-     
 
-        
         for($i=0 ; $i < count( (array) $request->idSP) ; $i++){
             $cthd = new ChiTietHoaDonNhap();
             $cthd->hoa_don_nhap_id = $hd->id;
             $cthd->san_pham_id = $request->idSP[$i];
+            $cthd->san_pham_bien_the_id = $request->bienThe[$i];
             $cthd->so_luong = $request->soLuong[$i];
             $cthd->gia_nhap = $request->giaNhap[$i];
             $cthd->gia_ban = $request->giaBan[$i];
@@ -49,10 +50,10 @@ class HoaDonNhapController extends Controller
 
             $TongTien += $cthd->thanh_tien;
 
-            $sp = SanPham::find($cthd->san_pham_id);
-            $sp->so_luong += $cthd->so_luong;
-            $sp->gia = $cthd->gia_ban;
-            $sp->save();
+            $spbt = SanPhamBienThe::find($cthd->san_pham_bien_the_id);
+            $spbt->so_luong += $cthd->so_luong;
+            $spbt->gia = $cthd->gia_ban;
+            $spbt->save();
         }
         $hd->tong_tien=$TongTien;
         $hd->save();
@@ -88,8 +89,9 @@ class HoaDonNhapController extends Controller
         }
         $hoaDon = HoaDonNhap::find($id);
         $dsSanPham = SanPham::all();
+        $dsBienThe = SanPhamBienThe::all();
         $chiTietHoaDon = ChiTietHoaDonNhap::all();
-        return view('hoa-don-nhap/chi-tiet-hoa-don-nhap',compact('hoaDon','dsSanPham','chiTietHoaDon'));
+        return view('hoa-don-nhap/chi-tiet-hoa-don-nhap',compact('hoaDon','dsSanPham','chiTietHoaDon','dsBienThe'));
     }
 
     public function Search(Request $request)
@@ -98,14 +100,24 @@ class HoaDonNhapController extends Controller
             return redirect()->route('trang-chu')->with('error','bạn không có quyền truy cập vào chức năng này');
         }
         $query = $request->input('query');
+        
+        $Page = $request->input('Page', 5);
 
         $dsHoaDonNhap = HoaDonNhap::where('ngay_nhap', 'LIKE', "%$query%")
         ->orWhere('tong_tien', 'LIKE', "%$query%")
         ->orWhere('nha_cung_cap_id', 'LIKE', "%$query%")
         ->join('nha_cung_cap', 'hoa_don_nhap.nha_cung_cap_id', '=', 'nha_cung_cap.id')
         ->orwhere('nha_cung_cap.ten', 'LIKE', "%$query%")
-        ->get();
+        ->paginate($Page);
             
-        return view('hoa-don-nhap/danh-sach',compact('dsHoaDonNhap'));
+        return view('hoa-don-nhap/danh-sach',compact('dsHoaDonNhap','Page'));
     }
+
+    public function BienThe(Request $request, $id)
+    {
+        $dsBienThe = SanPhamBienThe::where('san_pham_id', $id)->get();
+
+        return response()->json($dsBienThe);
+    }
+
 }

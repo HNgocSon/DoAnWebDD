@@ -24,7 +24,6 @@ class RedirectIfAuthenticated
                 return redirect()->route('trang-chu');
             }
             
-            
         }
 
         return $next($request);

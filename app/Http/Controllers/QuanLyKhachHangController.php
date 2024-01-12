@@ -36,14 +36,14 @@ class QuanLyKhachHangController extends Controller
             return redirect()->route('trang-chu')->with('error','bạn không có quyền truy cập vào chức năng này');
         }
         $query = $request->input('query');
-
+        $Page = $request->input('Page', 5); 
         $dsKhachHang = KhachHang::where('ten', 'LIKE', "%$query%")
         ->orWhere('sdt', 'LIKE', "%$query%")
         ->orWhere('email', 'LIKE', "%$query%")
         ->orWhere('dia_chi', 'LIKE', "%$query%")
-        ->get();
+        ->paginate($Page);
 
-        return view('quan-ly-tai-khoan-khach-hang/danh-sach', compact('dsKhachHang'));
+        return view('quan-ly-tai-khoan-khach-hang/danh-sach', compact('dsKhachHang','Page'));
     }
 
 }

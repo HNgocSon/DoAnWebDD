@@ -24,6 +24,12 @@
                 @endforeach
             </select>
 
+            <label>Chọn Biến Thể</label>
+            <select name="bien_the" id="bien_the" disabled>
+                <option>Chọn Biến Thể</option>
+                
+            </select>
+
             <label>Số Lượng</label>
             <input type="number" id="so_luong" value="0"/>
             <label>Giá Bán</label>
@@ -41,6 +47,7 @@
                     <tr>
                         <th>STT</th>
                         <th>Sản Phẩm</th>
+                        <th>Biến Thể</th>
                         <th>Số Lượng</th>
                         <th>Giá Bán</th>
                         <th>Gia Nhap</th>
@@ -54,7 +61,7 @@
                 </tbody>   
         </table>
             
-        <input type="hidden" id="nha_cung_cap_id" name="nha_cung_cap_id" value=""/>
+        <input type="" id="nha_cung_cap_id" name="nha_cung_cap_id" value=""/>
         
             <br/><br/>
             <button type ="submit">Lưu</button>
@@ -68,13 +75,45 @@
 @endsection
 
 @section('page')
+
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
+        $('#san_pham').change(function () {
+            var sanPhamId = $(this).val();
+
+            if (sanPhamId) {
+                $('#bien_the').prop('disabled', false); 
+                $('#bien_the').empty(); 
+
+                $.ajax({
+                type: 'GET',
+                url: '/hoa-don-nhap/lay-ds-bien-the/' + sanPhamId,
+                success: function (data) {
+                    $.each(data, function (index, bienThe) {
+                        var option = $('<option>', {
+                            value: bienThe.id,
+                            text: bienThe.mau + ' - ' + bienThe.dung_luong
+                        });
+                        $('#bien_the').append(option);
+                    });
+                },
+                error: function () {
+                    alert('Có lỗi xảy ra khi tải danh sách biến thể.');
+                }
+            });
+
+            } else {
+                $('#bien_the').prop('disabled', true); 
+            }
+        });
+
         $("#btn-them").click(function(){
           
             var stt=$('#tb-ds-san-pham tbody tr').length+1;
             var tenSP=$("#san_pham").find(":selected").text();
             var idSP= $("#san_pham").find(":selected").val();
+            var bienTheOption = $("#bien_the").find(":selected").text();
+            var bienThe = $("#bien_the").find(":selected").val();
             var soLuong=$("#so_luong").val();
             var giaBan=$("#gia_ban").val();
             var giaNhap=$("#gia_nhap").val();
@@ -83,6 +122,7 @@
             var row=`<tr>
             <td>${stt}</td>
             <td>${tenSP}<input type="hidden" name ="idSP[]" value="${idSP}"/></td>
+            <td>${bienTheOption}<input type="hidden" name="bienThe[]" value="${bienThe}"/></td>
             <td>${soLuong}<input type="hidden" name ="soLuong[]" value="${soLuong}"/></td>
             <td>${giaBan}<input type="hidden" name ="giaBan[]" value="${giaBan}"/></td>
             <td>${giaNhap}<input type="hidden" name ="giaNhap[]" value="${giaNhap}"/></td>

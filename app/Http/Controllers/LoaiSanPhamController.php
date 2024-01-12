@@ -24,11 +24,13 @@ class LoaiSanPhamController extends Controller
         {
             return redirect()->route('loai-san-pham.danh-sach')->with('error','loại sản phẩm đã tồn tại');
         }
-        
+     
         $LoaiSp = new LoaiSanPham();
         $LoaiSp->ten_loai    = $request->ten_loai;
+        if(!empty($request->img)){
          $file = $request->img;
          $LoaiSp->img = $file->store('images');
+        }
         $LoaiSp->save();
         return redirect()->route('loai-san-pham.danh-sach')->with('thong_bao','Thêm Thành Công');
 
@@ -36,9 +38,11 @@ class LoaiSanPhamController extends Controller
 
     public function DanhSachLoaiSp(Request $request)
     {
-        $Page = $request->input('Page', 5 );
-        $dsLoaiSp=LoaiSanPham::paginate($Page);
-        return view('loai-san-pham/danh-sach',compact('dsLoaiSp','Page'));
+        $Page = $request->input('Page', 5);
+        $Page = is_numeric($Page) ? (int) $Page : 5;
+        $dsLoaiSp = LoaiSanPham::paginate($Page);  
+    
+        return view('loai-san-pham/danh-sach', compact('dsLoaiSp', 'Page'));
     }
     public function XoaLoaiSp($id)
     {
@@ -82,13 +86,17 @@ class LoaiSanPhamController extends Controller
      public function Search(Request $request)
     {
         if (Gate::denies('quan-ly-san-pham')) {
-            return redirect()->route('trang-chu')->with('error','bạn không có quyền truy cập vào chức năng này');
+            return redirect()->route('trang-chu')->with('error', 'bạn không có quyền truy cập vào chức năng này');
         }
+    
         $query = $request->input('query');
-
-        $dsLoaiSp = LoaiSanPham::where('ten_loai', 'LIKE', "%$query%")->get();
-
-        return view('loai-san-pham/danh-sach', compact('dsLoaiSp'));
+    
+        $Page = $request->input('Page', 5); 
+    
+        // Sử dụng phương thức paginate để lấy danh sách loại sản phẩm đã phân trang
+        $dsLoaiSp = LoaiSanPham::where('ten_loai', 'LIKE', "%$query%")->paginate($Page);
+    
+        return view('loai-san-pham/danh-sach', compact('dsLoaiSp', 'Page'));
     }
 
 }

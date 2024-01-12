@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('khach_hang_id');
             $table->decimal('tong_tien', 15, 2);
             $table->datetime('ngay_xuat')->nullable()->default(DB::raw('now()'));
-            $table->float('status')->default(0);
+            $table->integer('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
 

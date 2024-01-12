@@ -63,6 +63,15 @@ Route::middleware('auth')->group(function () {
         Route::get('danh-sach',[SanPhamController::class,'DanhSachSp'])->name('danh-sach');
         Route::get('them-moi',[SanPhamController::class,'ThemMoiSp'])->name('them-moi');
         Route::post('them-moi',[SanPhamController::class,'xuLyThemMoiSp'])->name('xl-them-moi');
+
+
+        Route::get('bien-the/{id}', [SanPhamController::class, 'BienThe'])->name('bien-the');
+        Route::get('them-moi-bien-the/{id}',[SanPhamController::class,'ThemMoiBienThe'])->name('them-moi-bien-the');
+        Route::post('them-moi-bien-the/{id}',[SanPhamController::class,'xuLyThemMoiBienThe'])->name('xl-them-moi-bien-the');
+        Route::get('cap-nhat-bien-the/{id}',[SanPhamController::class,'CapNhatBienThe'])->name('cap-nhat-bien-the');
+        Route::post('cap-nhat-bien-the/{id}',[SanPhamController::class,'XuLyCapNhatBienThe'])->name('xl-cap-nhat-bien-the');
+        Route::get('xoa-bien-the/{id}',[SanPhamController::class,'XoaBienThe'])->name('xoa-bien-the');
+
         Route::get('search', [SanPhamController::class, 'Search'])->name('search');
 
         Route::get('XoaSp/{id}', [SanPhamController::class, 'XoaSp'])->name('xoa');
@@ -136,6 +145,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('hoa-don-nhap')->group(function (){
         Route::name('hoa-don-nhap.')->group(function (){
             Route::get('them-moi',[HoaDonNhapController::class,'ThemHoaDonNhap'])->name('them-moi');
+            Route::get('lay-ds-bien-the/{id}',[HoaDonNhapController::class,'BienThe'])->name('bien-the');
             Route::post('them-moi',[HoaDonNhapController::class,'XuLyHoaDonNhap'])->name('xl-them-moi');
             Route::get('danh-sach',[HoaDonNhapController::class,'DanhSachHoaDonNhap'])->name('danh-sach');
             Route::get('xoa/{id}',[HoaDonNhapController::class,'XoaHoaDonNhap'])->name('xoa');

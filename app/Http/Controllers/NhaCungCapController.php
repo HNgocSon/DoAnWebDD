@@ -75,12 +75,13 @@ class NhaCungCapController extends Controller
             return redirect()->route('trang-chu')->with('error','bạn không có quyền truy cập vào chức năng này');
         }
         $query = $request->input('query');
-
+        $Page = $request->input('Page', 5); 
+        
         $dsNCC = NhaCungCap::where('ten', 'LIKE', "%$query%")
         ->orWhere('sdt', 'LIKE', "%$query%")
         ->orWhere('dia_chi', 'LIKE', "%$query%")
-        ->get();
+        ->paginate($Page);
 
-        return view('nha-cung-cap/danh-sach', compact('dsNCC'));
+        return view('nha-cung-cap/danh-sach', compact('dsNCC','Page'));
     }
 }

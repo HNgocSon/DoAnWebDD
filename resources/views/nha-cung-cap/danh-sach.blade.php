@@ -8,10 +8,11 @@
                 <input type="text" class="form-control" style="max-width: 400px;" name="query" placeholder="Search for products">
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-primary">Search</button>
-                    <a href="{{route('nha-cung-cap.them-moi')}}"><button type="submit" class="btn btn-info">Thêm mới</button></a>
+                    
                 </div>
             </div>
         </form>
+        <a href="{{route('nha-cung-cap.them-moi')}}"><button type="submit" class="btn btn-info">Thêm mới</button></a>
 
           <thead>
           <h3>Danh Sách Nhà Cung Cấp</h3>

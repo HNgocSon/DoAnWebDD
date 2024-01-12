@@ -9,11 +9,26 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{asset('sweetalert/sweetalert2.min.css')}}">  
     <link rel="stylesheet" href="{{asset('styles.css')}}">
-    
+    <style>
+        body {
+            padding-top: 56px; 
+        }
+
+        .fixed-header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .body-content {
+            padding-top: 56px; 
+        }
+    </style>
 </head>
 <body>
     
-<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow fixed-header">
   
   <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3">
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stack" viewBox="0 0 16 16">
@@ -156,16 +171,15 @@
     </nav>
   </div>
 </div>
-<main>
+<main class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
         @yield('content')
         
 </main>
     <!-- resources/views/layouts/app.blade.php -->
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!-- <script src="https://kit.fontawesome.com/a076d05399.js"></script> -->
     <script src="{{ asset('jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('bootstrap-5.2.3/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{ asset('sweetalert/sweetalert2.all.min.js')}}"></script>

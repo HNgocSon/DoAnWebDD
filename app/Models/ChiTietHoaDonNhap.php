@@ -11,10 +11,12 @@ class ChiTietHoaDonNhap extends Model
     use HasFactory;
     protected $table="chi_tiet_hoa_don_nhap";
 
+    public function san_pham_bien_the(){
+        return $this->belongsto(SanPhamBienThe::class);
+    }
     public function san_pham(){
         return $this->belongsto(SanPham::class);
     }
-
     public function hoa_don_nhap(){
         return $this->belongsto(HoaDonNhap::class);
     }

@@ -31,9 +31,14 @@ Route::middleware('guest:api')->group(function () {
 
 });
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware('jwt.auth')->group(function () {
     Route::post('dang-xuat',[APIAuthController::class,'DangXuat']);
+   
 });
+Route::middleware('api.auth')->group(function () {
+    Route::get('khach-hang',[APIAuthController::class,'LayThongTinKhachHang']);
+});
+
 
 
 
@@ -56,6 +61,6 @@ Route::middleware('guest:api')->group(function () {
 });
 
 //Hóa Đơn Xuất
-Route::post("hoa-don",[APIHoaDonXuatController::class,"XuLyHoaDonXuat"]);
+Route::post("/hoa-don",[APIHoaDonXuatController::class,"XuLyHoaDonXuat"]);
 
 //Bình Luận

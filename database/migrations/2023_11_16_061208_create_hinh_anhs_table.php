@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('hinh_anh', function (Blueprint $table) {
             $table->id();
-            $table->string('url',100);
+            $table->string('url');
             $table->unsignedBigInteger('san_pham_id');
             $table->timestamps();
             

@@ -10,7 +10,7 @@ class APILoaiSanPhamController extends Controller
 {
     public function LayDanhSachLoaiSanPham()
     {   
-        $dsLoaiSanPham = LoaiSanPham::with('ds_san_pham')->get();
+        $dsLoaiSanPham = LoaiSanPham::with('ds_san_pham.san_pham_bien_the')->get();
         return response()->json([
             'success'=>true,
             'data'=>$dsLoaiSanPham
@@ -19,7 +19,7 @@ class APILoaiSanPhamController extends Controller
 
     public function LayChiTietLoaiSanPham($id)
     {
-        $loaiSanPham = LoaiSanPham::with('ds_san_pham', 'ds_san_pham.hinh_anh')->find($id);
+        $loaiSanPham = LoaiSanPham::with('ds_san_pham', 'ds_san_pham.san_pham_bien_the','ds_san_pham.hinh_anh')->find($id);
     
         return response()->json([
             'success' => true,

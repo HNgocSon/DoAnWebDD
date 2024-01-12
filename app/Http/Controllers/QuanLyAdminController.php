@@ -86,15 +86,16 @@ class QuanLyAdminController extends Controller
             return redirect()->route('trang-chu')->with('error','bạn không có quyền truy cập vào chức năng này');
         }
         $query = $request->input('query');
+        $Page = $request->input('Page', 5); 
 
         $dsAdmin = Admin::where('admin.ten', 'LIKE', "%$query%")
         ->orWhere('admin.ten_dang_nhap', 'LIKE', "%$query%")
         ->leftJoin('quyen', 'admin.quyen_id', '=', 'quyen.id')
         ->orWhere('quyen.ten_quyen', 'LIKE', "%$query%")
-        ->get();
+        ->paginate($Page);
 
 
-        return view('admin/danh-sach', compact('dsAdmin'));
+        return view('admin/danh-sach', compact('dsAdmin','Page'));
     } 
 
 }

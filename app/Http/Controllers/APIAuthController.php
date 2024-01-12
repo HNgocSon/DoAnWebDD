@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;  
 use App\Models\KhachHang;
-// use App\Models\ResetMatKhau;
 
 class APIAuthController extends Controller
 {
@@ -156,9 +155,21 @@ class APIAuthController extends Controller
 
     public function DangXuat()
     {
-        {
-            auth('api')->logout();
-            return response()->json(['message' => 'Successfully logged out']);
+        try {
+            $user = auth('api')->user();
+    
+            if ($user) {
+
+                auth('api')->logout();
+    
+                return response()->json(['message' => 'Đăng Xuất Thành Công']);
+            } else {
+                
+                return response()->json(['error' => 'Người Dùng Chưa Được Xác Thực'], 401);
+            }
+        } catch (\Exception $e) {
+       
+            return response()->json(['error' =>'Đăng Xuất Không Thành Công'], 500);
         }
     }
 
@@ -224,6 +235,28 @@ class APIAuthController extends Controller
        
         return "Cập nhật mật khẩu thành công";
     }
+
+    public function LayThongTinKhachHang()
+    {
+        try {
+
+            if (auth('api')->check()) {
+    
+                $user = auth('api')->user();
+
+        
+                return response()->json(['user' => $user]);
+            } else {
+            
+                return response()->json(['error' => 'Người Dùng Chưa Được Xác Thực '], 401);
+            }
+        } catch (\Exception $e) {
+
+            return response()->json(['error' => $e->getMessage()], 500);
+
+        }
+    }
+
 
 }
 
