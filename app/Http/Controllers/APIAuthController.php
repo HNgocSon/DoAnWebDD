@@ -153,6 +153,65 @@ class APIAuthController extends Controller
         ]);
     }
 
+    public function CapNhatThongTinTaiKhoan(Request $request)
+    {
+        $user = auth('api')->user(); 
+
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Người dùng không tồn tại'
+            ]);
+        }
+
+        if (isset($request->ten) && !empty($request->ten)) {
+            $user->ten = $request->ten;
+        }
+
+        if (isset($request->sdt) && !empty($request->sdt)) {
+            $user->sdt = $request->sdt;
+        }
+
+        if (isset($request->dia_chi) && !empty($request->dia_chi)) {
+            $user->dia_chi = $request->dia_chi;
+        }
+
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Cập nhật thông tin thành công'
+        ]);
+    }
+
+    public function CapNhatMatKhau(Request $request)
+    {
+        $user = auth('api')->user();
+
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Người dùng không tồn tại',
+            ]);
+        }
+
+        if (!Hash::check($request->mat_khau_cu, $user->password)) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Mật khẩu cũ không đúng',
+            ]);
+        }
+
+        $user->password = Hash::make($request->mat_khau_moi);
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Cập nhật mật khẩu thành công',
+        ]);
+    }
+
+
     public function DangXuat()
     {
         try {

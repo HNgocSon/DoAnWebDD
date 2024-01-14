@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('sdt');
             $table->string('email')->index();
             $table->string('password');
-            $table->string('dia_chi',50);
+            $table->string('dia_chi');
             $table->integer('status')->default(0);
             $table->string('token')->nullable();
             $table->timestamp('created_at')->nullable();

@@ -6,6 +6,9 @@ use App\Http\Controllers\APIAuthController;
 use App\Http\Controllers\APISanPhamController;
 use App\Http\Controllers\APILoaiSanPhamController;
 use App\Http\Controllers\APIHoaDonXuatController;
+use App\Http\Controllers\SanPhamYeuThichController;
+use App\Http\Controllers\BinhLuanController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,6 +32,7 @@ Route::middleware('guest:api')->group(function () {
     Route::post('forgot-password',[APIAuthController::class,'QuenMatKhau']);
     Route::post('/dang-nhap-google', [AuthController::class, 'dangNhapBangGoogle']);
 
+    Route::post('binh-luan',[BinhLuanController::class,'DanhSachBinhLuan']);
 });
 
 Route::middleware('jwt.auth')->group(function () {
@@ -37,6 +41,14 @@ Route::middleware('jwt.auth')->group(function () {
 });
 Route::middleware('api.auth')->group(function () {
     Route::get('khach-hang',[APIAuthController::class,'LayThongTinKhachHang']);
+    Route::post('cap-nhat',[APIAuthController::class,'CapNhatThongTinTaiKhoan']);
+    Route::post('cap-nhat-mat-khau',[APIAuthController::class,'CapNhatMatKhau']);
+    Route::post('san-pham-yeu-thich',[SanPhamYeuThichController::class,'ThemMoiSanPhamYeuThich']);
+    Route::get('danh-sach-yeu-thich',[SanPhamYeuThichController::class,'DanhSachSanPhamYeuThich']);
+    Route::post('xoa-yeu-thich',[SanPhamYeuThichController::class,'XoaSanPhamYeuThich']);
+
+    Route::post('them-binh-luan',[BinhLuanController::class,'ThemBinhLuan']);
+    Route::post('xoa',[BinhLuanController::class,'XoaBinhLuan']);
 });
 
 

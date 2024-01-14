@@ -8,19 +8,53 @@ use App\Models\BinhLuan;
 use Illuminate\Support\Facades\Gate;
 class BinhLuanController extends Controller
 {
-    public function DanhSachBinhLuan(Request $request)
+    
+    public function ThemBinhLuan(Request $request)
     {
-        $Page = $request->input('Page', 5 );
-        $dsCMT=BinhLuan::paginate($Page);
-        $dsKhachhang=KhachHang::all();
-        return view('quan-ly-binh-luan/danh-sach',compact('dsCMT','dsKhachhang','Page'));
+        $user = auth('api')->user();   
+
+        $binhLuan = new BinhLuan();
+        $binhLuan->khach_hang_id = $user->id;
+        $binhLuan->san_pham_id = $request->san_pham;
+        $binhLuan->comments = $request->comments;
+        $binhLuan->save();
+
+        return response()->json(['message' => 'bình luận đã được lưu.']);
     }
 
-    public function XoaBinhLuan($id)
+    public function DanhSachBinhLuan(Request $request)
     {
-        $binhLuan=BinhLuan::find($id);
-        $binhLuan->delete();
-        return redirect()->route('binh-luan.danh-sach')->with('thong_bao','xóa bình luận thành công');
+        $sanPhamId = $request->san_pham;
+
+        $danhSachBinhLuan = BinhLuan::where('san_pham_id', $sanPhamId)->get();
+
+        return response()->json(['success' => true, 'data' => $danhSachBinhLuan], 200);
     }
+
+    public function XoaBinhLuan(Request $request)
+    {
+        $comment = BinhLuan::find($request->comment_id);
+
+        if (!$comment) {
+            return response()->json(['error' => 'Bình luận không tồn tại.'], 404);
+        }
+
+        $user = auth('api')->user();
+
+        if ($user->id === $comment->khach_hang_id) {
+            $comment->delete();
+            return response()->json(['success' => true, 'message' => 'Bình luận đã được xóa.']);
+        }
+
+        return response()->json(['error' => 'Bạn không có quyền xóa bình luận.'], 403);
+    }
+
+
+ 
+
+
+
+
+  
 
 }
