@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('hoa_don_xuat_id');
             $table->unsignedBigInteger('san_pham_id');
+            $table->unsignedBigInteger('san_pham_bien_the_id');
             $table->integer('so_luong');
             $table->decimal('don_gia', 10, 2);
             $table->timestamps();
@@ -22,6 +23,7 @@ return new class extends Migration
             
             $table->foreign('hoa_don_xuat_id')->references('id')->on('hoa_don_xuat')->onDelete('cascade');
             $table->foreign('san_pham_id')->references('id')->on('san_pham')->onDelete('cascade');
+            $table->foreign('san_pham_bien_the_id')->references('id')->on('san_pham_bien_the')->onDelete('cascade');
         });
     }
 

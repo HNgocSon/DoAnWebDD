@@ -5,16 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BinhLuan extends Model
+class DanhGia extends Model
 {
     use HasFactory;
-    protected $table="binh_luan";
+    protected $table = "danh_gia";
     
     public function san_pham(){
         return $this->belongsto(SanPham::class);
-    }
-
-    public function khach_hang(){
-        return $this->belongsto(KhachHang::class);
     }
 }

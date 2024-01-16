@@ -34,7 +34,7 @@ class ResetMatKhauRequest extends FormRequest
            
             'email.required' => 'Vui Lòng Nhập Email Cần ResetMatKhau',
             'token.required' => 'Token Không Tồn Tại',
-            'password.required' => 'Vui Lòng Nhập Lại Mật Khẩu Mới',
+            'password.required' => 'Vui Lòng Nhập Mật Khẩu Mới',
             'password.confirmed' => 'Mật khẩu nhập lại không khớp.',
             'password_confirmation' => 'Vui Lòng Nhập Lại Mật Khẩu',
        

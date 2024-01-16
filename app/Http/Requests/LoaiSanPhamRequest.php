@@ -32,7 +32,6 @@ class LoaiSanPhamRequest extends FormRequest
         return [
            
             'ten_loai.required' => 'vui lòng nhập tên loại sản phẩm',
-            'ten_loai.between' => 'tên loại phải từ :min ký tự dến :max',
        
         
         ];

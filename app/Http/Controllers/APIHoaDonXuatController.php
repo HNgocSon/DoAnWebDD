@@ -5,63 +5,69 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SanPham;
 use App\Models\HoaDonXuat;
-use App\Models\ChiTietHoaDon;
+use App\Models\ChiTietHoaDonXuat;
 use App\Models\KhachHang;
+use App\Models\SanPhamBienThe;
+use App\Models\GioHang;
 
 class APIHoaDonXuatController extends Controller
 {
-    public function XuLyHoaDonXuat(Request $request)
-    {
-        try {
-            \DB::beginTransaction();
+    public function ThanhToan(Request $request)
+{
+    $user = auth('api')->user();
 
-            if (auth()->check()) {
-                $user = auth('api')->user();
-                $hoaDon = new HoaDonXuat();
-                $hoaDon->khach_hang_id = $request->khach_hang;
-                $hoaDon->tong_tien = 0;
-                switch ($request->hanh_dong) {
-                    case 'chuyen_khoan':
-                        $hoaDon->status = 1; // Đã chuyển khoản
-                        break;
-                    case 'huy_hang':
-                        $hoaDon->status = 2; // Hủy hàng
-                        break;
-                    default:
-                        $hoaDon->status = 0; // Chưa Thanh Toán
-                        break;
-                }
-                $hoaDon->save();
-                $TongTien=0;    
-        
-                for($i = 0; $i < count((array) $request->id); $i++){
-                    $ctHoaDon = new ChiTietHoaDonXuat();
-                    $ctHoaDon->hoa_don_xuat_id = $hoaDon->id;
-                    $ctHoaDon->san_pham_id = $request->san_pham[$i];
-                    $ctHoaDon->so_luong = $request->so_luong[$i];
-                    $ctHoaDon->gia_ban = $request->gia_ban[$i];
-                    $ctHoaDon->tong_tien = $request->so_luong[$i]*$request->gia_ban[$i];
-                    $ctHoaDon->save();
-        
-                    $TongTien += $ctHoaDon->tong_tien;
-        
-                    $sanPham = SanPham::find( $request->id[$i]);
-                    if( $hoaDon->status == 1){
-                    $sanPham->so_luong -= $ctHoaDon->so_luong;
-                    $sanPham->save();
-                    }
-                
-                }
-        
-                $hoaDon->tong_tien=$TongTien;
-                $hoaDon->save();
-
-                \DB::commit();
-                return response()->json(['message' => 'tạo hóa đơn thành công']);
-            } 
-            } catch (\Exception $e) {
-            \DB::rollBack();
-            return response()->json(['error' => 'Có lỗi xảy ra trong quá trình xử lý hóa đơn'], 500);
-        }
+    if (!$user) {
+        return response()->json(['error' => 'Người dùng chưa đăng nhập'], 401);
     }
+    
+    $gioHangIdsToPay = (array) $request->gio_hang_ids;
+
+    $gioHang = GioHang::whereIn('id', $gioHangIdsToPay)->get();
+
+    $hoaDon = new HoaDonXuat();
+    $hoaDon->khach_hang_id = $user->id;
+    $hoaDon->tong_tien = $this->tinhTongTien($gioHang);
+    $hoaDon->ngay_xuat = now();
+    $hoaDon->save();
+
+    foreach ($gioHang as $item) {
+        $chiTietHoaDon = new ChiTietHoaDonXuat();
+        $chiTietHoaDon->hoa_don_xuat_id = $hoaDon->id;
+        $chiTietHoaDon->san_pham_id = $item->san_pham_id;
+        $chiTietHoaDon->san_pham_bien_the_id = $item->san_pham_bien_the_id;
+        $chiTietHoaDon->so_luong = $item->so_luong;
+        $chiTietHoaDon->don_gia = $item->san_pham_bien_the->gia;
+        $chiTietHoaDon->save();
+
+        $bienThe = SanPhamBienThe::find($item->san_pham_bien_the_id);
+
+        if ($bienThe) {
+            if ($bienThe->so_luong >= $item->so_luong) {
+                $bienThe->so_luong -= $item->so_luong;
+                $bienThe->save();
+            } else {
+                return response()->json(['error' => 'sản phẩm đã hết hàng']);
+            }
+        }
+      
+
+
+    }
+
+    GioHang::whereIn('id', $gioHangIdsToPay)->delete();
+
+    return response()->json(['message' => 'Thanh toán thành công', 'hoa_don' => $hoaDon]);
+}
+
+    private function tinhTongTien($gioHang)
+    {
+        $tongTien = 0;
+
+        foreach ($gioHang as $item) {
+            $tongTien += $item->san_pham_bien_the->gia * $item->so_luong;
+        }
+
+        return $tongTien;
+    }
+
 }

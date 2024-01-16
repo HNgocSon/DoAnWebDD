@@ -19,16 +19,14 @@
           <thead>
             <tr class = "table-dark">
                 <th>Tên</th>
-                <th>Tổng Đánh Giá<th>
                 <th>Bình Luận</th>
                 <th>Thời Gian</th>
             </tr>
           </thead>
           <tbody>
-            @foreach($dsCMT as $cmt)
+            @foreach($dsBinhLuan as $cmt)
             <tr>
                 <td>{{ $cmt->khach_hang->ten }}</td>
-                <td>{{ $cmt->tong_danh_gia}}</td>
                 <td>{{ $cmt->comments }}</td>
                 <td>{{ $cmt->thoi_gian}}</td>
             <tr>
@@ -38,9 +36,9 @@
 <div class="container mt-3">
           <nav aria-label="Page navigation">
               <ul class="pagination justify-content-center">
-                  @if ($dsCMT->currentPage() > 1)
+                  @if ($dsBinhLuan->currentPage() > 1)
                       <li class="page-item">
-                          <a class="page-link" href="{{ $dsCMT->previousPageUrl() }}" aria-label="Previous">
+                          <a class="page-link" href="{{ $dsBinhLuan->previousPageUrl() }}" aria-label="Previous">
                               <span aria-hidden="true">&laquo; Previous</span>
                           </a>
                       </li>
@@ -50,15 +48,15 @@
                       </li>
                   @endif
 
-                  @for ($i = max(1, $dsCMT->currentPage() - 1); $i <= min($dsCMT->currentPage() + 1, $dsCMT->lastPage()); $i++)
-                      <li class="page-item {{ $i == $dsCMT->currentPage() ? 'active' : '' }}">
-                          <a class="page-link" href="{{ $dsCMT->url($i) }}">{{ $i }}</a>
+                  @for ($i = max(1, $dsBinhLuan->currentPage() - 1); $i <= min($dsBinhLuan->currentPage() + 1, $dsBinhLuan->lastPage()); $i++)
+                      <li class="page-item {{ $i == $dsBinhLuan->currentPage() ? 'active' : '' }}">
+                          <a class="page-link" href="{{ $dsBinhLuan->url($i) }}">{{ $i }}</a>
                       </li>
                   @endfor
 
-                  @if ($dsCMT->hasMorePages())
+                  @if ($dsBinhLuan->hasMorePages())
                       <li class="page-item">
-                          <a class="page-link" href="{{ $dsCMT->nextPageUrl() }}" aria-label="Next">
+                          <a class="page-link" href="{{ $dsBinhLuan->nextPageUrl() }}" aria-label="Next">
                               <span aria-hidden="true">Next &raquo;</span>
                           </a>
                       </li>

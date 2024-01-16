@@ -38,6 +38,7 @@ Route::get('/auth/google', [DangNhapGoogleController::class, 'redirectToGoogle']
 Route::get('/auth/google/callback', [DangNhapGoogleController::class, 'handleGoogleCallback']);
 
 
+Route::get('thong-Bao}',[APIAuthController::class,'ThongBao'])->name('thong-bao');
 Route::get('reset-password/{token}',[APIAuthController::class,'ResetMatKhau'])->name('reset-password');
 Route::post('reset-password-post',[APIAuthController::class,'ResetMatKhauPost'])->name('reset-password-post');
 Route::get('/accept/{khachhang}/{token}',[APIAuthController::class,'Accept'])->name('khach-hang.accept');
@@ -96,6 +97,7 @@ Route::middleware('auth')->group(function () {
             Route::get('danh-sach',[HoaDonXuatController::class,'DanhSach'])->name('danh-sach');
             Route::get('chi-tiet/{id}',[HoaDonXuatController::class,'ChiTietHoaDonXuat'])->name('chi-tiet');
             Route::get('xoa/{id}',[HoaDonXuatController::class,'XoaHoaDonXuat'])->name('xoa');
+            Route::put('/hoa-don-xuat/{id}/thay-doi-trang-thai', [HoaDonXuatController::class, 'ThayDoiTrangThaiDon'])->name('thay-doi-trang-thai');
         });
     });
 });

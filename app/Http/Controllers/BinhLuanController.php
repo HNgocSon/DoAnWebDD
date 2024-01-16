@@ -8,6 +8,13 @@ use App\Models\BinhLuan;
 use Illuminate\Support\Facades\Gate;
 class BinhLuanController extends Controller
 {
+
+    public function DanhSachBinhLuan(Request $request)
+    {
+        $Page = $request->input('Page', 5 );
+        $dsBinhLuan = BinhLuan::paginate($Page);
+        return view('quan-ly-binh-luan/danh-sach', compact('dsBinhLuan','Page'));
+    }
     
     public function ThemBinhLuan(Request $request)
     {
@@ -22,11 +29,11 @@ class BinhLuanController extends Controller
         return response()->json(['message' => 'bình luận đã được lưu.']);
     }
 
-    public function DanhSachBinhLuan(Request $request)
+    public function BinhLuan(Request $request)
     {
         $sanPhamId = $request->san_pham;
 
-        $danhSachBinhLuan = BinhLuan::where('san_pham_id', $sanPhamId)->get();
+        $danhSachBinhLuan = BinhLuan::where('san_pham_id', $sanPhamId)->with('khach_hang')->get();
 
         return response()->json(['success' => true, 'data' => $danhSachBinhLuan], 200);
     }

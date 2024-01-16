@@ -2,7 +2,7 @@
 @section('content')
       <div class="table-responsive">
         <table class="table table-striped table-sm" border="1">
-        <h3>Hóa Đơn</h3>
+        <h3>Hóa Đơn Xuất</h3>
     <form class="form-inline" method="get" action="{{ route('hoa-don-xuat.danh-sach') }}">
         <div class="form-group" style="max-width: 200px;">
             <label for="Page" style="color :red;font-size: 13px;">Số lượng dòng trên mỗi trang:</label>
@@ -32,16 +32,33 @@
                 <td>{{ $hoaDon->ngay_xuat }}</td>
                 <td>{{ $hoaDon->tong_tien }}</td>
                 @if($hoaDon->status == 1){
-                  <td>Đã Thanh Toán</td>
-                @endif
-
-                @if ($hoaDon->status == 2)
+                    <td>Đã Xác Nhận</td>
+                @elseif($hoaDon->status == 2)
+                    <td>Đang Giao</td>
+                @elseif ($hoaDon->status == 3)
+                    <td>Đã Giao</td>
+                @elseif($hoaDon->status == 4)
                     <td>Đã Hủy</td>
                 @else
-                    <td>Chưa Thanh Toán</td> 
-                    <td> <a href="#"><button type="submit" class="btn btn-success">Thay Đỏi Trạng Thái Đơn</button></a></td>
+                    <td>Chờ Duyệt</td> 
                 @endif
-              
+                <td>
+                    @if($hoaDon->status !== 4)
+                    <form method="post" action="{{ route('hoa-don-xuat.thay-doi-trang-thai', ['id' => $hoaDon->id]) }}">
+                        @csrf
+                        @method('put')
+                        <select name="trangthai" onchange="this.form.submit()">
+                            <option>Thay Đổi Trạng Thái đơn</option>
+                            <option value="1" {{ $hoaDon->status == 1 ? 'selected' : '' }}>Xác Nhận</option>
+                            <option value="2" {{ $hoaDon->status == 2 ? 'selected' : '' }}>Đang Giao</option>
+                            <option value="3" {{ $hoaDon->status == 3 ? 'selected' : '' }}>Đã Giao</option>
+                            <option value="4" {{ $hoaDon->status == 4 ? 'selected' : '' }}>Hủy Đơn</option>
+                        </select>
+                    </form>
+                    @else
+                    <label for="">Đã Hủy Đơn Hàng</label>
+                    @endif
+                </td>
                 <td> <a href="{{route('hoa-don-xuat.chi-tiet',['id'=>$hoaDon->id])}}"><button type="submit" class="btn btn-success">Chi Tiết</button></a> | <a href="{{route('hoa-don-xuat.xoa',['id'=>$hoaDon->id])}}"><button type="submit" class="btn btn-success">Xóa Đơn</button></a></td>
             </tr>
             @endforeach

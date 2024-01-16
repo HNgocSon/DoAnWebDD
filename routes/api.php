@@ -8,6 +8,8 @@ use App\Http\Controllers\APILoaiSanPhamController;
 use App\Http\Controllers\APIHoaDonXuatController;
 use App\Http\Controllers\SanPhamYeuThichController;
 use App\Http\Controllers\BinhLuanController;
+use App\Http\Controllers\GioHangController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,14 +27,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+
 // API Đăng Nhạp user
 Route::middleware('guest:api')->group(function () {
     Route::post('dang-nhap',[APIAuthController::class,'DangNhap']);
     Route::post('dang-ky',[APIAuthController::class,'DangKy']);
     Route::post('forgot-password',[APIAuthController::class,'QuenMatKhau']);
     Route::post('/dang-nhap-google', [AuthController::class, 'dangNhapBangGoogle']);
-
-    Route::post('binh-luan',[BinhLuanController::class,'DanhSachBinhLuan']);
+    Route::post('binh-luan',[BinhLuanController::class,'BinhLuan']);
 });
 
 Route::middleware('jwt.auth')->group(function () {
@@ -49,6 +51,13 @@ Route::middleware('api.auth')->group(function () {
 
     Route::post('them-binh-luan',[BinhLuanController::class,'ThemBinhLuan']);
     Route::post('xoa',[BinhLuanController::class,'XoaBinhLuan']);
+
+    Route::post('them-vao-gio-hang',[GioHangController::class,'ThemSanPhamVaoGioHang']);
+    Route::get('gio-hang',[GioHangController::class,'LayThongTinGioHang']);
+    Route::delete('xoa-gio-hang/{id}',[GioHangController::class,'XoaSanPhamKhoiGiohang']);
+
+    Route::post('thanh-toan',[APIHoaDonXuatController::class,'ThanhToan']);
+
 });
 
 

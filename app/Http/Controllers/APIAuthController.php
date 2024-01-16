@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Requests\ResetMatKhauRequest;
 use App\Http\Requests\DangKyRequest;
+use App\Http\Requests\DangNhapRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
@@ -17,42 +18,7 @@ use App\Models\KhachHang;
 class APIAuthController extends Controller
 {
    
-    public function DangKy(Request $request){
-  
-        if(!isset($request->password)||empty($request->password)) {
-            return response()->json([
-                'success'=>false,
-                'message'=>'vui lòng nhập password'
-            ]);
-        }
-
-        if(!isset($request->ten)||empty($request->ten)) {
-            return response()->json([
-                'success'=>false,
-                'message'=>'vui lòng nhập tên'
-            ]);
-        }
-
-        if(!isset($request->sdt)||empty($request->sdt)) {
-            return response()->json([
-                'success'=>false,
-                'message'=>'vui lòng nhập số điện thoại'
-            ]);
-        }
-
-        if(!isset($request->dia_chi)||empty($request->dia_chi)) {
-            return response()->json([
-                'success'=>false,
-                'message'=>'vui lòng nhập địa chỉ'
-            ]);
-        }
-
-        if(!isset($request->email)||empty($request->email)) {
-            return response()->json([
-                'success'=>false,
-                'message'=>'vui lòng nhập địa chỉ email'
-            ]);
-        }
+    public function DangKy(DangKyRequest $request){
 
         $khachHang = KhachHang::where('email',$request->email)->first();
 
@@ -106,44 +72,30 @@ class APIAuthController extends Controller
     public function Accept($khachhang,$token){
 
         if (!$this->KiemTraTokenDangKy($khachhang, $token)) {
-            return "Token đã hết hạn hoặc không hợp lệ";
+            return redirect()->route('thong-bao')->with('error','Token đã hết hạn hoặc không hợp lệ');
         }
     
         $user = KhachHang::find($khachhang);
         
         if ($user->status === 1) {
-            return "Người dùng đã được xác nhận trước đó";
+            return redirect()->route('thong-bao')->with('error','Người dùng đã xác thực');
         }
     
         $user->update(['status' => 1, 'token' => null]);
         
-        $redirectPath = 'http://localhost:3000/dang-nhap';
 
-        return "xác nhận thanh công";
+        return redirect()->route('thong-bao')->with('thong_bao','xác thực thành công');
     }
     
 
     
-    public function DangNhap(Request $request)
+    public function DangNhap(DangNhapRequest $request)
     {
-        if(!isset($request->email) || empty($request->email)) {
-            return response()->json([
-                'success'=>false,
-                'message'=>'vui lòng nhập địa chỉ email'
-            ]);
-        }
-
-        if(!isset($request->password) || empty($request->password)) {
-            return response()->json([
-                'success'=>false,
-                'message'=>'vui lòng nhập password '
-            ]);
-        }
 
         $credentials = request(['email', 'password']);
 
         if (!$token = auth('api')->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['message' => 'Email đăng nhập hoặc mật khẩu không đúng'], 401);
         }
 
         return response()->json([
@@ -255,7 +207,7 @@ class APIAuthController extends Controller
 
         Mail::send('email.forgot-password', ['token' => $token], function ($message) use ($request){
             $message->to($request->email);
-            $message->subject("reset password");
+            $message->subject("Reset Password");
         });
 
 
@@ -287,12 +239,12 @@ class APIAuthController extends Controller
     {
 
         if (!$this->KiemTraTokenResetMatKhau($request->email, $request->token)) {
-            return "Token đã hết hạn hoặc không hợp lệ";
+           return  redirect()->route('thong-bao')->with('error','Token đã hết hạn hoặc không hợp lệ');
         }
 
         KhachHang::where("email", $request->email)->update(["password" => Hash::make($request->password), 'token' => null]);
        
-        return "Cập nhật mật khẩu thành công";
+        return redirect()->route('thong-bao')->with('thong_bao','Cập Nhật Mật Khẩu Thành Công');
     }
 
     public function LayThongTinKhachHang()
@@ -314,6 +266,10 @@ class APIAuthController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
 
         }
+    }
+
+    public function ThongBao(){
+        return view('email/giao-dien');
     }
 
 

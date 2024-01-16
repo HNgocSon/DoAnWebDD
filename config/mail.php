@@ -100,7 +100,7 @@ return [
 
     'from' => [
         'address' => 'huynhsonqg@gmail.com',
-        'name' => 'web ban dt',
+        'name' => 'Cửa Hàng Điện Thoại Di Động',
     ],
 
     /*
