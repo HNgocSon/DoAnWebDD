@@ -2,75 +2,75 @@
 
 @section('content')
 <div class="table-responsive">
+    <h1 class="h3 mb-3">THÊM HOÁ ĐƠN</h1>
 
-            <h1>THÊM HOÁ ĐƠN </h1>
-            <label>Chọn nhà cung cấp</label>
+    <label for="nha_cung_cap" class="form-label">Chọn nhà cung cấp</label>
+    <select name="ncc" id="nha_cung_cap" class="form-select">
+        <option selected disabled>Chọn nhà cung cấp</option>
+        @foreach($dsNhaCungCap as $ncc)
+            <option value="{{$ncc->id}}">{{$ncc->ten}}</option>
+        @endforeach
+    </select>
 
-            <select name="ncc" id="nha_cung_cap">
-                <option>Chon nhà cung cấp</option>
-                @foreach($dsNhaCungCap as $ncc)
-                <option value="{{$ncc->id}}" > {{$ncc->ten}}</option>
-                @endforeach
-            </select>
-            <br>
-          
-            <h3>DANH SÁCH SẢN PHẨM</h3>
+    <br>
 
-            <label>Chọn Sản Phẩm</label>
-            <select name="san_pham" id="san_pham">
-                <option>Chon Sản Phẩm</option>
-                @foreach($dsSanPham as $SP)
-                <option value="{{$SP->id}}"> {{$SP->ten}}</option>
-                @endforeach
-            </select>
+    <h3 class="h4 mb-3">DANH SÁCH SẢN PHẨM</h3>
 
-            <label>Chọn Biến Thể</label>
-            <select name="bien_the" id="bien_the" disabled>
-                <option>Chọn Biến Thể</option>
-                
-            </select>
+    <label for="san_pham" class="form-label">Chọn Sản Phẩm</label>
+    <select name="san_pham" id="san_pham" class="form-select">
+        <option selected disabled>Chọn Sản Phẩm</option>
+        @foreach($dsSanPham as $SP)
+            <option value="{{$SP->id}}">{{$SP->ten}}</option>
+        @endforeach
+    </select>
 
-            <label>Số Lượng</label>
-            <input type="number" id="so_luong" value="0"/>
-            <label>Giá Bán</label>
-            <input type="number" id="gia_ban" value="0"/>
-            <label>Giá nhập</label>
-            <input type="number" id="gia_nhap" value="0"/>
+    <label for="bien_the" class="form-label">Chọn Biến Thể</label>
+    <select name="bien_the" id="bien_the" class="form-select" disabled>
+        <option selected disabled>Chọn Biến Thể</option>
+    </select>
 
-            <button type="button" id="btn-them">Thêm sản phẩm</button> 
+    <label for="so_luong" class="form-label">Số Lượng</label>
+    <input type="number" id="so_luong" class="form-control" value="0"/>
 
-            <br> </br>
+    <label for="gia_ban" class="form-label">Giá Bán</label>
+    <input type="number" id="gia_ban" class="form-control" value="0"/>
+
+    <label for="gia_nhap" class="form-label">Giá nhập</label>
+    <input type="number" id="gia_nhap" class="form-control" value="0"/>
+
+    <button type="button" id="btn-them" class="btn btn-primary">Thêm sản phẩm</button>
+
+    <br><br>
+
     <form method="POST" action="{{route('hoa-don-nhap.xl-them-moi')}}">
         @csrf
-        <table id="tb-ds-san-pham" border="1">
-                <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th>Sản Phẩm</th>
-                        <th>Biến Thể</th>
-                        <th>Số Lượng</th>
-                        <th>Giá Bán</th>
-                        <th>Gia Nhap</th>
-                        <th>Thành Tiền</th>
-                        <th>Thao Tác</th>
-
-                    </tr>
-                </thead> 
-                <tbody>
-
-                </tbody>   
+        <table id="tb-ds-san-pham" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Sản Phẩm</th>
+                    <th>Biến Thể</th>
+                    <th>Số Lượng</th>
+                    <th>Giá Bán</th>
+                    <th>Giá Nhập</th>
+                    <th>Thành Tiền</th>
+                    <th>Thao Tác</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
         </table>
-            
-        <input type="" id="nha_cung_cap_id" name="nha_cung_cap_id" value=""/>
-        
-            <br/><br/>
-            <button type ="submit">Lưu</button>
-            <div class="form-group row">
-                <div class="col-md-6 offset-md-4">
-                    <a href="{{route('hoa-don-nhap.danh-sach')}}" class="btn btn-primary">Quay lại</a>
-                </div>
+
+        <input type="hidden" id="nha_cung_cap_id" name="nha_cung_cap_id" value=""/>
+
+        <br/><br/>
+        <button type="submit" class="btn btn-success">Lưu</button>
+        <div class="form-group row">
+            <div class="col-md-6 offset-md-4">
+                <a href="{{route('hoa-don-nhap.danh-sach')}}" class="btn btn-primary">Quay lại</a>
             </div>
-</form>
+        </div>
+    </form>
+</div>
 
 @endsection
 

@@ -30,6 +30,6 @@
             @endforeach
         </tbody>
     </table>
-    <a href="{{route('hoa-don-nhap.danh-sach')}}"><button type="submit" class="btn btn-info">quay lai</button></a>
+    <a href="{{route('hoa-don-nhap.danh-sach')}}"><button type="submit" class="btn btn-info">Quay Lại</button></a>
 </div>
 @endsection

@@ -100,7 +100,7 @@
 
 
                                 <div class="col-md-8 offset-md-12">
-                                    <button type="button" id="btn-them">Thêm san Bien Thể</button> 
+                                    <button class="btn btn-primary" type="button" id="btn-them">Thêm Sản Phẩm Biến Thể</button> 
                                 </div>
 
 
@@ -140,7 +140,7 @@
                                     </div>
 
                                         <br/><br/>
-                                        <button type ="submit">Lưu</button>
+                                        <button class="btn btn-primary" type ="submit">Lưu</button>
                                         <div class="form-group row">
                                             <div class="col-md-8 offset-md-12">
                                                 <a href="{{route('hoa-don-nhap.danh-sach')}}" class="btn btn-primary">Quay lại</a>

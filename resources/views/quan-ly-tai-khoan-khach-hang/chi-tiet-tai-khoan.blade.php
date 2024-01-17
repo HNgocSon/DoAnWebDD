@@ -28,6 +28,6 @@
             </tr>
         </tbody>
     </table>
-    <a href="{{route('khach-hang.danh-sach')}}"><button type="submit" class="btn btn-info">quay lai</button></a>
+    <a href="{{route('khach-hang.danh-sach')}}"><button type="submit" class="btn btn-info">Quay lại</button></a>
 </div>
 @endsection
