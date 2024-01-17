@@ -51,7 +51,6 @@
                             <option>Thay Đổi Trạng Thái đơn</option>
                             <option value="1" {{ $hoaDon->status == 1 ? 'selected' : '' }}>Xác Nhận</option>
                             <option value="2" {{ $hoaDon->status == 2 ? 'selected' : '' }}>Đang Giao</option>
-                            <option value="3" {{ $hoaDon->status == 3 ? 'selected' : '' }}>Đã Giao</option>
                             <option value="4" {{ $hoaDon->status == 4 ? 'selected' : '' }}>Hủy Đơn</option>
                         </select>
                     </form>

@@ -58,6 +58,10 @@ Route::middleware('api.auth')->group(function () {
 
     Route::post('thanh-toan',[APIHoaDonXuatController::class,'ThanhToan']);
 
+    Route::post("/hoa-don",[APIHoaDonXuatController::class,"XuLyHoaDonXuat"]);
+    Route::get("/xem-hoa-don",[APIHoaDonXuatController::class,"XemHoaDon"]);
+    Route::post("/thay-doi-trang-thai/{id}",[APIHoaDonXuatController::class,"ThayDoiTrangThai"]);
+
 });
 
 
@@ -82,6 +86,6 @@ Route::middleware('guest:api')->group(function () {
 });
 
 //Hóa Đơn Xuất
-Route::post("/hoa-don",[APIHoaDonXuatController::class,"XuLyHoaDonXuat"]);
+
 
 //Bình Luận

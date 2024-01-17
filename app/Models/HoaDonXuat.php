@@ -14,4 +14,8 @@ class HoaDonXuat extends Model
     public function khach_hang(){
         return $this->belongsto(KhachHang::class);
     }
+    public function chi_tiet_hoa_don_xuat(){
+        return $this->hasMany(ChiTietHoaDonXuat::class);
+    }
+
 }

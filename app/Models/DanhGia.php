@@ -13,4 +13,9 @@ class DanhGia extends Model
     public function san_pham(){
         return $this->belongsto(SanPham::class);
     }
+
+    public function hoa_don_xuat()
+    {
+        return $this->belongsTo(HoaDonXuat::class);
+    }
 }

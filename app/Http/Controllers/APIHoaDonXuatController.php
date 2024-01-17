@@ -13,7 +13,7 @@ use App\Models\GioHang;
 class APIHoaDonXuatController extends Controller
 {
     public function ThanhToan(Request $request)
-{
+    {
     $user = auth('api')->user();
 
     if (!$user) {
@@ -57,7 +57,7 @@ class APIHoaDonXuatController extends Controller
     GioHang::whereIn('id', $gioHangIdsToPay)->delete();
 
     return response()->json(['message' => 'Thanh toán thành công', 'hoa_don' => $hoaDon]);
-}
+    }
 
     private function tinhTongTien($gioHang)
     {
@@ -69,5 +69,54 @@ class APIHoaDonXuatController extends Controller
 
         return $tongTien;
     }
+
+    public function XemHoaDon(Request $request)
+    {
+        $user = auth('api')->user();
+        if (!$user) {
+            return response()->json(['error' => 'Người dùng chưa đăng nhập'], 401);
+        }
+
+        $status = $request->status; 
+    
+        $query = HoaDonXuat::with('chi_tiet_hoa_don_xuat.san_pham', 'chi_tiet_hoa_don_xuat.san_pham_bien_the')
+            ->where('khach_hang_id', $user->id);
+    
+        if ($status !== null) {
+            $query->where('status', $status);
+        }
+    
+        $dsHoaDon = $query->get();
+    
+        return response()->json([
+            'success' => true,
+            'data' => $dsHoaDon
+        ]);
+    }
+
+    public function ThayDoiTrangThai(Request $request,$id)
+    {
+        $status = $request->trangThai;
+        if (!$status) {
+            return response()->json(['error' => 'Trạng thái không hợp lệ'], 400);
+        }
+
+        $user = auth('api')->user();
+        if (!$user) {
+            return response()->json(['error' => 'Người dùng chưa đăng nhập'], 401);
+        }
+    
+        $hoaDon = HoaDonXuat::find($id);
+    
+        if (!$hoaDon) {
+            return response()->json(['error' => 'Không tìm thấy hóa đơn'], 404);
+        }
+    
+        $hoaDon->status = $status;
+        $hoaDon->save();
+    
+        return response()->json(['message' => 'Xác Nhận Thành Công']);
+    }
+    
 
 }
