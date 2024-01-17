@@ -42,7 +42,7 @@
                 <td>{{ $HoaDon->nha_cung_cap->ten }}</td>
                 <td>{{ $HoaDon->ngay_nhap }}</td>
                 <td>{{ $HoaDon->tong_tien }}</td>
-                <td><a href="{{ route('hoa-don-nhap.chi-tiet-hoa-don-nhap', ['id' => $HoaDon->id]) }}"><button type="button" class="btn btn-success">xem chi tiet</button></a>|<a href="{{ route('hoa-don-nhap.xoa', ['id' => $HoaDon->id]) }}"><button type="button" class="btn btn-success">xoa</button></a></td>
+                <td><a href="{{ route('hoa-don-nhap.chi-tiet-hoa-don-nhap', ['id' => $HoaDon->id]) }}"><button type="button" class="btn btn-success">Xem Chi Tiết</button></a>|<a href="{{ route('hoa-don-nhap.xoa', ['id' => $HoaDon->id]) }}"><button type="button" class="btn btn-danger">Xóa</button></a></td>
             </tr>
             @endforeach
           </tbody>

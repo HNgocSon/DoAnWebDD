@@ -10,7 +10,7 @@
                         <form method="POST" action="">
                             @csrf
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">Tên Quan Lý</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">Tên Quản Lý</label>
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control  @error('ten') @enderror " name="ten" >    
                                     @error('ten')

@@ -41,7 +41,7 @@
                 <td>{{ $KhachHang->ten }}</td>
                 <td>{{ $KhachHang->email }}</td>
                 <td>{{ $KhachHang->sdt }}</td>
-                <td><a href="{{ route('khach-hang.chi-tiet',['id'=>$KhachHang->id])}}"><button type="button" class="btn btn-success">xem chi tiet</button></a>|<a href="{{ route('khach-hang.xoa',['id'=>$KhachHang->id])}}"><button type="button" class="btn btn-success">xoa</button></a></td>
+                <td><a href="{{ route('khach-hang.chi-tiet',['id'=>$KhachHang->id])}}"><button type="button" class="btn btn-success">Xem Chi Tiết</button></a>|<a href="{{ route('khach-hang.xoa',['id'=>$KhachHang->id])}}"><button type="button" class="btn btn-danger">Xóa</button></a></td>
             </tr>
             @endforeach
           </tbody>
