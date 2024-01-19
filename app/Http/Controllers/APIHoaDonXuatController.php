@@ -12,12 +12,12 @@ use App\Models\GioHang;
 
 class APIHoaDonXuatController extends Controller
 {
-    public function ThanhToan(Request $request)
+    public function MuaHang(Request $request)
     {
     $user = auth('api')->user();
 
     if (!$user) {
-        return response()->json(['error' => 'Người dùng chưa đăng nhập'], 401);
+        return response()->json(['success' => false, 'error' => 'Người dùng chưa đăng nhập'], 401);
     }
     
     $gioHangIdsToPay = (array) $request->gio_hang_ids;
@@ -46,17 +46,14 @@ class APIHoaDonXuatController extends Controller
                 $bienThe->so_luong -= $item->so_luong;
                 $bienThe->save();
             } else {
-                return response()->json(['error' => 'sản phẩm đã hết hàng']);
+                return response()->json(['success' => false, 'error' => 'sản phẩm đã hết hàng'], 404);
             }
         }
       
-
-
     }
 
     GioHang::whereIn('id', $gioHangIdsToPay)->delete();
-
-    return response()->json(['message' => 'Thanh toán thành công', 'hoa_don' => $hoaDon]);
+    return response()->json(['success' => true, 'message' => 'Mua Hàng thành công'], 200);
     }
 
     private function tinhTongTien($gioHang)
@@ -74,7 +71,7 @@ class APIHoaDonXuatController extends Controller
     {
         $user = auth('api')->user();
         if (!$user) {
-            return response()->json(['error' => 'Người dùng chưa đăng nhập'], 401);
+            return response()->json(['success' => false, 'error' => 'Người dùng chưa đăng nhập'], 401);
         }
 
         $status = $request->status; 
@@ -98,24 +95,36 @@ class APIHoaDonXuatController extends Controller
     {
         $status = $request->trangThai;
         if (!$status) {
-            return response()->json(['error' => 'Trạng thái không hợp lệ'], 400);
+            return response()->json(['success' => false, 'error' => 'Trạng thái không hợp lệ'], 400);
         }
 
         $user = auth('api')->user();
         if (!$user) {
-            return response()->json(['error' => 'Người dùng chưa đăng nhập'], 401);
+            return response()->json(['success' => false, 'error' => 'Người dùng chưa đăng nhập'], 401);
         }
     
         $hoaDon = HoaDonXuat::find($id);
     
         if (!$hoaDon) {
-            return response()->json(['error' => 'Không tìm thấy hóa đơn'], 404);
+            return response()->json(['success' => false, 'error' => 'Không tìm thấy hóa đơn'], 404);
         }
     
         $hoaDon->status = $status;
         $hoaDon->save();
+
+        if($status==4){
+
+            $chiTietHoaDon = ChiTietHoaDonXuat::where('hoa_don_xuat_id',$hoaDon->id)
+            ->get();
+
+            foreach($chiTietHoaDon as $chiTiet){
+                $sanPhamBienThe = SanPhamBienThe::find($chiTiet->san_pham_bien_the_id);
+                $sanPhamBienThe->so_luong += $chiTiet->so_luong;
+                $sanPhamBienThe->save();
+            }
+        }
     
-        return response()->json(['message' => 'Xác Nhận Thành Công']);
+        return response()->json(['success' => true, 'message' => 'Xác Nhận Thành Công'], 200);
     }
     
 

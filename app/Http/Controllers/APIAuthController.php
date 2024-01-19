@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ResetMatKhauRequest;
 use App\Http\Requests\DangKyRequest;
 use App\Http\Requests\DangNhapRequest;
+use App\Http\Requests\CapNhatMatKhauRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
@@ -95,7 +96,7 @@ class APIAuthController extends Controller
         $credentials = request(['email', 'password']);
 
         if (!$token = auth('api')->attempt($credentials)) {
-            return response()->json(['message' => 'Email đăng nhập hoặc mật khẩu không đúng'], 401);
+            return response()->json(['success' => false ,'message' => 'Email đăng nhập hoặc mật khẩu không đúng'], 401);
         }
 
         return response()->json([
@@ -110,10 +111,7 @@ class APIAuthController extends Controller
         $user = auth('api')->user(); 
 
         if (!$user) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Người dùng không tồn tại'
-            ]);
+            return response()->json(['success' => false ,'message' => 'Người Dùng Không Tồn Tại'], 404);
         }
 
         if (isset($request->ten) && !empty($request->ten)) {
@@ -130,10 +128,7 @@ class APIAuthController extends Controller
 
         $user->save();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Cập nhật thông tin thành công'
-        ]);
+        return response()->json(['success' => true ,'message' => 'cập nhật tài khoản thành công'], 200);
     }
 
     public function CapNhatMatKhau(Request $request)
@@ -141,10 +136,7 @@ class APIAuthController extends Controller
         $user = auth('api')->user();
 
         if (!$user) {
-            return response()->json([
-                'success' => false,
-                'error' => 'Người dùng không tồn tại',
-            ]);
+            return response()->json(['success' => false ,'error' => 'Người Dùng Không Tồn Tại'], 404);
         }
 
         if (!Hash::check($request->mat_khau_cu, $user->password)) {
@@ -152,15 +144,15 @@ class APIAuthController extends Controller
                 'success' => false,
                 'error' => 'Mật khẩu cũ không đúng',
             ]);
+            return response()->json(['success' => false ,'error' => 'Mật khẩu cũ không đúng'], 401);
         }
+
+
 
         $user->password = Hash::make($request->mat_khau_moi);
         $user->save();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Cập nhật mật khẩu thành công',
-        ]);
+        return response()->json(['success' => true ,'message' => 'Cập nhật mật khẩu thành công'], 200);
+       
     }
 
 
@@ -172,15 +164,14 @@ class APIAuthController extends Controller
             if ($user) {
 
                 auth('api')->logout();
-    
-                return response()->json(['message' => 'Đăng Xuất Thành Công']);
+                return response()->json(['success' => true ,'message' => 'Đăng Xuất Thành Công'], 200);
             } else {
                 
-                return response()->json(['error' => 'Người Dùng Chưa Được Xác Thực'], 401);
+                return response()->json(['success' => false , 'error' => 'Người Dùng Chưa Được Xác Thực'], 401);
             }
         } catch (\Exception $e) {
        
-            return response()->json(['error' =>'Đăng Xuất Không Thành Công'], 500);
+            return response()->json(['success' => false,'error' =>'Đăng Xuất Không Thành Công'], 500);
         }
     }
 
@@ -190,11 +181,11 @@ class APIAuthController extends Controller
         $user = KhachHang::where('email', $request->email)->first();
 
         if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
+            return response()->json(['success' => false,'error' =>'Người Dùng Không Tồn tại'], 404);
         }
 
         if($user->status == 0){
-            return response()->json(['message' => 'User not found'], 404);
+            return response()->json(['success' => false,'error' =>'Người Dùng Chưa Xác Thực'], 404);
         }
 
         $token = Str::random(64);
@@ -209,9 +200,7 @@ class APIAuthController extends Controller
             $message->to($request->email);
             $message->subject("Reset Password");
         });
-
-
-        return response()->json(['message' => 'Password reset email sent']);
+        return response()->json(['success' => true,'message' =>'Password reset email sent'], 200);
     }
 
     public function ResetMatKhau($token)
@@ -256,10 +245,9 @@ class APIAuthController extends Controller
                 $user = auth('api')->user();
 
         
-                return response()->json(['user' => $user]);
+                return response()->json(['data' => $user]);
             } else {
-            
-                return response()->json(['error' => 'Người Dùng Chưa Được Xác Thực '], 401);
+                return response()->json(['success' => false,'error' =>'Người Dùng Chưa Được Xác Thực '], 401);
             }
         } catch (\Exception $e) {
 

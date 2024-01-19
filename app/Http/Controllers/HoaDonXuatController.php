@@ -55,7 +55,6 @@ class HoaDonXuatController extends Controller
 
     public function ThayDoiTrangThaiDon(Request $request, $id)
     {
-   
         $trangthai = $request->trangthai;
 
         $hoaDon = HoaDonXuat::find($id);
@@ -72,7 +71,7 @@ class HoaDonXuatController extends Controller
             ->get();
 
             foreach($chiTietHoaDon as $chiTiet){
-                $sanPhamBienThe = SanPhamBienThe::where('id',$chiTiet->san_pham_bien_the_id)->first();
+                $sanPhamBienThe = SanPhamBienThe::find($chiTiet->san_pham_bien_the_id);
                 $sanPhamBienThe->so_luong += $chiTiet->so_luong;
                 $sanPhamBienThe->save();
             }

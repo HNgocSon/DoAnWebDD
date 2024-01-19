@@ -18,4 +18,9 @@ class DanhGia extends Model
     {
         return $this->belongsTo(HoaDonXuat::class);
     }
+
+    public function khach_hang()
+    {
+        return $this->belongsTo(KhachHang::class);
+    }
 }

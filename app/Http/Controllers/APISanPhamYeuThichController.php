@@ -7,14 +7,14 @@ use App\Models\SanPhamYeuThich;
 use App\Models\SanPham;
 use App\Models\KhachHang;
 
-class SanPhamYeuThichController extends Controller
+class APISanPhamYeuThichController extends Controller
 {
     public function ThemMoiSanPhamYeuThich(Request $request) 
     {
 
         $user = auth('api')->user();
         if (!$user) {
-            return response()->json(['success' =>  false, 'error' => 'Unauthenticated.'], 401);
+            return response()->json(['success' => false, 'error' => 'Người dùng chưa đăng nhập'], 401);
         }
     
     

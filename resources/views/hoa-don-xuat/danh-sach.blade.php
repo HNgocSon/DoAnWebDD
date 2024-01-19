@@ -36,7 +36,7 @@
                 @elseif($hoaDon->status == 2)
                     <td>Đang Giao</td>
                 @elseif ($hoaDon->status == 3)
-                    <td>Đã Giao</td>
+                    <td>Đã Giao Hàng Thành Công</td>
                 @elseif($hoaDon->status == 4)
                     <td>Đã Hủy</td>
                 @else
@@ -51,6 +51,7 @@
                             <option>Thay Đổi Trạng Thái đơn</option>
                             <option value="1" {{ $hoaDon->status == 1 ? 'selected' : '' }}>Xác Nhận</option>
                             <option value="2" {{ $hoaDon->status == 2 ? 'selected' : '' }}>Đang Giao</option>
+                            <option value="2" {{ $hoaDon->status == 3 ? 'selected' : '' }}>Đang Giao</option>
                             <option value="4" {{ $hoaDon->status == 4 ? 'selected' : '' }}>Hủy Đơn</option>
                         </select>
                     </form>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\GioHang;
 use App\Models\SanPhamBienThe;
-class GioHangController extends Controller
+class APIGioHangController extends Controller
 {
     public function ThemSanPhamVaoGioHang(Request $request)
     {
@@ -35,7 +35,7 @@ class GioHangController extends Controller
         ->sum('so_luong');
 
         if ($soLuong + $tongSoLuongTrongGioHang > $soLuongTonKho) {
-            return response()->json(['error' => 'Tổng số lượng trong giỏ hàng vượt quá số lượng tồn kho'], 400);
+            return response()->json(['error' => 'Sản Phẩm Đã Hết Hàng'], 400);
         }
 
          $gioHang = GioHang::where('khach_hang_id', $user->id)
