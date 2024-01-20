@@ -31,7 +31,7 @@
                 <td>{{ $hoaDon->khach_hang->ten}}</td>
                 <td>{{ $hoaDon->ngay_xuat }}</td>
                 <td>{{ $hoaDon->tong_tien }}</td>
-                @if($hoaDon->status == 1){
+                @if($hoaDon->status == 1)
                     <td>Đã Xác Nhận</td>
                 @elseif($hoaDon->status == 2)
                     <td>Đang Giao</td>
@@ -43,7 +43,7 @@
                     <td>Chờ Duyệt</td> 
                 @endif
                 <td>
-                    @if($hoaDon->status !== 4)
+                    @if($hoaDon->status !== 4|| $hoaDon->status !== 3)
                     <form method="post" action="{{ route('hoa-don-xuat.thay-doi-trang-thai', ['id' => $hoaDon->id]) }}">
                         @csrf
                         @method('put')
@@ -51,7 +51,7 @@
                             <option>Thay Đổi Trạng Thái đơn</option>
                             <option value="1" {{ $hoaDon->status == 1 ? 'selected' : '' }}>Xác Nhận</option>
                             <option value="2" {{ $hoaDon->status == 2 ? 'selected' : '' }}>Đang Giao</option>
-                            <option value="2" {{ $hoaDon->status == 3 ? 'selected' : '' }}>Đang Giao</option>
+                            <option value="3" {{ $hoaDon->status == 3 ? 'selected' : '' }}>Đã Giao</option>
                             <option value="4" {{ $hoaDon->status == 4 ? 'selected' : '' }}>Hủy Đơn</option>
                         </select>
                     </form>
