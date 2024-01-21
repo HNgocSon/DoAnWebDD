@@ -140,11 +140,11 @@ class APIAuthController extends Controller
         }
 
         if (!Hash::check($request->mat_khau_cu, $user->password)) {
-            return response()->json([
-                'success' => false,
-                'error' => 'Mật khẩu cũ không đúng',
-            ]);
             return response()->json(['success' => false ,'error' => 'Mật khẩu cũ không đúng'], 401);
+        }
+
+        if(strlen($request->mat_khau_moi)<6){
+            return response()->json(['success' => false ,'error' => 'Mật khẩu Mới Không được dưới 6 kí tự'], 401);
         }
 
 
