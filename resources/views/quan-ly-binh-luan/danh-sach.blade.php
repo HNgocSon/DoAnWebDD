@@ -3,7 +3,7 @@
 <div class="table-responsive">
         <table class="table table-striped table-sm" border="1">
         <h1>Danh Sách Bình Luận</h1>
-        <form class="form-inline" method="get" action="{{ route('binh-luan.danh-sach') }}">
+        <form class="form-inline" method="GET" action="{{ route('binh-luan.danh-sach') }}">
             <div class="form-group" style="max-width: 200px;">
                 <label for="Page" style="color :red;font-size: 13px;">Số lượng dòng trên mỗi trang:</label>
                 <select class="form-control" name="Page" id="Page" onchange="this.form.submit()">
@@ -21,6 +21,7 @@
                 <th>Tên</th>
                 <th>Bình Luận</th>
                 <th>Thời Gian</th>
+                <th></th>
             </tr>
           </thead>
           <tbody>
@@ -29,6 +30,7 @@
                 <td>{{ $cmt->khach_hang->ten }}</td>
                 <td>{{ $cmt->comments }}</td>
                 <td>{{ $cmt->thoi_gian}}</td>
+                <td><a href="{{route('binh-luan.xoa', ['id'=>$cmt->id] ) }}"><button type="button" class="btn btn-danger btn-sm px-3">Xóa</button></a></td>
             <tr>
             @endforeach
             </tbody>  

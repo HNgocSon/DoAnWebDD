@@ -15,7 +15,6 @@ class APIBinhLuanController extends Controller
 
         $binhLuan = new BinhLuan();
         $binhLuan->khach_hang_id = $user->id;
-        $binhLuan->san_pham_id = $request->san_pham;
         $binhLuan->comments = $request->comments;
         $binhLuan->save();
 
@@ -24,16 +23,15 @@ class APIBinhLuanController extends Controller
 
     public function BinhLuan(Request $request)
     {
-        $sanPhamId = $request->san_pham;
-
-        $danhSachBinhLuan = BinhLuan::where('san_pham_id', $sanPhamId)->with('khach_hang')->get();
+       
+        $danhSachBinhLuan = BinhLuan::with('khach_hang')->get();
 
         return response()->json(['success' => true, 'data' => $danhSachBinhLuan], 200);
     }
 
     public function XoaBinhLuan(Request $request)
     {
-        $comment = BinhLuan::find($request->comment_id);
+        $comment = BinhLuan::find($request->comments);
 
         if (!$comment) {
             return response()->json(['success' => false ,'error' => 'Bình luận không tồn tại.'], 404);

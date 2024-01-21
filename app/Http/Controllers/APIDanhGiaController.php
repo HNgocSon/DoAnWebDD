@@ -20,6 +20,9 @@ class APIDanhGiaController extends Controller
         $soSao = $request->soSao;
         $comments = $request->comments;
 
+        if(!$soSao || !$comments){
+            return response()->json(['success' => false, 'error' => 'Vui Lòng Nhập Đánh Giá'], 401);
+        }
 
         $hoaDon = HoaDonXuat::with('chi_tiet_hoa_don_xuat')->find($hoaDonId);
 

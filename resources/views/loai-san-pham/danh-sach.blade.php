@@ -2,7 +2,6 @@
 @section('content')
 <div class="table-responsive">
         <table class="table table-striped table-sm " border="1">
-        
         <div>
             <a href="{{route('loai-san-pham.them-moi')}}"><buttontype="button" class="btn btn-info">Thêm mới</button></a>
         </div>

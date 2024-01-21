@@ -17,4 +17,9 @@ class BinhLuan extends Model
     public function khach_hang(){
         return $this->belongsto(KhachHang::class);
     }
+
+    public function replies()
+    {
+        return $this->hasMany(BinhLuan::class, 'parent_id');
+    }
 }

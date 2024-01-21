@@ -66,7 +66,6 @@ Route::middleware('api.auth')->group(function () {
 
 
 //hóa Đơn xuất
-
 Route::middleware('api.auth')->group(function () {
     Route::post('mua-hang',[APIHoaDonXuatController::class,'MuaHang']);
     Route::post("/hoa-don",[APIHoaDonXuatController::class,"XuLyHoaDonXuat"]);
@@ -103,6 +102,6 @@ Route::middleware('guest:api')->group(function () {
 //Bình Luận
 Route::middleware('api.auth')->group(function () {
     Route::post('them-binh-luan',[APIBinhLuanController::class,'ThemBinhLuan']);
-    Route::post('xoa',[APIBinhLuanController::class,'XoaBinhLuan']);
+    Route::post('xoa-binh-luan',[APIBinhLuanController::class,'XoaBinhLuan']);
 });
 Route::post('binh-luan',[APIBinhLuanController::class,'BinhLuan']);

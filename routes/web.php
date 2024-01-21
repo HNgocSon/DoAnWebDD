@@ -140,8 +140,15 @@ Route::middleware('auth')->group(function () {
 });
 
 //Bình Luận
-Route::get('binh-luan/danh-sach',[BinhLuanController::class,'DanhSachBinhLuan'])->name('binh-luan.danh-sach');
 
+Route::middleware('auth')->group(function () {
+    Route::prefix('binh-luan')->group(function (){
+        Route::name('binh-luan.')->group(function (){
+            Route::get('danh-sach',[BinhLuanController::class,'DanhSachBinhLuan'])->name('danh-sach');
+            Route::get('xoa/{id}',[BinhLuanController::class,'XoaBinhLuan'])->name('xoa');
+        });
+    });
+});
 
 //Hóa Đơn Nhập
 Route::middleware('auth')->group(function () {
