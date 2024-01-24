@@ -15,7 +15,7 @@ use App\Http\Controllers\ChiTietHoaDonNhapController;
 use App\Http\Controllers\APIAuthController;
 use App\Http\Controllers\QuanLyKhachHangController;
 use App\Http\Controllers\QuanLyAdminController;
-use App\Http\Controllers\RevenueController;
+use App\Http\Controllers\ThongKeController;
 use App\Http\Controllers\DangNhapGoogleController;
 /*
 |--------------------------------------------------------------------------
@@ -177,4 +177,6 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-Route::get('thong-ke/danh-sach', [RevenueController::class, 'index'])->name('thong-ke.danh-sach');
+Route::get('thong-ke/danh-sach', [ThongKeController::class, 'index'])->name('thong-ke.danh-sach');
+Route::get('thong-ke/doanh-so-ban-hang', [ThongKeController::class, 'DoanhSoBanHang'])->name('thong-ke.doanh-so-ban-hang');
+Route::get('thong-ke/so-luong-ton-kho', [ThongKeController::class, 'SoLuongTonKho'])->name('thong-ke.so-luong-ton-kho');

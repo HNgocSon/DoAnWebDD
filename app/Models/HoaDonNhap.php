@@ -16,5 +16,8 @@ class HoaDonNhap extends Model
     public function nha_cung_cap(){
         return $this->belongsto(NhaCungCap::class);
     }
+    public function chi_tiet_hoa_don_nhap(){
+        return $this->hasMany(ChiTietHoaDonNhap::class);
+    }
     
 }
