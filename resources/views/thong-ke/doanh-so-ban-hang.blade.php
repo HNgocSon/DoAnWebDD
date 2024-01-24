@@ -14,7 +14,7 @@
         <label for="ngayKetThuc">Chọn Ngày Kết Thúc:</label>
         <input type="date" id="ngayKetThuc" name="ngayKetThuc" >
 
-        <button type="submit">Xem Thống Kê</button>
+        <button type="submit" class="btn btn-success">Xem Thống Kê</button>
     </form>
 
     <canvas id="myChart" width="200" height="100"></canvas>
