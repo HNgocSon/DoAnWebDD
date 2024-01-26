@@ -14,4 +14,8 @@ class SanPhamYeuThich extends Model
         return $this->belongsto(SanPham::class);
     }
 
+    public function san_pham_bien_the(){
+        return $this->belongsto(SanPhamBienThe::class);
+    }
+
 }
